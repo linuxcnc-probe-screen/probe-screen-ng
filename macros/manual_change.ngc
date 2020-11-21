@@ -46,10 +46,11 @@ O400 endif
 F #<_hal[probe.ps_searchvel]>
 G91
 G38.2 Z #<_ini[TOOLSENSOR]MAXPROBE>
-G0 Z0.26
+G38.4 Z2
+G0 Z0.5
 ; This is commented out only for sim.
 F #<_hal[probe.ps_probevel]>
-G38.2 Z-0.5
+G38.2 Z-3
 
 O500 if [#5070 EQ 0]
 G90

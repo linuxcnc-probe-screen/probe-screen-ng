@@ -8,8 +8,8 @@
 
 
 # The next two lines are only needed if the pins had been connected before
-unlinkp iocontrol.0.tool-change
-unlinkp iocontrol.0.tool-changed
+#unlinkp iocontrol.0.tool-change
+#unlinkp iocontrol.0.tool-changed
 
 # link to auto tool measurement toolchange, so you get the advantage of tool description on change dialog
 
