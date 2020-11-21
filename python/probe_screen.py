@@ -70,7 +70,7 @@ class ps_preferences(cp1):
         self.write(open(self.fn, "w"))
 
 def restore_mode(f):
-    """ Ensures the command mode is restored when a function exits """
+    """ Ensures the task mode is restored when a function exits """
     @wraps(f)
     def wrapper(self, *args, **kwargs):
         # Store Current Task Mode
@@ -393,7 +393,7 @@ class ProbeScreenClass:
         else:
             value = 1
 
-        velocity = float(self.inifile.find("TRAJ", "DEFAULT_VELOCITY"))
+        velocity = float(self.inifile.find("TRAJ", "DEFAULT_LINEAR_VELOCITY"))
 
         dir = widget.get_label()[1]
         if dir == "+":
@@ -401,10 +401,11 @@ class ProbeScreenClass:
         else:
             direction = -1
 
+        self.command.teleop_enable(1)
         if self.distance <> 0:  # incremental jogging
-            self.command.jog( linuxcnc.JOG_INCREMENT, axisnumber, direction * velocity, self.distance )
+            self.command.jog( linuxcnc.JOG_INCREMENT, False, axisnumber, direction * velocity, self.distance )
         else:  # continuous jogging
-            self.command.jog( linuxcnc.JOG_CONTINUOUS, axisnumber, direction * velocity )
+            self.command.jog( linuxcnc.JOG_CONTINUOUS, False, axisnumber, direction * velocity )
 
     def on_btn_jog_released( self, widget, data = None ):
         axisletter = widget.get_label()[0]
@@ -414,10 +415,11 @@ class ProbeScreenClass:
 
         axis = "xyzabcuvw".index( axisletter.lower() )
 
+        self.command.teleop_enable(1)
         if self.distance <> 0:
             pass
         else:
-            self.command.jog( linuxcnc.JOG_STOP, axis )
+            self.command.jog( linuxcnc.JOG_STOP, False, axis )
 
 
     # Spin  buttons
