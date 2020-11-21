@@ -15,7 +15,7 @@ unlinkp iocontrol.0.tool-changed
 
 # this settings were moved to probe_screen.hal:
 #net tool-change            probe.toolchange-change    <=   iocontrol.0.tool-change 
-#net tool-changed           probe.toolchange-changed   <=   iocontrol.0.tool-changed
+#net tool-changed           probe.toolchange-changed   =>   iocontrol.0.tool-changed
 #net tool-prep-number       probe.toolchange-number    <=   iocontrol.0.tool-prep-number
 
 net tool-prep-loop         iocontrol.0.tool-prepare      <=   iocontrol.0.tool-prepared
