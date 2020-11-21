@@ -29,6 +29,7 @@ from linuxcnc import ini
 import ConfigParser
 from datetime import datetime
 from subprocess import Popen, PIPE
+from functools import wraps
 
 CONFIGPATH1 = os.environ['CONFIG_DIR']
 
@@ -68,6 +69,20 @@ class ps_preferences(cp1):
         self.set("DEFAULT", option, type(value))
         self.write(open(self.fn, "w"))
 
+def restore_mode(f):
+    """ Ensures the command mode is restored when a function exits """
+    @wraps(f)
+    def wrapper(self, *args, **kwargs):
+        # Store Current Task Mode
+        prev_task_mode = self.stat.task_mode
+        try:
+            # Execute wrapped function
+            return f(self, *args, **kwargs)
+        finally:
+            # Restore Previous Task Mode
+            self.command.mode( prev_task_mode )
+            self.command.wait_complete()
+    return wrapper
 
 class ProbeScreenClass:
 
@@ -155,8 +170,6 @@ class ProbeScreenClass:
                 return -1
 
         return 0
-
-
 
     # calculate corner coordinates in rotated coord. system
     def calc_cross_rott(self,x1=0.,y1=0.,x2=0.,y2=0.,a1=0.,a2=90.) :
@@ -623,6 +636,7 @@ class ProbeScreenClass:
         return res
 
     # --------------  Touch off buttons -----------------
+    @restore_mode
     def on_btn_set_x_released(self, gtkbutton, data = None):
         self.prefs.putpref( "ps_offs_x", self.spbtn_offs_x.get_value(), float )
         self.command.mode( linuxcnc.MODE_MDI )
@@ -631,7 +645,7 @@ class ProbeScreenClass:
         self.vcp_action_reload.emit( "activate" )
         time.sleep(1)
 
-
+    @restore_mode
     def on_btn_set_y_released(self, gtkbutton, data = None):
         self.prefs.putpref( "ps_offs_y", self.spbtn_offs_y.get_value(), float )
         self.command.mode( linuxcnc.MODE_MDI )
@@ -640,6 +654,7 @@ class ProbeScreenClass:
         self.vcp_action_reload.emit( "activate" )
         time.sleep(1)
 
+    @restore_mode
     def on_btn_set_z_released(self, gtkbutton, data = None):
         self.prefs.putpref( "ps_offs_z", self.spbtn_offs_z.get_value(), float )
         self.command.mode( linuxcnc.MODE_MDI )
@@ -648,6 +663,7 @@ class ProbeScreenClass:
         self.vcp_action_reload.emit( "activate" )
         time.sleep(1)
 
+    @restore_mode
     def on_btn_set_angle_released(self, gtkbutton, data = None):
         self.prefs.putpref( "ps_offs_angle", self.spbtn_offs_angle.get_value(), float )
         self.lb_probe_a.set_text( "%.3f" % self.spbtn_offs_angle.get_value())
@@ -674,6 +690,7 @@ class ProbeScreenClass:
     #               Measurement outside
     # -------------------------------------------------
     # Down
+    @restore_mode
     def on_down_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -685,6 +702,7 @@ class ProbeScreenClass:
         self.add_history(gtkbutton.get_tooltip_text(),"Z",0,0,0,0,0,0,0,0,a[2],0,0)
         self.set_zerro("Z",0,0,a[2])
     # X+
+    @restore_mode
     def on_xp_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -714,6 +732,7 @@ class ProbeScreenClass:
         self.set_zerro("X")
 
     # Y+
+    @restore_mode
     def on_yp_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -743,6 +762,7 @@ class ProbeScreenClass:
         self.set_zerro("Y")
 
     # X-
+    @restore_mode
     def on_xm_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -772,6 +792,7 @@ class ProbeScreenClass:
         self.set_zerro("X")
 
     # Y-
+    @restore_mode
     def on_ym_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -803,6 +824,7 @@ class ProbeScreenClass:
     # Corners
     # Move Probe manual under corner 2-3 mm
     # X+Y+
+    @restore_mode
     def on_xpyp_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -854,6 +876,7 @@ class ProbeScreenClass:
         self.set_zerro("XY")
 
     # X+Y-
+    @restore_mode
     def on_xpym_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -904,6 +927,7 @@ class ProbeScreenClass:
         self.set_zerro("XY")
 
     # X-Y+
+    @restore_mode
     def on_xmyp_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -955,6 +979,7 @@ class ProbeScreenClass:
         self.set_zerro("XY")
 
     # X-Y-
+    @restore_mode
     def on_xmym_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -1006,6 +1031,7 @@ class ProbeScreenClass:
         self.set_zerro("XY")
 
     # Center X+ X- Y+ Y-
+    @restore_mode
     def on_xy_center_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -1118,6 +1144,7 @@ class ProbeScreenClass:
     # Corners
     # Move Probe manual under corner 2-3 mm
     # X+Y+
+    @restore_mode
     def on_xpyp1_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -1164,6 +1191,7 @@ class ProbeScreenClass:
         self.set_zerro("XY")
 
     # X+Y-
+    @restore_mode
     def on_xpym1_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -1210,6 +1238,7 @@ class ProbeScreenClass:
         self.set_zerro("XY")
 
     # X-Y+
+    @restore_mode
     def on_xmyp1_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -1257,6 +1286,7 @@ class ProbeScreenClass:
         self.set_zerro("XY")
 
     # X-Y-
+    @restore_mode
     def on_xmym1_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -1303,6 +1333,7 @@ class ProbeScreenClass:
         self.set_zerro("XY")
 
     # Hole Xin- Xin+ Yin- Yin+
+    @restore_mode
     def on_xy_hole_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -1397,6 +1428,7 @@ class ProbeScreenClass:
     # Angle
     # Move Probe manual under corner 2-3 mm
     # Y+Y+
+    @restore_mode
     def on_angle_yp_released(self, gtkbutton, data = None):
         self.stat.poll()
         xstart=self.stat.position[0]-self.stat.g5x_offset[0] - self.stat.g92_offset[0] - self.stat.tool_offset[0]
@@ -1448,6 +1480,7 @@ class ProbeScreenClass:
         self.rotate_coord_system(alfa)
 
     # Y-Y-
+    @restore_mode
     def on_angle_ym_released(self, gtkbutton, data = None):
         self.stat.poll()
         xstart=self.stat.position[0]-self.stat.g5x_offset[0] - self.stat.g92_offset[0] - self.stat.tool_offset[0]
@@ -1498,6 +1531,7 @@ class ProbeScreenClass:
         self.rotate_coord_system(alfa)
 
     # X+X+
+    @restore_mode
     def on_angle_xp_released(self, gtkbutton, data = None):
         self.stat.poll()
         ystart=self.stat.position[1]-self.stat.g5x_offset[1] - self.stat.g92_offset[1] - self.stat.tool_offset[1]
@@ -1548,6 +1582,7 @@ class ProbeScreenClass:
         self.rotate_coord_system(alfa)
 
     # X-X-
+    @restore_mode
     def on_angle_xm_released(self, gtkbutton, data = None):
         self.stat.poll()
         ystart=self.stat.position[1]-self.stat.g5x_offset[1] - self.stat.g92_offset[1] - self.stat.tool_offset[1]
@@ -1598,6 +1633,7 @@ class ProbeScreenClass:
         self.rotate_coord_system(alfa)
 
     # Lx OUT
+    @restore_mode
     def on_lx_out_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -1656,6 +1692,7 @@ class ProbeScreenClass:
 
 
     # Ly OUT
+    @restore_mode
     def on_ly_out_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -1715,6 +1752,7 @@ class ProbeScreenClass:
 
 
     # Lx IN
+    @restore_mode
     def on_lx_in_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -1763,6 +1801,7 @@ class ProbeScreenClass:
 
 
     # Ly IN
+    @restore_mode
     def on_ly_in_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -1812,6 +1851,7 @@ class ProbeScreenClass:
 
 
     # TOOL DIA
+    @restore_mode
     def on_tool_dia_released(self, gtkbutton, data = None):
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -1973,7 +2013,7 @@ class ProbeScreenClass:
             if result:
                 self.halcomp["toolchange-changed"] = True
             else:
-                print"toolchange abort", self.stat.tool_in_spindle, self.halcomp['toolchange-number']
+                print "toolchange abort", self.stat.tool_in_spindle, self.halcomp['toolchange-number']
                 self.command.abort()
                 self.halcomp['toolchange-number'] = self.stat.tool_in_spindle
                 self.halcomp['toolchange-change'] = False
@@ -2003,6 +2043,8 @@ class ProbeScreenClass:
             self.buffer.delete(i,self.buffer.get_end_iter())
         i.set_line(0)
         self.buffer.insert(i, "%s \n" % c)
+
+    @restore_mode
     def on_spbtn_block_height_value_changed( self, gtkspinbutton, data = None ):
         blockheight = gtkspinbutton.get_value()
         if blockheight != False:
@@ -2027,6 +2069,8 @@ class ProbeScreenClass:
             self.buffer.delete(i,self.buffer.get_end_iter())
         i.set_line(0)
         self.buffer.insert(i, "%s \n" % c)
+
+    @restore_mode
     def clicked_btn_probe_tool_setter(self, data = None):
         # Start probe_down.ngc
         self.command.mode( linuxcnc.MODE_MDI )
@@ -2041,6 +2085,7 @@ class ProbeScreenClass:
         self.spbtn_probe_height.set_value( float(a[2]) )
         self.add_history(gtkbutton.get_tooltip_text(),"Z",0,0,0,0,0,0,0,0,a[2],0,0)
 
+    @restore_mode
     def clicked_btn_probe_workpiece(self, data = None):
         # Start probe_down.ngc
         self.command.mode( linuxcnc.MODE_MDI )
