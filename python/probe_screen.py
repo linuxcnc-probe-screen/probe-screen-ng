@@ -2072,7 +2072,7 @@ class ProbeScreenClass:
         self.buffer.insert(i, "%s \n" % c)
 
     @restore_mode
-    def clicked_btn_probe_tool_setter(self, data = None):
+    def clicked_btn_probe_tool_setter(self, gtkbutton, data = None):
         # Start probe_down.ngc
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
@@ -2087,7 +2087,7 @@ class ProbeScreenClass:
         self.add_history(gtkbutton.get_tooltip_text(),"Z",0,0,0,0,0,0,0,0,a[2],0,0)
 
     @restore_mode
-    def clicked_btn_probe_workpiece(self, data = None):
+    def clicked_btn_probe_workpiece(self, gtkbutton, data = None):
         # Start probe_down.ngc
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
