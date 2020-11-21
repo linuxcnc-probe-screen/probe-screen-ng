@@ -2015,7 +2015,7 @@ class ProbeScreenClass:
             self.warning_dialog( self, _( "Conversion error in btn_block_height!" ),
                                    _( "Please enter only numerical values\nValues have not been applied" ) )
         # set koordinate system to new origin
-        origin = float(self.inifile.find("AXIS_2", "MIN_LIMIT")) + blockheight
+        origin = float(self.inifile.find("AXIS_Z", "MIN_LIMIT")) + blockheight
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
         self.command.mdi( "G10 L2 P0 Z%s" % origin )

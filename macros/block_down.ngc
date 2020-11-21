@@ -2,7 +2,7 @@ o<block_down> sub
 (cancel all Z offsets)
 G49
 G92.1
-G10 L20 P0  Z[#<_hal[axis.2.joint-pos-cmd]>]
+G10 L20 P0  Z[#<_hal[axis.z.pos-cmd]>]
 
 G91
 F #<_hal[probe.ps_searchvel]>
