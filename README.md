@@ -1,5 +1,10 @@
 # Probe Screen V2 for LinuxCNC
 
+History
+-------
+
+This repo was originally a fork of https://github.com/verser-git/probe_screen_v2 by Serguei Glavatski / Vers.by.
+
  Install.
 -----------------------------------------------------------------------------
 1. Delete (or comment out) from all .hal files lines of the form:
