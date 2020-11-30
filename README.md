@@ -1,9 +1,9 @@
-# Probe Screen V2 for LinuxCNC
+# Probe Screen for LinuxCNC 2.8
 
 History
 -------
 
-This repo was originally a fork of https://github.com/verser-git/probe_screen_v2 by Serguei Glavatski / Vers.by.
+This repo was originally a fork of https://github.com/verser-git/probe_screen_v2 by Serguei Glavatski / Vers.by. Hopefully, this will become a community maintained probe screen for LinuxCNC. Anyone with an interest in helping out, please submit PRs or ask to join the project via a GitHub issue.
 
  Install.
 -----------------------------------------------------------------------------
