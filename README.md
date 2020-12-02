@@ -1,5 +1,10 @@
 # Probe Screen for LinuxCNC 2.8
 
+Info
+----
+Probe-Screen ist currently being redesigned.
+
+
 History
 -------
 
