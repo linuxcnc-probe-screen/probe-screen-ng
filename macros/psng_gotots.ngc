@@ -1,4 +1,4 @@
-o<gotots> sub
+o<psng_gotots> sub
 F#<_ini[TOOLSENSOR]RAPID_SPEED>
 G90
 G53 G1 Z[#<_ini[AXIS_Z]MAX_LIMIT>]
@@ -14,6 +14,6 @@ G4 P0.5
 G38.2 Z[-#<_hal[probe.ps_probe_latch]>*2]
 G1 Z4 F#<_ini[TOOLSENSOR]RAPID_SPEED>
 G90
-o<gotots> endsub
+o<psng_gotots> endsub
 M2
 

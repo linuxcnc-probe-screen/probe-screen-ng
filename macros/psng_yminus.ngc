@@ -1,4 +1,4 @@
-o<yminus> sub
+o<psng_yminus> sub
 
 #<y>=#<_y> (save start Y position) 
 G91
@@ -13,5 +13,5 @@ G90
 (back to start point)
 G1 Y#<y> F#<_ini[TOOLSENSOR]RAPID_SPEED> 
 	
-o<yminus> endsub
+o<psng_yminus> endsub
 M2

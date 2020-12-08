@@ -147,7 +147,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="yalign">0</property>
-                                    <property name="pixbuf">Y+.png</property>
+                                    <property name="pixbuf">icons/Y+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -176,7 +176,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="yalign">0</property>
-                                    <property name="pixbuf">X-Y+.png</property>
+                                    <property name="pixbuf">icons/X-Y+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -205,7 +205,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">1</property>
                                     <property name="yalign">0</property>
-                                    <property name="pixbuf">X+Y+.png</property>
+                                    <property name="pixbuf">icons/X+Y+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -231,7 +231,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">1</property>
-                                    <property name="pixbuf">X+.png</property>
+                                    <property name="pixbuf">icons/X+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -259,7 +259,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">1</property>
                                     <property name="yalign">1</property>
-                                    <property name="pixbuf">X+Y-.png</property>
+                                    <property name="pixbuf">icons/X+Y-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -284,7 +284,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="yalign">1</property>
-                                    <property name="pixbuf">Y-.png</property>
+                                    <property name="pixbuf">icons/Y-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -312,7 +312,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="yalign">1</property>
-                                    <property name="pixbuf">X-Y-.png</property>
+                                    <property name="pixbuf">icons/X-Y-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -338,7 +338,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="tooltip_text" translatable="yes">X-</property>
                                     <property name="xalign">0</property>
-                                    <property name="pixbuf">X-.png</property>
+                                    <property name="pixbuf">icons/X-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -363,7 +363,7 @@
                                   <object class="GtkImage" id="image9">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="pixbuf">xy_center.png</property>
+                                    <property name="pixbuf">icons/xy_center.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -412,7 +412,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Search Velocity</property>
                                 <property name="xalign">0.80000001192092896</property>
-                                <property name="pixbuf">search_vel.png</property>
+                                <property name="pixbuf">icons/search_vel.png</property>
                               </object>
                               <packing>
                                 <property name="y_options">GTK_SHRINK</property>
@@ -450,7 +450,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Probe Velocity</property>
                                 <property name="xalign">0.80000001192092896</property>
-                                <property name="pixbuf">probe_vel.png</property>
+                                <property name="pixbuf">icons/probe_vel.png</property>
                               </object>
                               <packing>
                                 <property name="top_attach">1</property>
@@ -465,7 +465,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Max probe  distance</property>
                                 <property name="xalign">0.60000002384185791</property>
-                                <property name="pixbuf">max_probe.png</property>
+                                <property name="pixbuf">icons/max_probe.png</property>
                               </object>
                               <packing>
                                 <property name="top_attach">2</property>
@@ -480,7 +480,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Probe diameter</property>
                                 <property name="xalign">0.60000002384185791</property>
-                                <property name="pixbuf">probe_diam.png</property>
+                                <property name="pixbuf">icons/probe_diam.png</property>
                               </object>
                               <packing>
                                 <property name="top_attach">4</property>
@@ -495,7 +495,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">XY clearance</property>
                                 <property name="xalign">0.69999998807907104</property>
-                                <property name="pixbuf">XYclearance.png</property>
+                                <property name="pixbuf">icons/XYclearance.png</property>
                               </object>
                               <packing>
                                 <property name="top_attach">5</property>
@@ -510,7 +510,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Edge length</property>
                                 <property name="xalign">0.69999998807907104</property>
-                                <property name="pixbuf">edge_length.png</property>
+                                <property name="pixbuf">icons/edge_length.png</property>
                               </object>
                               <packing>
                                 <property name="top_attach">6</property>
@@ -660,7 +660,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Latch distance</property>
                                 <property name="xalign">0.60000002384185791</property>
-                                <property name="pixbuf">latch_dist.png</property>
+                                <property name="pixbuf">icons/latch_dist.png</property>
                               </object>
                               <packing>
                                 <property name="top_attach">3</property>
@@ -702,7 +702,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Z clearance</property>
                                 <property name="xalign">0.69999998807907104</property>
-                                <property name="pixbuf">Zclearance.png</property>
+                                <property name="pixbuf">icons/Zclearance.png</property>
                               </object>
                               <packing>
                                 <property name="top_attach">7</property>
@@ -783,7 +783,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">1</property>
                                     <property name="yalign">1</property>
-                                    <property name="pixbuf">inX+Y-.png</property>
+                                    <property name="pixbuf">icons/inX+Y-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -812,7 +812,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="yalign">1</property>
-                                    <property name="pixbuf">inY-.png</property>
+                                    <property name="pixbuf">icons/inY-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -843,7 +843,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="yalign">1</property>
-                                    <property name="pixbuf">inX-Y-.png</property>
+                                    <property name="pixbuf">icons/inX-Y-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -870,7 +870,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
-                                    <property name="pixbuf">inX-.png</property>
+                                    <property name="pixbuf">icons/inX-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -895,7 +895,7 @@
                                   <object class="GtkImage" id="image35">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="pixbuf">inHole.png</property>
+                                    <property name="pixbuf">icons/inHole.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -924,7 +924,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">1</property>
-                                    <property name="pixbuf">inX+.png</property>
+                                    <property name="pixbuf">icons/inX+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -955,7 +955,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">1</property>
                                     <property name="yalign">0</property>
-                                    <property name="pixbuf">inX+Y+.png</property>
+                                    <property name="pixbuf">icons/inX+Y+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -982,7 +982,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="yalign">0</property>
-                                    <property name="pixbuf">inY+.png</property>
+                                    <property name="pixbuf">icons/inY+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -1011,7 +1011,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="yalign">0</property>
-                                    <property name="pixbuf">inX-Y+.png</property>
+                                    <property name="pixbuf">icons/inX-Y+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -1306,7 +1306,7 @@
                                               <object class="GtkImage" id="image24">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
-                                                <property name="pixbuf">angleX+.png</property>
+                                                <property name="pixbuf">icons/angleX+.png</property>
                                               </object>
                                             </child>
                                           </object>
@@ -1329,7 +1329,7 @@
                                               <object class="GtkImage" id="image40">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
-                                                <property name="pixbuf">angleY+.png</property>
+                                                <property name="pixbuf">icons/angleY+.png</property>
                                               </object>
                                             </child>
                                           </object>
@@ -1354,7 +1354,7 @@
                                               <object class="GtkImage" id="image41">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
-                                                <property name="pixbuf">angleX-.png</property>
+                                                <property name="pixbuf">icons/angleX-.png</property>
                                               </object>
                                             </child>
                                           </object>
@@ -1381,7 +1381,7 @@
                                               <object class="GtkImage" id="image42">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
-                                                <property name="pixbuf">angleY-.png</property>
+                                                <property name="pixbuf">icons/angleY-.png</property>
                                               </object>
                                             </child>
                                           </object>
@@ -1476,7 +1476,7 @@
                                               <object class="GtkImage" id="image43">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
-                                                <property name="pixbuf">rott.png</property>
+                                                <property name="pixbuf">icons/rott.png</property>
                                               </object>
                                             </child>
                                           </object>
@@ -1621,7 +1621,7 @@
                                           <object class="GtkImage" id="image11">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="pixbuf">X0.png</property>
+                                            <property name="pixbuf">icons/X0.png</property>
                                           </object>
                                         </child>
                                       </object>
@@ -1647,7 +1647,7 @@
                                           <object class="GtkImage" id="image17">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="pixbuf">Y0.png</property>
+                                            <property name="pixbuf">icons/Y0.png</property>
                                           </object>
                                         </child>
                                       </object>
@@ -1673,7 +1673,7 @@
                                           <object class="GtkImage" id="image23">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="pixbuf">Z0.png</property>
+                                            <property name="pixbuf">icons/Z0.png</property>
                                           </object>
                                         </child>
                                       </object>
@@ -1763,7 +1763,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Probe X- pos.</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_xm.png</property>
+                                        <property name="pixbuf">icons/probe_xm.png</property>
                                       </object>
                                       <packing>
                                         <property name="x_options">GTK_SHRINK</property>
@@ -1778,7 +1778,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Probe Y- pos.</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_ym.png</property>
+                                        <property name="pixbuf">icons/probe_ym.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">2</property>
@@ -1795,7 +1795,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Probe Z pos.</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_z.png</property>
+                                        <property name="pixbuf">icons/probe_z.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">4</property>
@@ -1918,7 +1918,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Diameter</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_d.png</property>
+                                        <property name="pixbuf">icons/probe_d.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">4</property>
@@ -1959,7 +1959,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Center  X pos.</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_center_x.png</property>
+                                        <property name="pixbuf">icons/probe_center_x.png</property>
                                       </object>
                                       <packing>
                                         <property name="top_attach">1</property>
@@ -1976,7 +1976,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Center Y pos.</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_center_y.png</property>
+                                        <property name="pixbuf">icons/probe_center_y.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">2</property>
@@ -1995,7 +1995,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Angle of rotation</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_a.png</property>
+                                        <property name="pixbuf">icons/probe_a.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">4</property>
@@ -2034,7 +2034,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Probe X+ pos.</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_xp.png</property>
+                                        <property name="pixbuf">icons/probe_xp.png</property>
                                       </object>
                                       <packing>
                                         <property name="top_attach">2</property>
@@ -2073,7 +2073,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Probe Y+ pos.</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_yp.png</property>
+                                        <property name="pixbuf">icons/probe_yp.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">2</property>
@@ -2114,7 +2114,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Distance from X+ to X-</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_lx.png</property>
+                                        <property name="pixbuf">icons/probe_lx.png</property>
                                       </object>
                                       <packing>
                                         <property name="top_attach">3</property>
@@ -2131,7 +2131,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Distance from Y+ to Y-</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_ly.png</property>
+                                        <property name="pixbuf">icons/probe_ly.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">2</property>
@@ -2194,7 +2194,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="xalign">1</property>
                                         <property name="yalign">1</property>
-                                        <property name="pixbuf">logo_micro_vers_gray.png</property>
+                                        <property name="pixbuf">icons/logo_micro_vers_gray.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">5</property>
@@ -2240,7 +2240,7 @@
                               <object class="GtkImage" id="image12">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">down.png</property>
+                                <property name="pixbuf">icons/down.png</property>
                               </object>
                             </child>
                           </object>
@@ -2290,7 +2290,7 @@
                               <object class="GtkImage" id="image47">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">tool_dia.png</property>
+                                <property name="pixbuf">icons/tool_dia.png</property>
                               </object>
                             </child>
                           </object>
@@ -2313,7 +2313,7 @@
                               <object class="GtkImage" id="image48">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">Lx_out.png</property>
+                                <property name="pixbuf">icons/Lx_out.png</property>
                               </object>
                             </child>
                           </object>
@@ -2336,7 +2336,7 @@
                               <object class="GtkImage" id="image49">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">Ly_out.png</property>
+                                <property name="pixbuf">icons/Ly_out.png</property>
                               </object>
                             </child>
                           </object>
@@ -2359,7 +2359,7 @@
                               <object class="GtkImage" id="image50">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">Lx_in.png</property>
+                                <property name="pixbuf">icons/Lx_in.png</property>
                               </object>
                             </child>
                           </object>
@@ -2382,7 +2382,7 @@
                               <object class="GtkImage" id="image51">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">Ly_in.png</property>
+                                <property name="pixbuf">icons/Ly_in.png</property>
                               </object>
                             </child>
                           </object>
@@ -2433,7 +2433,7 @@
                                           <object class="GtkImage" id="image45">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="pixbuf">ts_height.png</property>
+                                            <property name="pixbuf">icons/ts_height.png</property>
                                           </object>
                                         </child>
                                       </object>
@@ -2457,7 +2457,7 @@
                                           <object class="GtkImage" id="image46">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="pixbuf">workpiece_height.png</property>
+                                            <property name="pixbuf">icons/workpiece_height.png</property>
                                           </object>
                                         </child>
                                       </object>

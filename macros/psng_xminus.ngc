@@ -1,4 +1,4 @@
-o<xminus> sub
+o<psng_xminus> sub
 	 	
 #<x>=#<_x> (save start X position) 
 G91
@@ -13,5 +13,5 @@ G90
 (back to start point)
 G1 X#<x> F#<_ini[TOOLSENSOR]RAPID_SPEED> 
 	
-o<xminus> endsub
+o<psng_xminus> endsub
 M2

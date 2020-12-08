@@ -1,6 +1,6 @@
 ; manual toolchange with automatic tool length probe 
 
-o<manual_change> sub
+o<psng_manual_change> sub
 ;(debug, in change tool_in_spindle=#<tool_in_spindle> current_pocket=#<current_pocket>)
 ;(debug, selected_tool=#<selected_tool> selected_pocket=#<selected_pocket>)
 
@@ -74,6 +74,6 @@ G43
 ;G10 L2 P0 Z[#<workpieceheight> + #<probeheight> + #<touch_result>]
 
 ; signal success be returning a value > 0:
-o<manual_change> endsub [1]
+o<psng_manual_change> endsub [1]
 m2
 
