@@ -12,7 +12,8 @@ This repo was originally a fork of https://github.com/verser-git/probe_screen_v2
 
  Install.
 -----------------------------------------------------------------------------
-1. Delete (or comment out) from all .hal files lines of the form:
+1. see "psng/install_del_from_your.hal" 
+   Delete (or comment out) from all .hal files lines of the form:
 ```sh
 #loadusr -W hal_manualtoolchange
 #net tool-change iocontrol.0.tool-change => hal_manualtoolchange.change
@@ -20,13 +21,13 @@ This repo was originally a fork of https://github.com/verser-git/probe_screen_v2
 #net tool-number iocontrol.0.tool-prep-number => hal_manualtoolchange.number
 ```
 
-2. Add to your .ini ...-postgui.hal settings from my-mill.ini and my-mill-postgui.hal, substitute your own constants.
+2. see "psng/install_add_to_your.ini" Add to your .ini settings, substitute your own constants.
 
 3. The following folders from the archive are placed in configuration folder:
 ```sh
 /python
+/psng
 /macros
-/probe_icons
 ```
 
 4. .axisrc is placed in home ~/ folder.
