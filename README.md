@@ -1,80 +1,57 @@
 # Probe Screen for LinuxCNC 2.8
 
-Info
-----
-Probe-Screen ist currently being redesigned.
+## Info
 
+Probe-Screen is currently being redesigned.
 
-History
--------
+## History
 
-This repo was originally a fork of https://github.com/verser-git/probe_screen_v2 by Serguei Glavatski / Vers.by. Hopefully, this will become a community maintained probe screen for LinuxCNC. Anyone with an interest in helping out, please submit PRs or ask to join the project via a GitHub issue.
+This repo was originally a fork of <https://github.com/verser-git/probe_screen_v2> by Serguei Glavatski / Vers.by. Hopefully, this will become a community maintained probe screen for LinuxCNC. Anyone with an interest in helping out, please submit PRs or ask to join the project via a GitHub issue.
 
- Install.
------------------------------------------------------------------------------
-1. see "psng/install_del_from_your.hal" 
+## Install
+
+1. See "psng/install_del_from_your.hal"
    Delete (or comment out) from all .hal files lines of the form:
-```sh
-#loadusr -W hal_manualtoolchange
-#net tool-change iocontrol.0.tool-change => hal_manualtoolchange.change
-#net tool-changed iocontrol.0.tool-changed <= hal_manualtoolchange.changed
-#net tool-number iocontrol.0.tool-prep-number => hal_manualtoolchange.number
-```
 
-2. see "psng/install_add_to_your.ini" Add to your .ini settings, substitute your own constants.
+   ```sh
+   #loadusr -W hal_manualtoolchange
+   #net tool-change iocontrol.0.tool-change => hal_manualtoolchange.change
+   #net tool-changed iocontrol.0.tool-changed <= hal_manualtoolchange.changed
+   #net tool-number iocontrol.0.tool-prep-number => hal_manualtoolchange.number
+   ```
+
+2. See "psng/install_add_to_your.ini" Add to your .ini settings, substitute your own constants.
 
 3. The following folders from the archive are placed in configuration folder:
-```sh
-/python
-/psng
-/macros
-```
 
-4. .axisrc is placed in home ~/ folder.
-If you are already using .axisrc, then only add to your file contents of this .axisrc.
+   ```sh
+   /python
+   /psng
+   /macros
+   ```
 
+4. Copy .axisrc to your home ~/ folder. If you are already using .axisrc, then only add to your file contents of this .axisrc.
 
-Use.
-----------------------------------------------------------------------------------
+## Use
+
 Set the probe in the spindle.
-Move manually probe for Z about 2-10 mm above the workpiece surface, 
+
+Move manually probe for Z about 2-10 mm above the workpiece surface,
 and for XY about the position indicated by the colored dot on the appropriate button Probe Screen.
+
 Fill parameters. Meaning of the parameters should be clear from the names and pictures (the name pop up when approaching the mouse). If you change the parameters are automatically saved in .pref .
 
-Hit only! the button that corresponds to the position of the probe above the workpiece. For the other buttons - another position above the workpiece.  
+Hit **only** the button that corresponds to the position of the probe above the workpiece. For the other buttons - you **must** move the probe to another position above the workpiece.
 
-You do not need to expose offsets for tool "Probe", the program desired zero offsets for the current tool makes herself, and G-code works off all in relative coordinates. 
+You do not need to expose offsets for tool "Probe", the program desired zero offsets for the current tool makes herself, and G-code works off all in relative coordinates.
 In fact, you can use the application immediately after the Home.
-
 
 Any of the search ends at XY moving at the desired point (or edge, or corner, or center), Z remains in the original position.
 
-More info https://vers.by/en/blog/useful-articles/probe-screen
-Discussion on the forum linuxcnc.org: https://forum.linuxcnc.org/49-basic-configuration/29187-work-with-probe
+More info <https://vers.by/en/blog/useful-articles/probe-screen>
+Discussion on the forum linuxcnc.org: <https://forum.linuxcnc.org/49-basic-configuration/29187-work-with-probe>
 
-Changes in updates.
-----------------------------------------------------------------------------------
-
-v.2.0.8
-```sh
--corrections in tool diameter button
--allow neg. angle value
--correction pref. and history for tool measurement
-```
-v.2.0.7
-```sh
--correction my-mill-postgui.hal from installation instructions for tool change
--delete all "%" from macros
-```
-v.2.0.6
-```sh
--fixed incorrect toolchange pin connection
--added FernV's corrections for inch
--added FernV's scrolling screen version
-```
-
- License terms.
------------------------------------------------------------------------------
+## License
 
    This is a plugin for LinuxCNC
    Copyright 2015 Serguei Glavatski <info@vers.by>
