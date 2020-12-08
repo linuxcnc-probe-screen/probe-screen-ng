@@ -697,7 +697,7 @@ class ProbeScreenClass:
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
         # Start down.ngc
-        if self.ocode ("O<down> call") == -1:
+        if self.ocode ("o<psng_down> call") == -1:
             return
         a=self.probed_position_with_offsets()
         self.lb_probe_z.set_text( "%.4f" % float(a[2]) )
@@ -717,7 +717,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
        # Start xplus.ngc
-        if self.ocode ("O<xplus> call") == -1:
+        if self.ocode ("o<psng_xplus> call") == -1:
             return
         a=self.probed_position_with_offsets()
         xres=float(a[0]+0.5*self.spbtn1_probe_diam.get_value())
@@ -747,7 +747,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start yplus.ngc
-        if self.ocode ("O<yplus> call") == -1:
+        if self.ocode ("o<psng_yplus> call") == -1:
             return
         a=self.probed_position_with_offsets()
         yres=float(a[1])+0.5*self.spbtn1_probe_diam.get_value()
@@ -777,7 +777,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xminus.ngc
-        if self.ocode ("O<xminus> call") == -1:
+        if self.ocode ("o<psng_xminus> call") == -1:
             return
         a=self.probed_position_with_offsets()
         xres=float(a[0]-0.5*self.spbtn1_probe_diam.get_value())
@@ -807,7 +807,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start yminus.ngc
-        if self.ocode ("O<yminus> call") == -1:
+        if self.ocode ("o<psng_yminus> call") == -1:
             return
         a=self.probed_position_with_offsets()
         yres=float(a[1])-0.5*self.spbtn1_probe_diam.get_value()
@@ -839,7 +839,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xplus.ngc
-        if self.ocode ("O<xplus> call") == -1:
+        if self.ocode ("o<psng_xplus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -860,7 +860,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start yplus.ngc
-        if self.ocode ("O<yplus> call") == -1:
+        if self.ocode ("o<psng_yplus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -891,7 +891,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xplus.ngc
-        if self.ocode ("O<xplus> call") == -1:
+        if self.ocode ("o<psng_xplus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -912,7 +912,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start yminus.ngc
-        if self.ocode ("O<yminus> call") == -1:
+        if self.ocode ("o<psng_yminus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -942,7 +942,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xminus.ngc
-        if self.ocode ("O<xminus> call") == -1:
+        if self.ocode ("o<psng_xminus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -963,7 +963,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start yplus.ngc
-        if self.ocode ("O<yplus> call") == -1:
+        if self.ocode ("o<psng_yplus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -994,7 +994,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xminus.ngc
-        if self.ocode ("O<xminus> call") == -1:
+        if self.ocode ("o<psng_xminus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1015,7 +1015,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start yminus.ngc
-        if self.ocode ("O<yminus> call") == -1:
+        if self.ocode ("o<psng_yminus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1046,7 +1046,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xplus.ngc
-        if self.ocode ("O<xplus> call") == -1:
+        if self.ocode ("o<psng_xplus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1067,7 +1067,7 @@ class ProbeScreenClass:
             return
         # Start xminus.ngc
 
-        if self.ocode ("O<xminus> call") == -1:
+        if self.ocode ("o<psng_xminus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1097,7 +1097,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start yplus.ngc
-        if self.ocode ("O<yplus> call") == -1:
+        if self.ocode ("o<psng_yplus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1117,7 +1117,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xminus.ngc
-        if self.ocode ("O<yminus> call") == -1:
+        if self.ocode ("o<psng_yminus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1159,7 +1159,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xplus.ngc
-        if self.ocode ("O<xplus> call") == -1:
+        if self.ocode ("o<psng_xplus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1175,7 +1175,7 @@ class ProbeScreenClass:
         if self.gcode(s) == -1:
             return
         # Start yplus.ngc
-        if self.ocode ("O<yplus> call") == -1:
+        if self.ocode ("o<psng_yplus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1206,7 +1206,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xplus.ngc
-        if self.ocode ("O<xplus> call") == -1:
+        if self.ocode ("o<psng_xplus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1222,7 +1222,7 @@ class ProbeScreenClass:
         if self.gcode(s) == -1:
             return
         # Start yminus.ngc
-        if self.ocode ("O<yminus> call") == -1:
+        if self.ocode ("o<psng_yminus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1253,7 +1253,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xminus.ngc
-        if self.ocode ("O<xminus> call") == -1:
+        if self.ocode ("o<psng_xminus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1269,7 +1269,7 @@ class ProbeScreenClass:
         if self.gcode(s) == -1:
             return
         # Start yplus.ngc
-        if self.ocode ("O<yplus> call") == -1:
+        if self.ocode ("o<psng_yplus> call") == -1:
             return
 
         # show Y result
@@ -1301,7 +1301,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xminus.ngc
-        if self.ocode ("O<xminus> call") == -1:
+        if self.ocode ("o<psng_xminus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1317,7 +1317,7 @@ class ProbeScreenClass:
         if self.gcode(s) == -1:
             return
         # Start yminus.ngc
-        if self.ocode ("O<yminus> call") == -1:
+        if self.ocode ("o<psng_yminus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1349,7 +1349,7 @@ class ProbeScreenClass:
         if self.gcode(s) == -1:
             return
         # Start xminus.ngc
-        if self.ocode ("O<xminus> call") == -1:
+        if self.ocode ("o<psng_xminus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1364,7 +1364,7 @@ class ProbeScreenClass:
         if self.gcode(s) == -1:
             return
         # Start xplus.ngc
-        if self.ocode ("O<xplus> call") == -1:
+        if self.ocode ("o<psng_xplus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1387,7 +1387,7 @@ class ProbeScreenClass:
         if self.gcode(s) == -1:
             return
         # Start yminus.ngc
-        if self.ocode ("O<yminus> call") == -1:
+        if self.ocode ("o<psng_yminus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1402,7 +1402,7 @@ class ProbeScreenClass:
         if self.gcode(s) == -1:
             return
         # Start yplus.ngc
-        if self.ocode ("O<yplus> call") == -1:
+        if self.ocode ("o<psng_yplus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1445,7 +1445,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start yplus.ngc
-        if self.ocode ("O<yplus> call") == -1:
+        if self.ocode ("o<psng_yplus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1463,7 +1463,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start yplus.ngc
-        if self.ocode ("O<yplus> call") == -1:
+        if self.ocode ("o<psng_yplus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1497,7 +1497,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start yminus.ngc
-        if self.ocode ("O<yminus> call") == -1:
+        if self.ocode ("o<psng_yminus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1515,7 +1515,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start yminus.ngc
-        if self.ocode ("O<yminus> call") == -1:
+        if self.ocode ("o<psng_yminus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1548,7 +1548,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xplus.ngc
-        if self.ocode ("O<xplus> call") == -1:
+        if self.ocode ("o<psng_xplus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1566,7 +1566,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xplus.ngc
-        if self.ocode ("O<xplus> call") == -1:
+        if self.ocode ("o<psng_xplus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1599,7 +1599,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xminus.ngc
-        if self.ocode ("O<xminus> call") == -1:
+        if self.ocode ("o<psng_xminus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1617,7 +1617,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xminus.ngc
-        if self.ocode ("O<xminus> call") == -1:
+        if self.ocode ("o<psng_xminus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1648,7 +1648,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xplus.ngc
-        if self.ocode ("O<xplus> call") == -1:
+        if self.ocode ("o<psng_xplus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1673,7 +1673,7 @@ class ProbeScreenClass:
             return
         # Start xminus.ngc
 
-        if self.ocode ("O<xminus> call") == -1:
+        if self.ocode ("o<psng_xminus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1708,7 +1708,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start yplus.ngc
-        if self.ocode ("O<yplus> call") == -1:
+        if self.ocode ("o<psng_yplus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1732,7 +1732,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xminus.ngc
-        if self.ocode ("O<yminus> call") == -1:
+        if self.ocode ("o<psng_yminus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1768,7 +1768,7 @@ class ProbeScreenClass:
         if self.gcode(s) == -1:
             return
         # Start xminus.ngc
-        if self.ocode ("O<xminus> call") == -1:
+        if self.ocode ("o<psng_xminus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1783,7 +1783,7 @@ class ProbeScreenClass:
         if self.gcode(s) == -1:
             return
         # Start xplus.ngc
-        if self.ocode ("O<xplus> call") == -1:
+        if self.ocode ("o<psng_xplus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1817,7 +1817,7 @@ class ProbeScreenClass:
         if self.gcode(s) == -1:
             return
         # Start yminus.ngc
-        if self.ocode ("O<yminus> call") == -1:
+        if self.ocode ("o<psng_yminus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1832,7 +1832,7 @@ class ProbeScreenClass:
         if self.gcode(s) == -1:
             return
         # Start yplus.ngc
-        if self.ocode ("O<yplus> call") == -1:
+        if self.ocode ("o<psng_yplus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1859,7 +1859,7 @@ class ProbeScreenClass:
         self.command.wait_complete()
         # move XY to Tool Setter point
         # Start gotots.ngc
-        if self.ocode ("O<gotots> call") == -1:
+        if self.ocode ("o<psng_gotots> call") == -1:
             return
         # move X - edge_lenght- xy_clearance
         s="""G91
@@ -1870,7 +1870,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xplus.ngc
-        if self.ocode ("O<xplus> call") == -1:
+        if self.ocode ("o<psng_xplus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1895,7 +1895,7 @@ class ProbeScreenClass:
             return
         # Start xminus.ngc
 
-        if self.ocode ("O<xminus> call") == -1:
+        if self.ocode ("o<psng_xminus> call") == -1:
             return
         # show X result
         a=self.probed_position_with_offsets()
@@ -1923,7 +1923,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start yplus.ngc
-        if self.ocode ("O<yplus> call") == -1:
+        if self.ocode ("o<psng_yplus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -1947,7 +1947,7 @@ class ProbeScreenClass:
         if self.z_clearance_down() == -1:
             return
         # Start xminus.ngc
-        if self.ocode ("O<yminus> call") == -1:
+        if self.ocode ("o<psng_yminus> call") == -1:
             return
         # show Y result
         a=self.probed_position_with_offsets()
@@ -2076,7 +2076,7 @@ class ProbeScreenClass:
         # Start probe_down.ngc
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
-        self.command.mdi( "O<probe_down> call" )
+        self.command.mdi( "o<psng_probe_down> call" )
         self.stat.poll()
         while self.stat.interp_state != linuxcnc.INTERP_IDLE :
             self.command.wait_complete()
@@ -2091,7 +2091,7 @@ class ProbeScreenClass:
         # Start probe_down.ngc
         self.command.mode( linuxcnc.MODE_MDI )
         self.command.wait_complete()
-        self.command.mdi( "O<block_down> call" )
+        self.command.mdi( "o<psng_block_down> call" )
         self.stat.poll()
         while self.stat.interp_state != linuxcnc.INTERP_IDLE :
             self.command.wait_complete()

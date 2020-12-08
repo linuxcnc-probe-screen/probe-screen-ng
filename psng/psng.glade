@@ -133,8 +133,8 @@
                             <property name="n_columns">3</property>
                             <child>
                               <object class="GtkButton" id="yp">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -147,7 +147,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="yalign">0</property>
-                                    <property name="pixbuf">Y+.png</property>
+                                    <property name="pixbuf">icons/Y+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -160,8 +160,8 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="xmyp">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -176,7 +176,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="yalign">0</property>
-                                    <property name="pixbuf">X-Y+.png</property>
+                                    <property name="pixbuf">icons/X-Y+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -189,12 +189,12 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="xpyp">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">X+Y+ out</property>
+                                <property name="tooltip_text" translatable="yes">X+Y- out</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="xalign">1</property>
                                 <property name="yalign">0</property>
@@ -205,7 +205,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">1</property>
                                     <property name="yalign">0</property>
-                                    <property name="pixbuf">X+Y+.png</property>
+                                    <property name="pixbuf">icons/X+Y+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -217,8 +217,8 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="xp">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -231,7 +231,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">1</property>
-                                    <property name="pixbuf">X+.png</property>
+                                    <property name="pixbuf">icons/X+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -243,8 +243,8 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="xpym">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -259,7 +259,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">1</property>
                                     <property name="yalign">1</property>
-                                    <property name="pixbuf">X+Y-.png</property>
+                                    <property name="pixbuf">icons/X+Y-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -270,8 +270,8 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="ym">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -284,7 +284,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="yalign">1</property>
-                                    <property name="pixbuf">Y-.png</property>
+                                    <property name="pixbuf">icons/Y-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -296,12 +296,12 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="xmym">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Y-X- out</property>
+                                <property name="tooltip_text" translatable="yes">Y-X+ out</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="xalign">0</property>
                                 <property name="yalign">1</property>
@@ -312,7 +312,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="yalign">1</property>
-                                    <property name="pixbuf">X-Y-.png</property>
+                                    <property name="pixbuf">icons/X-Y-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -324,12 +324,11 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="xm">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">X-</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="xalign">0</property>
                                 <signal name="released" handler="on_xm_released" swapped="no"/>
@@ -337,8 +336,9 @@
                                   <object class="GtkImage" id="image8">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
+                                    <property name="tooltip_text" translatable="yes">X-</property>
                                     <property name="xalign">0</property>
-                                    <property name="pixbuf">X-.png</property>
+                                    <property name="pixbuf">icons/X-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -351,19 +351,19 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="xy_center">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">X+X-Y+Y- out</property>
+                                <property name="tooltip_text" translatable="yes">Center OUT</property>
                                 <property name="use_action_appearance">False</property>
                                 <signal name="released" handler="on_xy_center_released" swapped="no"/>
                                 <child>
                                   <object class="GtkImage" id="image9">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="pixbuf">xy_center.png</property>
+                                    <property name="pixbuf">icons/xy_center.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -404,14 +404,15 @@
                             <property name="can_focus">False</property>
                             <property name="n_rows">8</property>
                             <property name="n_columns">2</property>
+                            <property name="row_spacing">2</property>
                             <child>
                               <object class="GtkImage" id="image13">
-                                <property name="height_request">26</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Search Velocity</property>
                                 <property name="xalign">0.80000001192092896</property>
-                                <property name="pixbuf">search_vel.png</property>
+                                <property name="pixbuf">icons/search_vel.png</property>
                               </object>
                               <packing>
                                 <property name="y_options">GTK_SHRINK</property>
@@ -419,8 +420,8 @@
                             </child>
                             <child>
                               <object class="GtkSpinButton" id="spbtn1_search_vel">
-                                <property name="width_request">80</property>
-                                <property name="height_request">26</property>
+                                <property name="width_request">105</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">●</property>
@@ -444,12 +445,12 @@
                             </child>
                             <child>
                               <object class="GtkImage" id="image14">
-                                <property name="height_request">26</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Probe Velocity</property>
                                 <property name="xalign">0.80000001192092896</property>
-                                <property name="pixbuf">probe_vel.png</property>
+                                <property name="pixbuf">icons/probe_vel.png</property>
                               </object>
                               <packing>
                                 <property name="top_attach">1</property>
@@ -459,12 +460,12 @@
                             </child>
                             <child>
                               <object class="GtkImage" id="image15">
-                                <property name="height_request">26</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Max probe  distance</property>
                                 <property name="xalign">0.60000002384185791</property>
-                                <property name="pixbuf">max_probe.png</property>
+                                <property name="pixbuf">icons/max_probe.png</property>
                               </object>
                               <packing>
                                 <property name="top_attach">2</property>
@@ -474,12 +475,12 @@
                             </child>
                             <child>
                               <object class="GtkImage" id="image19">
-                                <property name="height_request">26</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Probe diameter</property>
                                 <property name="xalign">0.60000002384185791</property>
-                                <property name="pixbuf">probe_diam.png</property>
+                                <property name="pixbuf">icons/probe_diam.png</property>
                               </object>
                               <packing>
                                 <property name="top_attach">4</property>
@@ -489,12 +490,12 @@
                             </child>
                             <child>
                               <object class="GtkImage" id="image20">
-                                <property name="height_request">26</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">XY clearance</property>
                                 <property name="xalign">0.69999998807907104</property>
-                                <property name="pixbuf">XYclearance.png</property>
+                                <property name="pixbuf">icons/XYclearance.png</property>
                               </object>
                               <packing>
                                 <property name="top_attach">5</property>
@@ -504,12 +505,12 @@
                             </child>
                             <child>
                               <object class="GtkImage" id="image21">
-                                <property name="height_request">26</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Edge length</property>
                                 <property name="xalign">0.69999998807907104</property>
-                                <property name="pixbuf">edge_length.png</property>
+                                <property name="pixbuf">icons/edge_length.png</property>
                               </object>
                               <packing>
                                 <property name="top_attach">6</property>
@@ -519,8 +520,8 @@
                             </child>
                             <child>
                               <object class="GtkSpinButton" id="spbtn1_probe_vel">
-                                <property name="width_request">80</property>
-                                <property name="height_request">26</property>
+                                <property name="width_request">105</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">●</property>
@@ -546,8 +547,8 @@
                             </child>
                             <child>
                               <object class="GtkSpinButton" id="spbtn1_probe_max">
-                                <property name="width_request">80</property>
-                                <property name="height_request">26</property>
+                                <property name="width_request">105</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">●</property>
@@ -573,8 +574,8 @@
                             </child>
                             <child>
                               <object class="GtkSpinButton" id="spbtn1_probe_diam">
-                                <property name="width_request">80</property>
-                                <property name="height_request">26</property>
+                                <property name="width_request">105</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">●</property>
@@ -600,8 +601,8 @@
                             </child>
                             <child>
                               <object class="GtkSpinButton" id="spbtn1_xy_clearance">
-                                <property name="width_request">80</property>
-                                <property name="height_request">26</property>
+                                <property name="width_request">105</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">●</property>
@@ -627,8 +628,8 @@
                             </child>
                             <child>
                               <object class="GtkSpinButton" id="spbtn1_edge_lenght">
-                                <property name="width_request">80</property>
-                                <property name="height_request">26</property>
+                                <property name="width_request">105</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">●</property>
@@ -654,12 +655,12 @@
                             </child>
                             <child>
                               <object class="GtkImage" id="image28">
-                                <property name="height_request">26</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Latch distance</property>
                                 <property name="xalign">0.60000002384185791</property>
-                                <property name="pixbuf">latch_dist.png</property>
+                                <property name="pixbuf">icons/latch_dist.png</property>
                               </object>
                               <packing>
                                 <property name="top_attach">3</property>
@@ -669,8 +670,8 @@
                             </child>
                             <child>
                               <object class="GtkSpinButton" id="spbtn1_probe_latch">
-                                <property name="width_request">80</property>
-                                <property name="height_request">26</property>
+                                <property name="width_request">105</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">●</property>
@@ -696,12 +697,12 @@
                             </child>
                             <child>
                               <object class="GtkImage" id="image29">
-                                <property name="height_request">26</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Z clearance</property>
                                 <property name="xalign">0.69999998807907104</property>
-                                <property name="pixbuf">Zclearance.png</property>
+                                <property name="pixbuf">icons/Zclearance.png</property>
                               </object>
                               <packing>
                                 <property name="top_attach">7</property>
@@ -711,8 +712,8 @@
                             </child>
                             <child>
                               <object class="GtkSpinButton" id="spbtn1_z_clearance">
-                                <property name="width_request">80</property>
-                                <property name="height_request">26</property>
+                                <property name="width_request">105</property>
+                                <property name="height_request">32</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">●</property>
@@ -766,8 +767,8 @@
                             <property name="n_columns">3</property>
                             <child>
                               <object class="GtkButton" id="xpym1">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -782,7 +783,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">1</property>
                                     <property name="yalign">1</property>
-                                    <property name="pixbuf">inX+Y-.png</property>
+                                    <property name="pixbuf">icons/inX+Y-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -797,8 +798,8 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="ym1">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -811,7 +812,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="yalign">1</property>
-                                    <property name="pixbuf">inY-.png</property>
+                                    <property name="pixbuf">icons/inY-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -826,8 +827,8 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="xmym1">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -842,7 +843,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="yalign">1</property>
-                                    <property name="pixbuf">inX-Y-.png</property>
+                                    <property name="pixbuf">icons/inX-Y-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -855,8 +856,8 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="xm1">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -869,7 +870,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
-                                    <property name="pixbuf">inX-.png</property>
+                                    <property name="pixbuf">icons/inX-.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -882,19 +883,19 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="xy_hole">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">X-X+Y-Y+ in</property>
                                 <property name="use_action_appearance">False</property>
                                 <signal name="released" handler="on_xy_hole_released" swapped="no"/>
                                 <child>
                                   <object class="GtkImage" id="image35">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="tooltip_text" translatable="yes">X-X+Y-Y+ in</property>
-                                    <property name="pixbuf">inHole.png</property>
+                                    <property name="pixbuf">icons/inHole.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -909,8 +910,8 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="xp1">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -923,7 +924,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">1</property>
-                                    <property name="pixbuf">inX+.png</property>
+                                    <property name="pixbuf">icons/inX+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -938,8 +939,8 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="xpyp1">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -954,7 +955,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">1</property>
                                     <property name="yalign">0</property>
-                                    <property name="pixbuf">inX+Y+.png</property>
+                                    <property name="pixbuf">icons/inX+Y+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -967,8 +968,8 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="yp1">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -981,7 +982,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="yalign">0</property>
-                                    <property name="pixbuf">inY+.png</property>
+                                    <property name="pixbuf">icons/inY+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -994,8 +995,8 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="xmyp1">
-                                <property name="width_request">68</property>
-                                <property name="height_request">68</property>
+                                <property name="width_request">92</property>
+                                <property name="height_request">92</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -1010,7 +1011,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="yalign">0</property>
-                                    <property name="pixbuf">inX-Y+.png</property>
+                                    <property name="pixbuf">icons/inX-Y+.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -1038,7 +1039,7 @@
                     </child>
                     <child>
                       <object class="GtkAlignment" id="alignment5">
-                        <property name="width_request">180</property>
+                        <property name="width_request">242</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="top_padding">5</property>
@@ -1050,12 +1051,12 @@
                             <property name="can_focus">False</property>
                             <child>
                               <object class="Combi_DRO" id="combi_dro_X">
-                                <property name="height_request">50</property>
+                                <property name="height_request">68</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="abs_color">#00000000ffff</property>
                                 <property name="dtg_color">#ffffffff0000</property>
-                                <property name="font_size">20</property>
+                                <property name="font_size">24</property>
                                 <property name="homed_color">#0000ffff0000</property>
                                 <property name="rel_color">#000000000000</property>
                                 <property name="unhomed_color">#ffff00000000</property>
@@ -1068,12 +1069,12 @@
                             </child>
                             <child>
                               <object class="Combi_DRO" id="combi_dro_Y">
-                                <property name="height_request">50</property>
+                                <property name="height_request">68</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="abs_color">#00000000ffff</property>
                                 <property name="dtg_color">#ffffffff0000</property>
-                                <property name="font_size">20</property>
+                                <property name="font_size">24</property>
                                 <property name="homed_color">#0000ffff0000</property>
                                 <property name="joint_number">1</property>
                                 <property name="rel_color">#000000000000</property>
@@ -1087,12 +1088,12 @@
                             </child>
                             <child>
                               <object class="Combi_DRO" id="combi_dro_Z">
-                                <property name="height_request">50</property>
+                                <property name="height_request">68</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="abs_color">#00000000ffff</property>
                                 <property name="dtg_color">#ffffffff0000</property>
-                                <property name="font_size">20</property>
+                                <property name="font_size">24</property>
                                 <property name="homed_color">#0000ffff0000</property>
                                 <property name="joint_number">2</property>
                                 <property name="rel_color">#000000000000</property>
@@ -1115,8 +1116,8 @@
                                     <child>
                                       <object class="GtkButton" id="jog_Xplus_btn">
                                         <property name="label" translatable="yes">X+</property>
-                                        <property name="width_request">40</property>
-                                        <property name="height_request">26</property>
+                                        <property name="width_request">54</property>
+                                        <property name="height_request">35</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
@@ -1126,15 +1127,15 @@
                                         <signal name="released" handler="on_btn_jog_released" swapped="no"/>
                                       </object>
                                       <packing>
-                                        <property name="x">83</property>
-                                        <property name="y">24</property>
+                                        <property name="x">111</property>
+                                        <property name="y">26</property>
                                       </packing>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="jog_Xminus_btn">
                                         <property name="label" translatable="yes">X-</property>
-                                        <property name="width_request">40</property>
-                                        <property name="height_request">26</property>
+                                        <property name="width_request">54</property>
+                                        <property name="height_request">35</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
@@ -1144,14 +1145,14 @@
                                       </object>
                                       <packing>
                                         <property name="x">1</property>
-                                        <property name="y">24</property>
+                                        <property name="y">26</property>
                                       </packing>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="jog_Yplus_btn1">
                                         <property name="label" translatable="yes">Y+</property>
-                                        <property name="width_request">40</property>
-                                        <property name="height_request">26</property>
+                                        <property name="width_request">54</property>
+                                        <property name="height_request">35</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
@@ -1161,15 +1162,15 @@
                                         <signal name="released" handler="on_btn_jog_released" swapped="no"/>
                                       </object>
                                       <packing>
-                                        <property name="x">42</property>
+                                        <property name="x">56</property>
                                         <property name="y">2</property>
                                       </packing>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="jog_Yminus_btn2">
                                         <property name="label" translatable="yes">Y-</property>
-                                        <property name="width_request">40</property>
-                                        <property name="height_request">26</property>
+                                        <property name="width_request">54</property>
+                                        <property name="height_request">35</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
@@ -1179,15 +1180,15 @@
                                         <signal name="released" handler="on_btn_jog_released" swapped="no"/>
                                       </object>
                                       <packing>
-                                        <property name="x">42</property>
-                                        <property name="y">46</property>
+                                        <property name="x">56</property>
+                                        <property name="y">49</property>
                                       </packing>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="jog_Zplus_btn2">
                                         <property name="label" translatable="yes">Z+</property>
-                                        <property name="width_request">40</property>
-                                        <property name="height_request">26</property>
+                                        <property name="width_request">54</property>
+                                        <property name="height_request">35</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
@@ -1197,15 +1198,15 @@
                                         <signal name="released" handler="on_btn_jog_released" swapped="no"/>
                                       </object>
                                       <packing>
-                                        <property name="x">129</property>
+                                        <property name="x">182</property>
                                         <property name="y">2</property>
                                       </packing>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="jog_Zminus_btn2">
                                         <property name="label" translatable="yes">Z-</property>
-                                        <property name="width_request">40</property>
-                                        <property name="height_request">26</property>
+                                        <property name="width_request">54</property>
+                                        <property name="height_request">35</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
@@ -1215,8 +1216,8 @@
                                         <signal name="released" handler="on_btn_jog_released" swapped="no"/>
                                       </object>
                                       <packing>
-                                        <property name="x">129</property>
-                                        <property name="y">46</property>
+                                        <property name="x">182</property>
+                                        <property name="y">49</property>
                                       </packing>
                                     </child>
                                   </object>
@@ -1269,7 +1270,7 @@
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkFixed" id="fixed2">
-                        <property name="width_request">714</property>
+                        <property name="width_request">950</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
@@ -1293,8 +1294,8 @@
                                         <property name="n_columns">2</property>
                                         <child>
                                           <object class="GtkButton" id="angle_xp">
-                                            <property name="width_request">62</property>
-                                            <property name="height_request">62</property>
+                                            <property name="width_request">84</property>
+                                            <property name="height_request">84</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
@@ -1305,7 +1306,7 @@
                                               <object class="GtkImage" id="image24">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
-                                                <property name="pixbuf">angleX+.png</property>
+                                                <property name="pixbuf">icons/angleX+.png</property>
                                               </object>
                                             </child>
                                           </object>
@@ -1316,8 +1317,8 @@
                                         </child>
                                         <child>
                                           <object class="GtkButton" id="angle_yp">
-                                            <property name="width_request">62</property>
-                                            <property name="height_request">62</property>
+                                            <property name="width_request">84</property>
+                                            <property name="height_request">84</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
@@ -1328,7 +1329,7 @@
                                               <object class="GtkImage" id="image40">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
-                                                <property name="pixbuf">angleY+.png</property>
+                                                <property name="pixbuf">icons/angleY+.png</property>
                                               </object>
                                             </child>
                                           </object>
@@ -1341,8 +1342,8 @@
                                         </child>
                                         <child>
                                           <object class="GtkButton" id="angle_xm">
-                                            <property name="width_request">62</property>
-                                            <property name="height_request">62</property>
+                                            <property name="width_request">84</property>
+                                            <property name="height_request">84</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
@@ -1353,7 +1354,7 @@
                                               <object class="GtkImage" id="image41">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
-                                                <property name="pixbuf">angleX-.png</property>
+                                                <property name="pixbuf">icons/angleX-.png</property>
                                               </object>
                                             </child>
                                           </object>
@@ -1368,8 +1369,8 @@
                                         </child>
                                         <child>
                                           <object class="GtkButton" id="angle_ym">
-                                            <property name="width_request">62</property>
-                                            <property name="height_request">62</property>
+                                            <property name="width_request">84</property>
+                                            <property name="height_request">84</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
@@ -1380,7 +1381,7 @@
                                               <object class="GtkImage" id="image42">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
-                                                <property name="pixbuf">angleY-.png</property>
+                                                <property name="pixbuf">icons/angleY-.png</property>
                                               </object>
                                             </child>
                                           </object>
@@ -1407,7 +1408,7 @@
                                         <child>
                                           <object class="GtkCheckButton" id="chk_auto_rott">
                                             <property name="label" translatable="yes">Auto Rot</property>
-                                            <property name="height_request">16</property>
+                                            <property name="height_request">20</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
@@ -1419,14 +1420,12 @@
                                         </child>
                                         <child>
                                           <object class="HAL_LED" id="hal_led_auto_rott">
-                                            <property name="width_request">28</property>
-                                            <property name="height_request">16</property>
+                                            <property name="height_request">20</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
                                             <property name="blink_color">#a0a0a0a0a0a0</property>
                                             <property name="led_blink_rate">500</property>
                                             <property name="led_shiny">True</property>
-                                            <property name="led_size">6</property>
                                             <property name="off_color">#a0a0a0a0a0a0</property>
                                             <property name="on_color">#a0a0a0a0a0a0</property>
                                             <property name="pick_color_blink">#d8d84242ffff</property>
@@ -1441,7 +1440,7 @@
                                         </child>
                                         <child>
                                           <object class="GtkSpinButton" id="spbtn_offs_angle">
-                                            <property name="height_request">20</property>
+                                            <property name="height_request">28</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="invisible_char">●</property>
@@ -1466,8 +1465,8 @@
                                         </child>
                                         <child>
                                           <object class="GtkButton" id="btn_set_angle">
-                                            <property name="width_request">28</property>
-                                            <property name="height_request">20</property>
+                                            <property name="width_request">36</property>
+                                            <property name="height_request">28</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
@@ -1477,7 +1476,7 @@
                                               <object class="GtkImage" id="image43">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
-                                                <property name="pixbuf">rott.png</property>
+                                                <property name="pixbuf">icons/rott.png</property>
                                               </object>
                                             </child>
                                           </object>
@@ -1522,8 +1521,8 @@
                             <property name="label_xalign">0</property>
                             <child>
                               <object class="GtkAlignment" id="alignment3">
-                                <property name="width_request">120</property>
-                                <property name="height_request">82</property>
+                                <property name="width_request">162</property>
+                                <property name="height_request">110</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="left_padding">2</property>
@@ -1536,7 +1535,7 @@
                                     <property name="n_columns">2</property>
                                     <child>
                                       <object class="GtkSpinButton" id="spbtn_offs_x">
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="invisible_char">●</property>
@@ -1561,7 +1560,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkSpinButton" id="spbtn_offs_y">
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="invisible_char">●</property>
@@ -1586,7 +1585,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkSpinButton" id="spbtn_offs_z">
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="invisible_char">●</property>
@@ -1612,7 +1611,7 @@
                                     <child>
                                       <object class="GtkButton" id="btn_set_x">
                                         <property name="width_request">28</property>
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
@@ -1622,7 +1621,7 @@
                                           <object class="GtkImage" id="image11">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="pixbuf">X0.png</property>
+                                            <property name="pixbuf">icons/X0.png</property>
                                           </object>
                                         </child>
                                       </object>
@@ -1638,7 +1637,7 @@
                                     <child>
                                       <object class="GtkButton" id="btn_set_y">
                                         <property name="width_request">28</property>
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
@@ -1648,7 +1647,7 @@
                                           <object class="GtkImage" id="image17">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="pixbuf">Y0.png</property>
+                                            <property name="pixbuf">icons/Y0.png</property>
                                           </object>
                                         </child>
                                       </object>
@@ -1664,7 +1663,7 @@
                                     <child>
                                       <object class="GtkButton" id="btn_set_z">
                                         <property name="width_request">28</property>
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
@@ -1674,7 +1673,7 @@
                                           <object class="GtkImage" id="image23">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="pixbuf">Z0.png</property>
+                                            <property name="pixbuf">icons/Z0.png</property>
                                           </object>
                                         </child>
                                       </object>
@@ -1690,7 +1689,7 @@
                                     <child>
                                       <object class="GtkCheckButton" id="chk_set_zero">
                                         <property name="label" translatable="yes">Auto Zero</property>
-                                        <property name="height_request">16</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -1703,13 +1702,12 @@
                                     <child>
                                       <object class="HAL_LED" id="hal_led_set_zero">
                                         <property name="width_request">28</property>
-                                        <property name="height_request">16</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="blink_color">#a0a0a0a0a0a0</property>
                                         <property name="led_blink_rate">500</property>
                                         <property name="led_shiny">True</property>
-                                        <property name="led_size">6</property>
                                         <property name="off_color">#a0a0a0a0a0a0</property>
                                         <property name="on_color">#a0a0a0a0a0a0</property>
                                         <property name="pick_color_blink">#d8d84242ffff</property>
@@ -1736,8 +1734,8 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="x">587</property>
-                            <property name="y">39</property>
+                            <property name="x">776</property>
+                            <property name="y">41</property>
                           </packing>
                         </child>
                         <child>
@@ -1760,12 +1758,12 @@
                                     <child>
                                       <object class="GtkImage" id="image25">
                                         <property name="width_request">28</property>
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Probe X- pos.</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_xm.png</property>
+                                        <property name="pixbuf">icons/probe_xm.png</property>
                                       </object>
                                       <packing>
                                         <property name="x_options">GTK_SHRINK</property>
@@ -1775,12 +1773,12 @@
                                     <child>
                                       <object class="GtkImage" id="image26">
                                         <property name="width_request">28</property>
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Probe Y- pos.</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_ym.png</property>
+                                        <property name="pixbuf">icons/probe_ym.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">2</property>
@@ -1792,12 +1790,12 @@
                                     <child>
                                       <object class="GtkImage" id="image27">
                                         <property name="width_request">28</property>
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Probe Z pos.</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_z.png</property>
+                                        <property name="pixbuf">icons/probe_z.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">4</property>
@@ -1808,7 +1806,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel" id="lb_probe_ym">
-                                        <property name="width_request">120</property>
+                                        <property name="width_request">162</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="width_chars">18</property>
@@ -1828,7 +1826,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel" id="lb_probe_z">
-                                        <property name="width_request">120</property>
+                                        <property name="width_request">162</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="width_chars">18</property>
@@ -1848,7 +1846,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel" id="lb_probe_xc">
-                                        <property name="width_request">120</property>
+                                        <property name="width_request">162</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="width_chars">18</property>
@@ -1870,7 +1868,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel" id="lb_probe_yc">
-                                        <property name="width_request">120</property>
+                                        <property name="width_request">162</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="width_chars">18</property>
@@ -1892,7 +1890,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel" id="lb_probe_a">
-                                        <property name="width_request">120</property>
+                                        <property name="width_request">162</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="width_chars">18</property>
@@ -1915,12 +1913,12 @@
                                     <child>
                                       <object class="GtkImage" id="image31">
                                         <property name="width_request">28</property>
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Diameter</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_d.png</property>
+                                        <property name="pixbuf">icons/probe_d.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">4</property>
@@ -1933,7 +1931,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel" id="lb_probe_d">
-                                        <property name="width_request">120</property>
+                                        <property name="width_request">162</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="width_chars">18</property>
@@ -1956,12 +1954,12 @@
                                     <child>
                                       <object class="GtkImage" id="lb_probe_center_x">
                                         <property name="width_request">30</property>
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Center  X pos.</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_center_x.png</property>
+                                        <property name="pixbuf">icons/probe_center_x.png</property>
                                       </object>
                                       <packing>
                                         <property name="top_attach">1</property>
@@ -1973,12 +1971,12 @@
                                     <child>
                                       <object class="GtkImage" id="lb_probe_center_y">
                                         <property name="width_request">28</property>
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Center Y pos.</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_center_y.png</property>
+                                        <property name="pixbuf">icons/probe_center_y.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">2</property>
@@ -1992,12 +1990,12 @@
                                     <child>
                                       <object class="GtkImage" id="im_probe_a">
                                         <property name="width_request">28</property>
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Angle of rotation</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_a.png</property>
+                                        <property name="pixbuf">icons/probe_a.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">4</property>
@@ -2010,7 +2008,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel" id="lb_probe_xm">
-                                        <property name="width_request">120</property>
+                                        <property name="width_request">162</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="width_chars">18</property>
@@ -2031,12 +2029,12 @@
                                     <child>
                                       <object class="GtkImage" id="image10">
                                         <property name="width_request">28</property>
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Probe X+ pos.</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_xp.png</property>
+                                        <property name="pixbuf">icons/probe_xp.png</property>
                                       </object>
                                       <packing>
                                         <property name="top_attach">2</property>
@@ -2047,7 +2045,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel" id="lb_probe_xp">
-                                        <property name="width_request">120</property>
+                                        <property name="width_request">162</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="width_chars">18</property>
@@ -2070,12 +2068,12 @@
                                     <child>
                                       <object class="GtkImage" id="image16">
                                         <property name="width_request">28</property>
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Probe Y+ pos.</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_yp.png</property>
+                                        <property name="pixbuf">icons/probe_yp.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">2</property>
@@ -2088,7 +2086,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel" id="lb_probe_yp">
-                                        <property name="width_request">120</property>
+                                        <property name="width_request">162</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="width_chars">18</property>
@@ -2111,12 +2109,12 @@
                                     <child>
                                       <object class="GtkImage" id="image18">
                                         <property name="width_request">28</property>
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Distance from X+ to X-</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_lx.png</property>
+                                        <property name="pixbuf">icons/probe_lx.png</property>
                                       </object>
                                       <packing>
                                         <property name="top_attach">3</property>
@@ -2128,12 +2126,12 @@
                                     <child>
                                       <object class="GtkImage" id="image22">
                                         <property name="width_request">28</property>
-                                        <property name="height_request">20</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="tooltip_text" translatable="yes">Distance from Y+ to Y-</property>
                                         <property name="xalign">0</property>
-                                        <property name="pixbuf">probe_ly.png</property>
+                                        <property name="pixbuf">icons/probe_ly.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">2</property>
@@ -2146,7 +2144,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel" id="lb_probe_lx">
-                                        <property name="width_request">120</property>
+                                        <property name="width_request">162</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="width_chars">18</property>
@@ -2168,7 +2166,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkLabel" id="lb_probe_ly">
-                                        <property name="width_request">120</property>
+                                        <property name="width_request">162</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="width_chars">18</property>
@@ -2190,13 +2188,13 @@
                                     </child>
                                     <child>
                                       <object class="GtkImage" id="image44">
-                                        <property name="width_request">100</property>
-                                        <property name="height_request">20</property>
+                                        <property name="width_request">150</property>
+                                        <property name="height_request">28</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="xalign">1</property>
                                         <property name="yalign">1</property>
-                                        <property name="pixbuf">logo_micro_vers_gray.png</property>
+                                        <property name="pixbuf">icons/logo_micro_vers_gray.png</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">5</property>
@@ -2224,14 +2222,14 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="x">257</property>
-                            <property name="y">138</property>
+                            <property name="x">362</property>
+                            <property name="y">167</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkButton" id="down">
-                            <property name="width_request">60</property>
-                            <property name="height_request">50</property>
+                            <property name="width_request">72</property>
+                            <property name="height_request">58</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
@@ -2242,13 +2240,13 @@
                               <object class="GtkImage" id="image12">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">down.png</property>
+                                <property name="pixbuf">icons/down.png</property>
                               </object>
                             </child>
                           </object>
                           <packing>
                             <property name="x">1</property>
-                            <property name="y">4</property>
+                            <property name="y">2</property>
                           </packing>
                         </child>
                         <child>
@@ -2274,14 +2272,14 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="x">530</property>
+                            <property name="x">761</property>
                             <property name="y">5</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkButton" id="tool_dia">
-                            <property name="width_request">60</property>
-                            <property name="height_request">50</property>
+                            <property name="width_request">72</property>
+                            <property name="height_request">58</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
@@ -2292,19 +2290,19 @@
                               <object class="GtkImage" id="image47">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">tool_dia.png</property>
+                                <property name="pixbuf">icons/tool_dia.png</property>
                               </object>
                             </child>
                           </object>
                           <packing>
-                            <property name="x">67</property>
-                            <property name="y">4</property>
+                            <property name="x">98</property>
+                            <property name="y">2</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkButton" id="lx_out">
-                            <property name="width_request">76</property>
-                            <property name="height_request">46</property>
+                            <property name="width_request">104</property>
+                            <property name="height_request">62</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
@@ -2315,19 +2313,19 @@
                               <object class="GtkImage" id="image48">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">Lx_out.png</property>
+                                <property name="pixbuf">icons/Lx_out.png</property>
                               </object>
                             </child>
                           </object>
                           <packing>
-                            <property name="x">155</property>
-                            <property name="y">93</property>
+                            <property name="x">216</property>
+                            <property name="y">107</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkButton" id="ly_out">
-                            <property name="width_request">76</property>
-                            <property name="height_request">46</property>
+                            <property name="width_request">104</property>
+                            <property name="height_request">62</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
@@ -2338,19 +2336,19 @@
                               <object class="GtkImage" id="image49">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">Ly_out.png</property>
+                                <property name="pixbuf">icons/Ly_out.png</property>
                               </object>
                             </child>
                           </object>
                           <packing>
-                            <property name="x">155</property>
-                            <property name="y">193</property>
+                            <property name="x">216</property>
+                            <property name="y">237</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkButton" id="lx_in">
-                            <property name="width_request">76</property>
-                            <property name="height_request">46</property>
+                            <property name="width_request">104</property>
+                            <property name="height_request">62</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
@@ -2361,19 +2359,19 @@
                               <object class="GtkImage" id="image50">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">Lx_in.png</property>
+                                <property name="pixbuf">icons/Lx_in.png</property>
                               </object>
                             </child>
                           </object>
                           <packing>
-                            <property name="x">155</property>
-                            <property name="y">43</property>
+                            <property name="x">216</property>
+                            <property name="y">42</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkButton" id="ly_in">
-                            <property name="width_request">76</property>
-                            <property name="height_request">46</property>
+                            <property name="width_request">104</property>
+                            <property name="height_request">62</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
@@ -2384,13 +2382,13 @@
                               <object class="GtkImage" id="image51">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">Ly_in.png</property>
+                                <property name="pixbuf">icons/Ly_in.png</property>
                               </object>
                             </child>
                           </object>
                           <packing>
-                            <property name="x">155</property>
-                            <property name="y">143</property>
+                            <property name="x">216</property>
+                            <property name="y">172</property>
                           </packing>
                         </child>
                         <child>
@@ -2412,8 +2410,8 @@
                             <property name="label_xalign">0</property>
                             <child>
                               <object class="GtkAlignment" id="alignment1">
-                                <property name="width_request">322</property>
-                                <property name="height_request">82</property>
+                                <property name="width_request">410</property>
+                                <property name="height_request">110</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
@@ -2422,8 +2420,8 @@
                                     <property name="can_focus">False</property>
                                     <child>
                                       <object class="GtkButton" id="btn_probe_tool_setter">
-                                        <property name="width_request">54</property>
-                                        <property name="height_request">54</property>
+                                        <property name="width_request">72</property>
+                                        <property name="height_request">72</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
@@ -2435,23 +2433,23 @@
                                           <object class="GtkImage" id="image45">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="pixbuf">ts_height.png</property>
+                                            <property name="pixbuf">icons/ts_height.png</property>
                                           </object>
                                         </child>
                                       </object>
                                       <packing>
                                         <property name="x">4</property>
-                                        <property name="y">23</property>
+                                        <property name="y">31</property>
                                       </packing>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="btn_probe_workpiece">
-                                        <property name="width_request">54</property>
-                                        <property name="height_request">54</property>
+                                        <property name="width_request">72</property>
+                                        <property name="height_request">72</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="tooltip_text" translatable="yes">Workpiece Heidht</property>
+                                        <property name="tooltip_text" translatable="yes">Workpiece Height</property>
                                         <property name="related_action">vcp_action_reload</property>
                                         <property name="use_action_appearance">False</property>
                                         <signal name="clicked" handler="clicked_btn_probe_workpiece" swapped="no"/>
@@ -2459,19 +2457,19 @@
                                           <object class="GtkImage" id="image46">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="pixbuf">workpiece_height.png</property>
+                                            <property name="pixbuf">icons/workpiece_height.png</property>
                                           </object>
                                         </child>
                                       </object>
                                       <packing>
-                                        <property name="x">165</property>
-                                        <property name="y">23</property>
+                                        <property name="x">211</property>
+                                        <property name="y">31</property>
                                       </packing>
                                     </child>
                                     <child>
                                       <object class="GtkSpinButton" id="spbtn_probe_height">
-                                        <property name="width_request">90</property>
-                                        <property name="height_request">26</property>
+                                        <property name="width_request">105</property>
+                                        <property name="height_request">32</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="invisible_char">●</property>
@@ -2487,14 +2485,14 @@
                                         <signal name="value-changed" handler="on_spbtn_probe_height_value_changed" swapped="no"/>
                                       </object>
                                       <packing>
-                                        <property name="x">63</property>
-                                        <property name="y">51</property>
+                                        <property name="x">81</property>
+                                        <property name="y">70</property>
                                       </packing>
                                     </child>
                                     <child>
                                       <object class="GtkSpinButton" id="spbtn_block_height">
-                                        <property name="width_request">90</property>
-                                        <property name="height_request">26</property>
+                                        <property name="width_request">105</property>
+                                        <property name="height_request">32</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="invisible_char">●</property>
@@ -2510,8 +2508,8 @@
                                         <signal name="value-changed" handler="on_spbtn_block_height_value_changed" swapped="no"/>
                                       </object>
                                       <packing>
-                                        <property name="x">224</property>
-                                        <property name="y">51</property>
+                                        <property name="x">287</property>
+                                        <property name="y">70</property>
                                       </packing>
                                     </child>
                                     <child>
@@ -2523,8 +2521,8 @@
 Height</property>
                                       </object>
                                       <packing>
-                                        <property name="x">225</property>
-                                        <property name="y">21</property>
+                                        <property name="x">289</property>
+                                        <property name="y">34</property>
                                       </packing>
                                     </child>
                                     <child>
@@ -2535,8 +2533,8 @@ Height</property>
                                         <property name="label" translatable="yes">TS Height</property>
                                       </object>
                                       <packing>
-                                        <property name="x">64</property>
-                                        <property name="y">20</property>
+                                        <property name="x">83</property>
+                                        <property name="y">40</property>
                                       </packing>
                                     </child>
                                     <child>
@@ -2546,14 +2544,13 @@ Height</property>
                                         <property name="blink_color">#0dbfef8050f4</property>
                                         <property name="led_blink_rate">0</property>
                                         <property name="led_shiny">True</property>
-                                        <property name="led_size">6</property>
                                         <property name="off_color">#a0a0a0a0a0a0</property>
                                         <property name="on_color">#0dbfef8050f4</property>
                                         <property name="pick_color_blink">#0dbfef8050f4</property>
                                         <property name="pick_color_off">#a0a0a0a0a0a0</property>
                                       </object>
                                       <packing>
-                                        <property name="x">292</property>
+                                        <property name="x">370</property>
                                         <property name="y">1</property>
                                       </packing>
                                     </child>
@@ -2571,14 +2568,14 @@ Height</property>
                             </child>
                           </object>
                           <packing>
-                            <property name="x">258</property>
-                            <property name="y">39</property>
+                            <property name="x">359</property>
+                            <property name="y">41</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="chk_use_tool_measurement">
                             <property name="label" translatable="yes">Enable</property>
-                            <property name="height_request">16</property>
+                            <property name="height_request">20</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
@@ -2589,7 +2586,7 @@ Height</property>
                             <signal name="toggled" handler="on_chk_use_tool_measurement_toggled" swapped="no"/>
                           </object>
                           <packing>
-                            <property name="x">262</property>
+                            <property name="x">365</property>
                             <property name="y">55</property>
                           </packing>
                         </child>
@@ -2612,12 +2609,11 @@ Height</property>
                 </child>
                 <child>
                   <object class="GtkHBox" id="hbox4">
-                    <property name="width_request">714</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkFrame" id="frame3">
-                        <property name="width_request">714</property>
+                        <property name="height_request">200</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label_xalign">0</property>
@@ -2625,6 +2621,7 @@ Height</property>
                         <property name="shadow_type">none</property>
                         <child>
                           <object class="GtkScrolledWindow" id="scrolledwindow1">
+                            <property name="width_request">940</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="hscrollbar_policy">automatic</property>
@@ -2647,7 +2644,7 @@ Height</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
-                        <property name="fill">False</property>
+                        <property name="fill">True</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
@@ -2657,7 +2654,7 @@ Height</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">False</property>
+                    <property name="fill">True</property>
                     <property name="position">2</property>
                   </packing>
                 </child>

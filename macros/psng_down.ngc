@@ -1,4 +1,4 @@
-o<down> sub
+o<psng_down> sub
 	 
 #<z>=#<_z> (save current Z position)
 G91
@@ -12,5 +12,5 @@ G90
 (back to start point)
 G1 Z#<z> F#<_ini[TOOLSENSOR]RAPID_SPEED> 
 	
-o<down> endsub
+o<psng_down> endsub
 M2
