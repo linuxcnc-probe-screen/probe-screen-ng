@@ -37,7 +37,7 @@ CONFIGPATH1 = os.environ["CONFIG_DIR"]
 cp1 = ConfigParser.RawConfigParser
 
 
-class ps_preferences(cp1):
+class ProbeScreenPreferences(cp1):
     types = {
         bool: cp1.getboolean,
         float: cp1.getfloat,
@@ -57,8 +57,8 @@ class ps_preferences(cp1):
         m = self.types.get(type)
         try:
             o = m(self, "DEFAULT", option)
-        except Exception, detail:
-            print detail
+        except Exception as detail:
+            print(detail)
             self.set("DEFAULT", option, default)
             self.write(open(self.fn, "w"))
             if type in (bool, float, int):
@@ -90,7 +90,7 @@ def restore_mode(f):
     return wrapper
 
 
-class ProbeScreenClass:
+class ProbeScreenClass(object):
     def get_preference_file_path(self):
         # we get the preference file, if there is none given in the INI
         # we use toolchange2.pref in the config dir
@@ -102,14 +102,14 @@ class ProbeScreenClass:
             else:
                 machinename = machinename.replace(" ", "_")
                 temp = os.path.join(CONFIGPATH1, "%s.pref" % machinename)
-        print ("****  probe_screen GETINIINFO **** \n Preference file path: %s" % temp)
+        print("****  probe_screen GETINIINFO **** \n Preference file path: %s" % temp)
         return temp
 
     def get_display(self):
         # gmoccapy or axis ?
         temp = self.inifile.find("DISPLAY", "DISPLAY")
         if not temp:
-            print (
+            print(
                 "****  PROBE SCREEN GET INI INFO **** \n Error recognition of display type : %s"
                 % temp
             )
@@ -180,11 +180,11 @@ class ProbeScreenClass:
             if kind in (linuxcnc.NML_ERROR, linuxcnc.OPERATOR_ERROR):
 
                 typus = "error"
-                print typus, text
+                print(typus, text)
                 return -1
             else:
                 typus = "info"
-                print typus, text
+                print(typus, text)
                 return -1
         else:
             if "TRUE" in error_pin:
@@ -193,7 +193,7 @@ class ProbeScreenClass:
                     "Error: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
                 )
                 typus = "error"
-                print typus, text
+                print(typus, text)
                 self.command.mode(linuxcnc.MODE_MANUAL)
                 self.command.wait_complete()
                 return -1
@@ -339,17 +339,15 @@ class ProbeScreenClass:
             jog_increments.insert(0, 0)
         else:
             jog_increments = [0, "1,000", "0,100", "0,010", "0,001"]
-            print (
+            print(
                 "**** PROBE SCREEN INFO **** \n No default jog increments entry found in [DISPLAY] of INI file"
             )
 
         self.jog_increments = jog_increments
         if len(self.jog_increments) > 5:
-            print (_("**** PROBE SCREEN INFO ****"))
-            print (_("**** To many increments given in INI File for this screen ****"))
-            print (
-                _("**** Only the first 5 will be reachable through this screen ****")
-            )
+            print(_("**** PROBE SCREEN INFO ****"))
+            print(_("**** To many increments given in INI File for this screen ****"))
+            print(_("**** Only the first 5 will be reachable through this screen ****"))
             # we shorten the incrementlist to 5 (first is default = 0)
             self.jog_increments = self.jog_increments[0:5]
 
@@ -427,7 +425,7 @@ class ProbeScreenClass:
 
         axisletter = widget.get_label()[0]
         if not axisletter.lower() in "xyzabcuvw":
-            print ("unknown axis %s" % axisletter)
+            print("unknown axis %s" % axisletter)
             return
 
         # get the axisnumber
@@ -449,7 +447,7 @@ class ProbeScreenClass:
             direction = -1
 
         self.command.teleop_enable(1)
-        if self.distance <> 0:  # incremental jogging
+        if self.distance != 0:  # incremental jogging
             self.command.jog(
                 linuxcnc.JOG_INCREMENT,
                 False,
@@ -465,13 +463,13 @@ class ProbeScreenClass:
     def on_btn_jog_released(self, widget, data=None):
         axisletter = widget.get_label()[0]
         if not axisletter.lower() in "xyzabcuvw":
-            print ("unknown axis %s" % axisletter)
+            print("unknown axis %s" % axisletter)
             return
 
         axis = "xyzabcuvw".index(axisletter.lower())
 
         self.command.teleop_enable(1)
-        if self.distance <> 0:
+        if self.distance != 0:
             pass
         else:
             self.command.jog(linuxcnc.JOG_STOP, False, axis)
@@ -739,7 +737,7 @@ class ProbeScreenClass:
             s += " X%.4f" % x
             s += " Y%.4f" % y
         s += " R%.4f" % self.spbtn_offs_angle.get_value()
-        print "s=", s
+        print("s=", s)
         self.gcode(s)
         time.sleep(1)
 
@@ -2550,7 +2548,7 @@ class ProbeScreenClass:
     def on_tool_change(self, gtkbutton, data=None):
         change = self.halcomp["toolchange-change"]
         toolnumber = self.halcomp["toolchange-number"]
-        print "toolnumber =", toolnumber, change
+        print("toolnumber =", toolnumber, change)
         if change:
             # if toolnumber = 0 we will get an error because we will not be able to get
             # any tooldescription, so we avoid that case
@@ -2559,8 +2557,8 @@ class ProbeScreenClass:
             else:
                 tooltable = self.inifile.find("EMCIO", "TOOL_TABLE")
                 if not tooltable:
-                    print (_("**** auto_tool_measurement ERROR ****"))
-                    print (
+                    print(_("**** auto_tool_measurement ERROR ****"))
+                    print(
                         _(
                             "**** Did not find a toolfile file in [EMCIO] TOOL_TABLE ****"
                         )
@@ -2577,9 +2575,11 @@ class ProbeScreenClass:
             if result:
                 self.halcomp["toolchange-changed"] = True
             else:
-                print "toolchange abort", self.stat.tool_in_spindle, self.halcomp[
-                    "toolchange-number"
-                ]
+                print(
+                    "toolchange abort",
+                    self.stat.tool_in_spindle,
+                    self.halcomp["toolchange-number"],
+                )
                 self.command.abort()
                 self.halcomp["toolchange-number"] = self.stat.tool_in_spindle
                 self.halcomp["toolchange-change"] = False
@@ -2618,7 +2618,7 @@ class ProbeScreenClass:
             self.halcomp["probeheight"] = self.spbtn_probe_height.get_value()
         else:
             self.prefs.putpref("blockheight", 0.0, float)
-            print (_("Conversion error in btn_block_height"))
+            print(_("Conversion error in btn_block_height"))
             self._add_alarm_entry(_("Offset conversion error because off wrong entry"))
             self.warning_dialog(
                 self,
@@ -2695,13 +2695,13 @@ class ProbeScreenClass:
         inipath = os.environ["INI_FILE_NAME"]
         self.inifile = ini(inipath)
         if not self.inifile:
-            print ("**** PROBE SCREEN GET INI INFO **** \n Error, no INI File given !!")
+            print("**** PROBE SCREEN GET INI INFO **** \n Error, no INI File given !!")
             sys.exit()
         self.display = self.get_display() or "unknown"
         self.command = linuxcnc.command()
         self.stat = linuxcnc.stat()
         self.builder = builder
-        self.prefs = ps_preferences(self.get_preference_file_path())
+        self.prefs = ProbeScreenPreferences(self.get_preference_file_path())
         self.window1 = builder.get_object("window1")
         self.textarea = builder.get_object("textview1")
         self.e = linuxcnc.error_channel()
@@ -2890,9 +2890,9 @@ class ProbeScreenClass:
         ):
             self.chk_use_tool_measurement.set_active(False)
             self.tool_dia.set_sensitive(False)
-            print (_("**** PROBE SCREEN INFO ****"))
-            print (_("**** no valid probe config in INI File ****"))
-            print (_("**** disabled auto tool measurement ****"))
+            print(_("**** PROBE SCREEN INFO ****"))
+            print(_("**** no valid probe config in INI File ****"))
+            print(_("**** disabled auto tool measurement ****"))
         else:
             self.spbtn_probe_height.set_value(
                 self.prefs.getpref("probeheight", 0.0, float)
@@ -2909,9 +2909,6 @@ class ProbeScreenClass:
             else:
                 self.frm_probe_pos.set_sensitive(False)
                 self.chk_use_tool_measurement.set_sensitive(True)
-
-
-#        gobject.timeout_add( 500, self._periodic )  # time between calls to the function, in milliseconds
 
 
 def get_handlers(halcomp, builder, useropts):
