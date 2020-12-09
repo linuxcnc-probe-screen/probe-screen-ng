@@ -1,4 +1,5 @@
 o<psng_yminus> sub
+o<psng_hook> call psng_yminus
 
 #<y>=#<_y> (save start Y position) 
 G91
