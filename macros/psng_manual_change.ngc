@@ -8,6 +8,8 @@ o<psng_manual_change> sub
 #<tool> = #<selected_tool>
 #<pocket> = #<selected_pocket>
 
+
+
 ; we must execute this only in the milltask interpreter
 ; or preview will break, so test for '#<_task>' which is 1 for 
 ; the milltask interpreter and 0 in the UI's
@@ -17,11 +19,12 @@ O100     return [999]
 O100 endif
 
 ;first go up
+F#<_ini[TOOLSENSOR]RAPID_SPEED>
 G90
-G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>-0.1]
+G53 G1 Z[#<_ini[AXIS_Z]MAX_LIMIT>-1]
 ; then move to change position
-G53 G0 X[#<_ini[CHANGE_POSITION]X>] Y[#<_ini[CHANGE_POSITION]Y>]
-G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
+G53 G1 X[#<_ini[CHANGE_POSITION]X>] Y[#<_ini[CHANGE_POSITION]Y>]
+G53 G1 Z[#<_ini[CHANGE_POSITION]Z>]
 
 ; cancel tool offset
 G49
@@ -33,8 +36,8 @@ O200 if [#<_hal[probe.use_toolmeasurement]> EQ 0]
 O200 return [3] ; indicate no tool measurement 
 O200 endif
 
-G53 G0 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
-G53 G0 Z[#<_ini[TOOLSENSOR]Z>]
+G53 G1 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
+G53 G1 Z[#<_ini[TOOLSENSOR]Z>]
 
 O300 if [#<_hal[probe.ps_searchvel]> LE 0]
 O300 return [-1] ; indicate searchvel <= 0 
@@ -46,20 +49,21 @@ O400 endif
 
 F #<_hal[probe.ps_searchvel]>
 G91
-G38.2 Z #<_ini[TOOLSENSOR]MAXPROBE>
-G38.4 Z2
-G0 Z0.5
-; This is commented out only for sim.
+G38.2 Z#<_ini[TOOLSENSOR]MAXPROBE>
+G1 Z[#<_hal[probe.ps_probe_latch]>] F#<_ini[TOOLSENSOR]RAPID_SPEED>
 F #<_hal[probe.ps_probevel]>
-G38.2 Z-3
+G4 P0.5
+G38.2 Z[-#<_hal[probe.ps_probe_latch]>*2]
 
 O500 if [#5070 EQ 0]
 G90
 O500 return [-3] ; indicate probe contact failure to epilog
 O500 endif
 
+F#<_ini[TOOLSENSOR]RAPID_SPEED>
 G90
-G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
+G53 G1 Z[#<_ini[CHANGE_POSITION]Z>]
+G53 G1 X[#<_ini[CHANGE_POSITION]X>] Y[#<_ini[CHANGE_POSITION]Y>]
 
 #<touch_result> = #5063
 #<probeheight> = #<_hal[probe.probeheight]> 
