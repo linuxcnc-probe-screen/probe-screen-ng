@@ -27,7 +27,6 @@ This repo was originally a fork of <https://github.com/verser-git/probe_screen_v
    ```sh
    /python
    /psng
-   /macros
    ```
 
 4. Copy .axisrc to your home ~/ folder. If you are already using .axisrc, then only add to your file contents of this .axisrc.

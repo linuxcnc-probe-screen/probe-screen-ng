@@ -1,0 +1,28 @@
+# Use Macro Hooks
+
+To use macro hooks, you can do the following:
+
+```shell
+cd $HOME/linuxccnc/configs/MyConfigName
+cp psng/macros/psng_hook.ngc macros/psng_hook.ngc
+```
+
+Now, edit the `macros/psng_hook.ngc` file with the code you wish to run
+at the start of each PSNG macro call. For example:
+
+```gcode
+o<psng_hook> sub
+#<hooked_macro> = #1
+
+O100 if [#<hooked_macro> EQ psng_manual_change]
+; Do something specific to o<psng_manual_change> here
+O100 return
+
+O100 elseif  if [#<hooked_macro> EQ psng_gotots]
+; Do something specific to o<psng_gotots> here
+O100 return
+O100 endif
+
+o<psng_hook> endsub
+M2
+```

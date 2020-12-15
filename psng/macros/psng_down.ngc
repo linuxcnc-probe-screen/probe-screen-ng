@@ -1,5 +1,6 @@
 o<psng_down> sub
-	 
+o<psng_hook> call [3]
+
 #<z>=#<_z> (save current Z position)
 G91
 F #<_hal[probe.ps_searchvel]>

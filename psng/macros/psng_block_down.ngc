@@ -1,4 +1,6 @@
 o<psng_block_down> sub
+o<psng_hook> call [5]
+
 (cancel all Z offsets)
 G49
 G92.1

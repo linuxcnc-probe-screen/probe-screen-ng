@@ -1,5 +1,6 @@
 o<psng_yplus> sub
- 	
+o<psng_hook> call [9]
+
 #<y>=#<_y> (save start Y position) 
 G91
 F #<_hal[probe.ps_searchvel]>
