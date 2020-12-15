@@ -1,5 +1,5 @@
 o<psng_down> sub
-o<psng_hook> call psng_down
+o<psng_hook> call [3]
 
 #<z>=#<_z> (save current Z position)
 G91

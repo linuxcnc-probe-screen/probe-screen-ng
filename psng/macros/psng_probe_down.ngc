@@ -1,5 +1,5 @@
 o<psng_probe_down> sub
-o<psng_hook> call psng_probe_down
+o<psng_hook> call [4]
  
 F#<_ini[TOOLSENSOR]RAPID_SPEED>
 G90

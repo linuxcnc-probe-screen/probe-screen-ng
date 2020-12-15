@@ -6,10 +6,23 @@
 ; You should NOT edit this file directly, instead, you should copy this file
 ; from the psng/macros folder, to the macros folder and edit the copy.
 
+; Hooked Macro ID -> Name Table
+;
+; 1 = psng_manual_change
+; 2 = psng_gotots
+; 3 = psng_down
+; 4 = psng_probe_down
+; 5 = psng_block_down
+; 6 = psng_xminus
+; 7 = psng_xplus
+; 8 = psng_yminus
+; 9 = psng_yplus
+
+
 o<psng_hook> sub
 ; The #1 variable will be set to the name of the macro being hooked. For
-; example, when o<psng_manual_change> is called, #1 will be set to the
-; value "psng_manual_change".
+; example, when o<psng_xminus> is called, #1 will be set to the
+; value "6".
 #<hooked_macro> = #1
 
 o<psng_hook> endsub

@@ -1,7 +1,7 @@
 ; manual toolchange with automatic tool length probe 
 
 o<psng_manual_change> sub
-o<psng_hook> call psng_manual_change
+o<psng_hook> call [1]
 
 ;(debug, in change tool_in_spindle=#<tool_in_spindle> current_pocket=#<current_pocket>)
 ;(debug, selected_tool=#<selected_tool> selected_pocket=#<selected_pocket>)

@@ -1,5 +1,5 @@
 o<psng_xplus> sub
-o<psng_hook> call psng_xplus
+o<psng_hook> call [7]
 
 #<x>=#<_x> (save start X position) 
 G91

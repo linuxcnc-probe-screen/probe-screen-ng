@@ -1,5 +1,5 @@
 o<psng_gotots> sub
-o<psng_hook> call psng_gotots
+o<psng_hook> call [2]
 
 F#<_ini[TOOLSENSOR]RAPID_SPEED>
 G90
