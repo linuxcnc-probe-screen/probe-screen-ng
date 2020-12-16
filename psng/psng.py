@@ -2640,10 +2640,10 @@ class ProbeScreenClass(object):
 
     @restore_mode
     def clicked_btn_probe_tool_setter(self, gtkbutton, data=None):
-        # Start probe_down.ngc
+        # Start psng_probe_tool_setter.ngc
         self.command.mode(linuxcnc.MODE_MDI)
         self.command.wait_complete()
-        self.command.mdi("o<psng_probe_down> call")
+        self.command.mdi("o<psng_probe_tool_setter> call")
         self.stat.poll()
         while self.stat.interp_state != linuxcnc.INTERP_IDLE:
             self.command.wait_complete()

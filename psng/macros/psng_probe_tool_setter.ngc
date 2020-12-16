@@ -1,4 +1,4 @@
-o<psng_probe_down> sub
+o<psng_probe_tool_setter> sub
 o<psng_hook> call [4]
  
 F#<_ini[TOOLSENSOR]RAPID_SPEED>
@@ -20,5 +20,5 @@ G4 P0.5
 G38.2 Z[-#<_hal[probe.ps_probe_latch]>*2]
 G90
 G53 G1 Z[#<_ini[TOOLSENSOR]Z>] F#<_ini[TOOLSENSOR]RAPID_SPEED>	
-o<psng_probe_down> endsub
+o<psng_probe_tool_setter> endsub
 M2
