@@ -1,4 +1,4 @@
-o<psng_block_down> sub
+o<psng_probe_workpiece> sub
 o<psng_hook> call [5]
 
 (cancel all Z offsets)
@@ -23,5 +23,5 @@ o11 else
 o11 endif
 
 G90
-o<psng_block_down> endsub
+o<psng_probe_workpiece> endsub
 M2
