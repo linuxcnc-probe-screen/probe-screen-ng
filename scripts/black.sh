@@ -4,4 +4,4 @@
 SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 # Run psng/psng.py through the `black` code formatting tool.
-docker run -v $SCRIPTPATH/../:/code jbbarth/black psng/psng.py
+docker run -v $SCRIPTPATH/../:/code jbbarth/black psng/python/

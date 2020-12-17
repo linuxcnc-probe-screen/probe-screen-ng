@@ -19,57 +19,16 @@ import gtk  # base for pygtk widgets and constants
 import gtk.glade
 import sys  # handle system calls
 import linuxcnc  # to get our own error sytsem
-import gobject  # needed to add the timer for periodic
-import pygtk
-import gladevcp
 import pango
 import time
 import math
-from linuxcnc import ini
-import ConfigParser
 from datetime import datetime
 from subprocess import Popen, PIPE
 from functools import wraps
 
+from .base import ProbeScreenBase
+
 CONFIGPATH1 = os.environ["CONFIG_DIR"]
-
-
-cp1 = ConfigParser.RawConfigParser
-
-
-class ProbeScreenPreferences(cp1):
-    types = {
-        bool: cp1.getboolean,
-        float: cp1.getfloat,
-        int: cp1.getint,
-        str: cp1.get,
-        repr: lambda self, section, option: eval(cp1.get(self, section, option)),
-    }
-
-    def __init__(self, path=None):
-        cp1.__init__(self)
-        if not path:
-            path = "~/.toolch_preferences"
-        self.fn = os.path.expanduser(path)
-        self.read(self.fn)
-
-    def getpref(self, option, default=False, type=bool):
-        m = self.types.get(type)
-        try:
-            o = m(self, "DEFAULT", option)
-        except Exception as detail:
-            print(detail)
-            self.set("DEFAULT", option, default)
-            self.write(open(self.fn, "w"))
-            if type in (bool, float, int):
-                o = type(default)
-            else:
-                o = default
-        return o
-
-    def putpref(self, option, value, type=bool):
-        self.set("DEFAULT", option, type(value))
-        self.write(open(self.fn, "w"))
 
 
 def restore_mode(f):
@@ -90,31 +49,7 @@ def restore_mode(f):
     return wrapper
 
 
-class ProbeScreenClass(object):
-    def get_preference_file_path(self):
-        # we get the preference file, if there is none given in the INI
-        # we use toolchange2.pref in the config dir
-        temp = self.inifile.find("DISPLAY", "PREFERENCE_FILE_PATH")
-        if not temp:
-            machinename = self.inifile.find("EMC", "MACHINE")
-            if not machinename:
-                temp = os.path.join(CONFIGPATH1, "probe_screen.pref")
-            else:
-                machinename = machinename.replace(" ", "_")
-                temp = os.path.join(CONFIGPATH1, "%s.pref" % machinename)
-        print("****  probe_screen GETINIINFO **** \n Preference file path: %s" % temp)
-        return temp
-
-    def get_display(self):
-        # gmoccapy or axis ?
-        temp = self.inifile.find("DISPLAY", "DISPLAY")
-        if not temp:
-            print(
-                "****  PROBE SCREEN GET INI INFO **** \n Error recognition of display type : %s"
-                % temp
-            )
-        return temp
-
+class ProbeScreenClass(ProbeScreenBase):
     def add_history(
         self,
         tool_tip_text,
@@ -322,157 +257,6 @@ class ProbeScreenClass(object):
             s += " R%s" % a
             self.gcode(s)
             time.sleep(1)
-
-    # -----------
-    # JOG BUTTONS
-    # -----------
-    def _init_jog_increments(self):
-        # Get the increments from INI File
-        jog_increments = []
-        increments = self.inifile.find("DISPLAY", "INCREMENTS")
-        if increments:
-            if "," in increments:
-                for i in increments.split(","):
-                    jog_increments.append(i.strip())
-            else:
-                jog_increments = increments.split()
-            jog_increments.insert(0, 0)
-        else:
-            jog_increments = [0, "1,000", "0,100", "0,010", "0,001"]
-            print(
-                "**** PROBE SCREEN INFO **** \n No default jog increments entry found in [DISPLAY] of INI file"
-            )
-
-        self.jog_increments = jog_increments
-        if len(self.jog_increments) > 5:
-            print(_("**** PROBE SCREEN INFO ****"))
-            print(_("**** To many increments given in INI File for this screen ****"))
-            print(_("**** Only the first 5 will be reachable through this screen ****"))
-            # we shorten the incrementlist to 5 (first is default = 0)
-            self.jog_increments = self.jog_increments[0:5]
-
-        # The first radio button is created to get a radio button group
-        # The group is called according the name off  the first button
-        # We use the pressed signal, not the toggled, otherwise two signals will be emitted
-        # One from the released button and one from the pressed button
-        # we make a list of the buttons to later add the hardware pins to them
-        label = "Cont"
-        rbt0 = gtk.RadioButton(None, label)
-        rbt0.connect("pressed", self.on_increment_changed, 0)
-        self.steps.pack_start(rbt0, True, True, 0)
-        rbt0.set_property("draw_indicator", False)
-        rbt0.show()
-        rbt0.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("#FFFF00"))
-        rbt0.__name__ = "rbt0"
-        self.incr_rbt_list.append(rbt0)
-        # the rest of the buttons are now added to the group
-        # self.no_increments is set while setting the hal pins with self._check_len_increments
-        for item in range(1, len(self.jog_increments)):
-            rbt = "rbt%d" % (item)
-            rbt = gtk.RadioButton(rbt0, self.jog_increments[item])
-            rbt.connect("pressed", self.on_increment_changed, self.jog_increments[item])
-            self.steps.pack_start(rbt, True, True, 0)
-            rbt.set_property("draw_indicator", False)
-            rbt.show()
-            rbt.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("#FFFF00"))
-            rbt.__name__ = "rbt%d" % (item)
-            self.incr_rbt_list.append(rbt)
-        self.active_increment = "rbt0"
-
-    # This is the jogging part
-    def on_increment_changed(self, widget=None, data=None):
-        if data == 0:
-            self.distance = 0
-        else:
-            self.distance = self._parse_increment(data)
-        self.halcomp["jog-increment"] = self.distance
-        self.active_increment = widget.__name__
-
-    def _from_internal_linear_unit(self, v, unit=None):
-        if unit is None:
-            unit = self.stat.linear_units
-        lu = (unit or 1) * 25.4
-        return v * lu
-
-    def _parse_increment(self, jogincr):
-        if jogincr.endswith("mm"):
-            scale = self._from_internal_linear_unit(1 / 25.4)
-        elif jogincr.endswith("cm"):
-            scale = self._from_internal_linear_unit(10 / 25.4)
-        elif jogincr.endswith("um"):
-            scale = self._from_internal_linear_unit(.001 / 25.4)
-        elif jogincr.endswith("in") or jogincr.endswith("inch"):
-            scale = self._from_internal_linear_unit(1.)
-        elif jogincr.endswith("mil"):
-            scale = self._from_internal_linear_unit(.001)
-        else:
-            scale = 1
-        jogincr = jogincr.rstrip(" inchmuil")
-        if "/" in jogincr:
-            p, q = jogincr.split("/")
-            jogincr = float(p) / float(q)
-        else:
-            jogincr = float(jogincr)
-        return jogincr * scale
-
-    def on_btn_jog_pressed(self, widget, data=None):
-        # only in manual mode we will allow jogging the axis at this development state
-        self.command.mode(linuxcnc.MODE_MANUAL)
-        self.command.wait_complete()
-        self.stat.poll()
-        if not self.stat.task_mode == linuxcnc.MODE_MANUAL:
-            return
-
-        axisletter = widget.get_label()[0]
-        if not axisletter.lower() in "xyzabcuvw":
-            print("unknown axis %s" % axisletter)
-            return
-
-        # get the axisnumber
-        axisnumber = "xyzabcuvws".index(axisletter.lower())
-
-        # if data = True, then the user pressed SHIFT for Jogging and
-        # want's to jog at 0.2 speed
-        if data:
-            value = 0.2
-        else:
-            value = 1
-
-        velocity = float(self.inifile.find("TRAJ", "DEFAULT_LINEAR_VELOCITY"))
-
-        dir = widget.get_label()[1]
-        if dir == "+":
-            direction = 1
-        else:
-            direction = -1
-
-        self.command.teleop_enable(1)
-        if self.distance != 0:  # incremental jogging
-            self.command.jog(
-                linuxcnc.JOG_INCREMENT,
-                False,
-                axisnumber,
-                direction * velocity,
-                self.distance,
-            )
-        else:  # continuous jogging
-            self.command.jog(
-                linuxcnc.JOG_CONTINUOUS, False, axisnumber, direction * velocity
-            )
-
-    def on_btn_jog_released(self, widget, data=None):
-        axisletter = widget.get_label()[0]
-        if not axisletter.lower() in "xyzabcuvw":
-            print("unknown axis %s" % axisletter)
-            return
-
-        axis = "xyzabcuvw".index(axisletter.lower())
-
-        self.command.teleop_enable(1)
-        if self.distance != 0:
-            pass
-        else:
-            self.command.jog(linuxcnc.JOG_STOP, False, axis)
 
     # Spin  buttons
 
@@ -2692,16 +2476,8 @@ class ProbeScreenClass(object):
     #
     # --------------------------
     def __init__(self, halcomp, builder, useropts):
-        inipath = os.environ["INI_FILE_NAME"]
-        self.inifile = ini(inipath)
-        if not self.inifile:
-            print("**** PROBE SCREEN GET INI INFO **** \n Error, no INI File given !!")
-            sys.exit()
-        self.display = self.get_display() or "unknown"
-        self.command = linuxcnc.command()
-        self.stat = linuxcnc.stat()
-        self.builder = builder
-        self.prefs = ProbeScreenPreferences(self.get_preference_file_path())
+        super(ProbeScreenClass, self).__init__(halcomp, builder, useropts)
+
         self.window1 = builder.get_object("window1")
         self.textarea = builder.get_object("textview1")
         self.e = linuxcnc.error_channel()
@@ -2770,7 +2546,6 @@ class ProbeScreenClass(object):
 
         self.vcp_action_reload = self.builder.get_object("vcp_action_reload")
 
-        self.halcomp = hal.component("probe")
         self.halcomp.newpin("ps_searchvel", hal.HAL_FLOAT, hal.HAL_OUT)
         self.halcomp.newpin("ps_probevel", hal.HAL_FLOAT, hal.HAL_OUT)
         self.halcomp.newpin("ps_z_clearance", hal.HAL_FLOAT, hal.HAL_OUT)
@@ -2847,14 +2622,6 @@ class ProbeScreenClass(object):
         self.halcomp["ps_offs_angle"] = self.spbtn_offs_angle.get_value()
         self.halcomp["ps_error"] = 0.
 
-        # For JOG
-        self.steps = self.builder.get_object("steps")
-        self.incr_rbt_list = []  # we use this list to add hal pin to the button later
-        self.jog_increments = []  # This holds the increment values
-        self.distance = 0  # This global will hold the jog distance
-        self.halcomp.newpin("jog-increment", hal.HAL_FLOAT, hal.HAL_OUT)
-        self._init_jog_increments()
-
         # For Auto Tool Measurement
         # set the title of the window
         self.frm_probe_pos = self.builder.get_object("frm_probe_pos")
@@ -2909,7 +2676,3 @@ class ProbeScreenClass(object):
             else:
                 self.frm_probe_pos.set_sensitive(False)
                 self.chk_use_tool_measurement.set_sensitive(True)
-
-
-def get_handlers(halcomp, builder, useropts):
-    return [ProbeScreenClass(halcomp, builder, useropts)]
