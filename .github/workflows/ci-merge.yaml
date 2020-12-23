@@ -1,0 +1,38 @@
+name: Format Code on Merge
+
+on:
+  push:
+    branches:
+      - ci-test
+
+jobs:
+  format:
+    name: Format Code
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Run Black (Python Code Formatter)
+      uses: lgeiger/black-action@master
+      with:
+        path: psng/python/
+
+    - name: Run isort (Python Import Sorter)
+      uses: olance/isort-action@v1.1.0
+      with:
+        args: --recursive psng/python/
+
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Actions"
+        git add -A && git diff-index --cached --quiet HEAD || git commit -m 'Format Code'
+      
+    - name: Push changes
+      uses: ad-m/github-push-action@v0.5.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
