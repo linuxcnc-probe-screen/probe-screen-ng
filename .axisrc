@@ -1,19 +1,34 @@
 #root_window.tk.call("wm","geometry",".","1024x768")
 root_window.attributes("-fullscreen",1)
+
 def my_error_task(self):
+    """
+    Overrides the Axis LivePlotter.error_task method
+    
+    This is needed as otherwise, AXIS would consume the error+show a
+    popup, and the probe screen would never have an opportunity to
+    know there was an error. 
+    """
+    error = e.poll()
+    while error:
+        kind, text = error
+        if kind in (linuxcnc.NML_ERROR, linuxcnc.OPERATOR_ERROR):
+            icon = "error"
+            # Signal to Probe Screen that an error has occurred
+            probe_user_comp["error"]=True
+        else:
+            icon = "info"
+        notifications.add(icon, text)
         error = e.poll()
-        while error: 
-            kind, text = error
-            if kind in (linuxcnc.NML_ERROR, linuxcnc.OPERATOR_ERROR):
-                icon = "error"
-            else:
-                icon = "info"
-            notifications.add(icon, text)
-            ucomp["error"]=True
-            error = e.poll()
-        self.error_after = self.win.after(200, self.error_task)
+    self.error_after = self.win.after(200, self.error_task)
 
 def my_remove(self, widgets):
+    """
+    Overrides the Axis Notification.remove method
+    
+    This is used to reset the probe screen error pin when the user discards
+    all error/info popups.
+    """
     self.widgets.remove(widgets)
     if len(self.cache) < 10:
         widgets[0].pack_forget()
@@ -27,7 +42,7 @@ def my_remove(self, widgets):
 LivePlotter.error_task = my_error_task
 Notification.remove = my_remove
 
-if hal_present == 1 :
-    ucomp = hal.component("probe.user")
-    ucomp.newpin("error",hal.HAL_BIT,hal.HAL_IN)
-    ucomp.ready()
+if hal_present == 1:
+    probe_user_comp = hal.component("probe.user")
+    probe_user_comp.newpin("error", hal.HAL_BIT, hal.HAL_IN)
+    probe_user_comp.ready()
