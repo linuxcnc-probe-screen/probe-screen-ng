@@ -1,4 +1,4 @@
-; manual toolchange with automatic tool length probe 
+; manual toolchange with automatic tool length probe
 
 o<psng_manual_change> sub
 o<psng_hook> call [1]
@@ -11,7 +11,7 @@ o<psng_hook> call [1]
 #<pocket> = #<selected_pocket>
 
 ; we must execute this only in the milltask interpreter
-; or preview will break, so test for '#<_task>' which is 1 for 
+; or preview will break, so test for '#<_task>' which is 1 for
 ; the milltask interpreter and 0 in the UI's
 O100 if [#<_task> EQ 0]
         (debug, Task ist Null)
@@ -32,18 +32,18 @@ G49
 M6
 
 O200 if [#<_hal[probe.use_toolmeasurement]> EQ 0]
-O200 return [3] ; indicate no tool measurement 
+O200 return [3] ; indicate no tool measurement
 O200 endif
 
 G53 G0 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
 G53 G0 Z[#<_ini[TOOLSENSOR]Z>]
 
 O300 if [#<_hal[probe.ps_searchvel]> LE 0]
-O300 return [-1] ; indicate searchvel <= 0 
+O300 return [-1] ; indicate searchvel <= 0
 O300 endif
 
 O400 if [#<_hal[probe.ps_probevel]> LE 0]
-O400 return [-2] ; indicate probevel <= 0 
+O400 return [-2] ; indicate probevel <= 0
 O400 endif
 
 F #<_hal[probe.ps_searchvel]>
@@ -64,7 +64,7 @@ G90
 G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
 
 #<touch_result> = #5063
-#<probeheight> = #<_hal[probe.probeheight]> 
+#<probeheight> = #<_hal[probe.probeheight]>
 #<blockheight> = #<_hal[probe.blockheight]>
 
 ;(DEBUG, #<touch_result>  #<probeheight>  #<blockheight>)
