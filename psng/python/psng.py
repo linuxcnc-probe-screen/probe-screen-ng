@@ -98,6 +98,16 @@ class ProbeScreenClass(ProbeScreenBase):
         self.buffer.insert(i, "%s \n" % c)
 
     def error_poll(self):
+        # TODO: The method is essentially a giant race condition. AXIS UI
+        # is also polling the error channel, and the first poller to
+        # receive an error will be the only poller to get that specific
+        # error. As a hacky workaround for this, we override the error
+        # polling method in .axisrc to add an .error pin we can use for
+        # times where the AXIS UI built in polling wins the race. However,
+        # when this code wins the race - the AXIS UI build in method will
+        # not receive the error - so no popup will be shown.
+        # This code should probably be reworked - though I don't know we'll
+        # be able to do much better without changes in AXIS UI.
         error = self.e.poll()
         if "axis" in self.display:
             error_pin = Popen(
@@ -113,22 +123,19 @@ class ProbeScreenClass(ProbeScreenBase):
             kind, text = error
             self.add_history("Error: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
             if kind in (linuxcnc.NML_ERROR, linuxcnc.OPERATOR_ERROR):
-
-                typus = "error"
-                print(typus, text)
+                print("error", text)
                 return -1
             else:
-                typus = "info"
-                print(typus, text)
-                return -1
+                # Info messages are not errors
+                print("info", text)
+                return 0
         else:
             if "TRUE" in error_pin:
                 text = "User probe error"
                 self.add_history(
                     "Error: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
                 )
-                typus = "error"
-                print(typus, text)
+                print("error", text)
                 self.command.mode(linuxcnc.MODE_MANUAL)
                 self.command.wait_complete()
                 return -1
