@@ -3,7 +3,7 @@ name: Format Code on Merge
 on:
   push:
     branches:
-      - ci-test
+      - master
 
 jobs:
   format:
