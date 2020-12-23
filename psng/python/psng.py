@@ -414,7 +414,8 @@ class ProbeScreenClass(ProbeScreenBase):
 
     def gcode(self, s, data=None):
         for l in s.split("\n"):
-            if "G1" in l:
+            # Search for G1 followed by a space, otherwise we'll catch G10 too.
+            if "G1 " in l:
                 l += " F#<_ini[TOOLSENSOR]RAPID_SPEED>"
             self.command.mdi(l)
             self.command.wait_complete()
@@ -489,7 +490,7 @@ class ProbeScreenClass(ProbeScreenBase):
         self.prefs.putpref("ps_offs_x", self.spbtn_offs_x.get_value(), float)
         self.command.mode(linuxcnc.MODE_MDI)
         self.command.wait_complete()
-        self.command.mdi("G10 L20 P0 X%f" % self.spbtn_offs_x.get_value())
+        self.gcode("G10 L20 P0 X%f" % self.spbtn_offs_x.get_value())
         self.vcp_action_reload.emit("activate")
         time.sleep(1)
 
@@ -498,7 +499,7 @@ class ProbeScreenClass(ProbeScreenBase):
         self.prefs.putpref("ps_offs_y", self.spbtn_offs_y.get_value(), float)
         self.command.mode(linuxcnc.MODE_MDI)
         self.command.wait_complete()
-        self.command.mdi("G10 L20 P0 Y%f" % self.spbtn_offs_y.get_value())
+        self.gcode("G10 L20 P0 Y%f" % self.spbtn_offs_y.get_value())
         self.vcp_action_reload.emit("activate")
         time.sleep(1)
 
@@ -507,7 +508,7 @@ class ProbeScreenClass(ProbeScreenBase):
         self.prefs.putpref("ps_offs_z", self.spbtn_offs_z.get_value(), float)
         self.command.mode(linuxcnc.MODE_MDI)
         self.command.wait_complete()
-        self.command.mdi("G10 L20 P0 Z%f" % self.spbtn_offs_z.get_value())
+        self.gcode("G10 L20 P0 Z%f" % self.spbtn_offs_z.get_value())
         self.vcp_action_reload.emit("activate")
         time.sleep(1)
 
@@ -2419,7 +2420,7 @@ class ProbeScreenClass(ProbeScreenBase):
         # set koordinate system to new origin
         self.command.mode(linuxcnc.MODE_MDI)
         self.command.wait_complete()
-        self.command.mdi("G10 L2 P0 Z%s" % blockheight)
+        self.gcode("G10 L2 P0 Z%s" % blockheight)
         self.vcp_action_reload.emit("activate")
         c = "Workpiece Height = " + "%.4f" % gtkspinbutton.get_value()
         i = self.buffer.get_end_iter()
