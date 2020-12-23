@@ -18,10 +18,9 @@ O100 if [#<_task> EQ 0]
 O100     return [999]
 O100 endif
 
-;first go up
+; first go up then move to change position
 G90
 G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>-0.1]
-; then move to change position
 G53 G0 X[#<_ini[CHANGE_POSITION]X>] Y[#<_ini[CHANGE_POSITION]Y>]
 G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
 
@@ -35,6 +34,8 @@ O200 if [#<_hal[probe.use_toolmeasurement]> EQ 0]
 O200 return [3] ; indicate no tool measurement
 O200 endif
 
+; first go up then move to tool sensor position
+G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>-0.1]
 G53 G0 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
 G53 G0 Z[#<_ini[TOOLSENSOR]Z>]
 
