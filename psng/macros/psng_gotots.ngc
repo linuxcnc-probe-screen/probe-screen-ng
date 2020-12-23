@@ -3,7 +3,7 @@ o<psng_hook> call [2]
 
 ; first go up then move to tool sensor position
 G90
-G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>-0.1]
+G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>+#<_ini[PROBE_SCREEN]Z_SAFE_TRAVEL_OFFSET>]
 G53 G0 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
 G53 G0 Z[#<_ini[TOOLSENSOR]Z>]
 
