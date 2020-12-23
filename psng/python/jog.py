@@ -15,8 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; If not, see <http://www.gnu.org/licenses/>.
 
-import hal  # base hal class to react to hal signals
 import gtk  # base for pygtk widgets and constants
+import hal  # base hal class to react to hal signals
 import linuxcnc
 
 from .base import ProbeScreenBase

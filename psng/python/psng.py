@@ -12,19 +12,18 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-import hal  # base hal class to react to hal signals
+import math
 import os  # needed to get the paths and directorys
-import hal_glib  # needed to make our own hal pins
+import sys  # handle system calls
+import time
+from functools import wraps
+
 import gtk  # base for pygtk widgets and constants
 import gtk.glade
-import sys  # handle system calls
+import hal  # base hal class to react to hal signals
+import hal_glib  # needed to make our own hal pins
 import linuxcnc  # to get our own error sytsem
 import pango
-import time
-import math
-from datetime import datetime
-from subprocess import Popen, PIPE
-from functools import wraps
 
 from .base import ProbeScreenBase
 
@@ -50,98 +49,6 @@ def restore_mode(f):
 
 
 class ProbeScreenClass(ProbeScreenBase):
-    def add_history(
-        self,
-        tool_tip_text,
-        s="",
-        xm=0.,
-        xc=0.,
-        xp=0.,
-        lx=0.,
-        ym=0.,
-        yc=0.,
-        yp=0.,
-        ly=0.,
-        z=0.,
-        d=0.,
-        a=0.,
-    ):
-        #        c = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        c = datetime.now().strftime("%H:%M:%S  ") + "{0: <10}".format(tool_tip_text)
-        if "Xm" in s:
-            c += "X-=%.4f " % xm
-        if "Xc" in s:
-            c += "Xc=%.4f " % xc
-        if "Xp" in s:
-            c += "X+=%.4f " % xp
-        if "Lx" in s:
-            c += "Lx=%.4f " % lx
-        if "Ym" in s:
-            c += "Y-=%.4f " % ym
-        if "Yc" in s:
-            c += "Yc=%.4f " % yc
-        if "Yp" in s:
-            c += "Y+=%.4f " % yp
-        if "Ly" in s:
-            c += "Ly=%.4f " % ly
-        if "Z" in s:
-            c += "Z=%.4f " % z
-        if "D" in s:
-            c += "D=%.4f" % d
-        if "A" in s:
-            c += "Angle=%.3f" % a
-        i = self.buffer.get_end_iter()
-        if i.get_line() > 1000:
-            i.backward_line()
-            self.buffer.delete(i, self.buffer.get_end_iter())
-        i.set_line(0)
-        self.buffer.insert(i, "%s \n" % c)
-
-    def error_poll(self):
-        # TODO: The method is essentially a giant race condition. AXIS UI
-        # is also polling the error channel, and the first poller to
-        # receive an error will be the only poller to get that specific
-        # error. As a hacky workaround for this, we override the error
-        # polling method in .axisrc to add an .error pin we can use for
-        # times where the AXIS UI built in polling wins the race. However,
-        # when this code wins the race - the AXIS UI build in method will
-        # not receive the error - so no popup will be shown.
-        # This code should probably be reworked - though I don't know we'll
-        # be able to do much better without changes in AXIS UI.
-        error = self.e.poll()
-        if "axis" in self.display:
-            error_pin = Popen(
-                "halcmd getp probe.user.error ", shell=True, stdout=PIPE
-            ).stdout.read()
-        else:
-            error_pin = Popen(
-                "halcmd getp gmoccapy.error ", shell=True, stdout=PIPE
-            ).stdout.read()
-        if error:
-            self.command.mode(linuxcnc.MODE_MANUAL)
-            self.command.wait_complete()
-            kind, text = error
-            self.add_history("Error: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            if kind in (linuxcnc.NML_ERROR, linuxcnc.OPERATOR_ERROR):
-                print("error", text)
-                return -1
-            else:
-                # Info messages are not errors
-                print("info", text)
-                return 0
-        else:
-            if "TRUE" in error_pin:
-                text = "User probe error"
-                self.add_history(
-                    "Error: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                )
-                print("error", text)
-                self.command.mode(linuxcnc.MODE_MANUAL)
-                self.command.wait_complete()
-                return -1
-
-        return 0
-
     # calculate corner coordinates in rotated coord. system
     def calc_cross_rott(self, x1=0., y1=0., x2=0., y2=0., a1=0., a2=90.):
         coord = [0, 0]
@@ -411,30 +318,6 @@ class ProbeScreenClass(ProbeScreenBase):
         gtkspinbutton.modify_font(pango.FontDescription("normal"))
         self.halcomp["ps_offs_angle"] = gtkspinbutton.get_value()
         self.prefs.putpref("ps_offs_angle", gtkspinbutton.get_value(), float)
-
-    def gcode(self, s, data=None):
-        for l in s.split("\n"):
-            # Search for G1 followed by a space, otherwise we'll catch G10 too.
-            if "G1 " in l:
-                l += " F#<_ini[TOOLSENSOR]RAPID_SPEED>"
-            self.command.mdi(l)
-            self.command.wait_complete()
-            if self.error_poll() == -1:
-                return -1
-        return 0
-
-    def ocode(self, s, data=None):
-        self.command.mdi(s)
-        self.stat.poll()
-        while self.stat.interp_state != linuxcnc.INTERP_IDLE:
-            if self.error_poll() == -1:
-                return -1
-            self.command.wait_complete()
-            self.stat.poll()
-        self.command.wait_complete()
-        if self.error_poll() == -1:
-            return -1
-        return 0
 
     def z_clearance_down(self, data=None):
         # move Z - z_clearance
@@ -2317,26 +2200,8 @@ class ProbeScreenClass(ProbeScreenBase):
     #    AUTO TOOL MEASUREMENT
     #
     # ---------------------------------------
-    # display warning dialog
-    def warning_dialog(self, message, secondary=None, title=_("Operator Message")):
-        dialog = gtk.MessageDialog(
-            self.window1,
-            gtk.DIALOG_DESTROY_WITH_PARENT,
-            gtk.MESSAGE_INFO,
-            gtk.BUTTONS_OK,
-            message,
-        )
-        # if there is a secondary message then the first message text is bold
-        if secondary:
-            dialog.format_secondary_text(secondary)
-        dialog.show_all()
-        dialog.set_title(title)
-        responce = dialog.run()
-        dialog.destroy()
-        return responce == gtk.RESPONSE_OK
 
-        # Here we create a manual tool change dialog
-
+    # Here we create a manual tool change dialog
     def on_tool_change(self, gtkbutton, data=None):
         change = self.halcomp["toolchange-change"]
         toolnumber = self.halcomp["toolchange-number"]
@@ -2478,13 +2343,6 @@ class ProbeScreenClass(ProbeScreenBase):
     def __init__(self, halcomp, builder, useropts):
         super(ProbeScreenClass, self).__init__(halcomp, builder, useropts)
 
-        self.window1 = builder.get_object("window1")
-        self.textarea = builder.get_object("textview1")
-        self.e = linuxcnc.error_channel()
-        self.stat.poll()
-        self.e.poll()
-
-        self.buffer = self.textarea.get_property("buffer")
         self.chk_use_tool_measurement = self.builder.get_object(
             "chk_use_tool_measurement"
         )

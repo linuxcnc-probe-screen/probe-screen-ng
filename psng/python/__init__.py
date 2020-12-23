@@ -15,8 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; If not, see <http://www.gnu.org/licenses/>.
 
-from .psng import ProbeScreenClass
 from .jog import ProbeScreenJog
+from .psng import ProbeScreenClass
 
 
 def get_handlers(halcomp, builder, useropts):
