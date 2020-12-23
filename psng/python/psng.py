@@ -2431,15 +2431,11 @@ class ProbeScreenClass(ProbeScreenBase):
 
     @restore_mode
     def clicked_btn_probe_tool_setter(self, gtkbutton, data=None):
-        # Start psng_probe_tool_setter.ngc
         self.command.mode(linuxcnc.MODE_MDI)
         self.command.wait_complete()
-        self.command.mdi("o<psng_probe_tool_setter> call")
-        self.stat.poll()
-        while self.stat.interp_state != linuxcnc.INTERP_IDLE:
-            self.command.wait_complete()
-            self.stat.poll()
-        self.command.wait_complete()
+        # Start psng_probe_tool_setter.ngc
+        if self.ocode("o<psng_probe_tool_setter> call") == -1:
+            return
         a = self.stat.probed_position
         self.spbtn_probe_height.set_value(float(a[2]))
         self.add_history(
@@ -2448,15 +2444,11 @@ class ProbeScreenClass(ProbeScreenBase):
 
     @restore_mode
     def clicked_btn_probe_workpiece(self, gtkbutton, data=None):
-        # Start psng_probe_workpiece.ngc
         self.command.mode(linuxcnc.MODE_MDI)
         self.command.wait_complete()
-        self.command.mdi("o<psng_probe_workpiece> call")
-        self.stat.poll()
-        while self.stat.interp_state != linuxcnc.INTERP_IDLE:
-            self.command.wait_complete()
-            self.stat.poll()
-        self.command.wait_complete()
+        # Start psng_probe_workpiece.ngc
+        if self.ocode("o<psng_probe_workpiece> call") == -1:
+            return
         a = self.stat.probed_position
         self.spbtn_block_height.set_value(float(a[2]))
         self.add_history(
