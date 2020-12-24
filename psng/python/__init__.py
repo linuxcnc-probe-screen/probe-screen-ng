@@ -17,10 +17,16 @@
 
 from .jog import ProbeScreenJog
 from .psng import ProbeScreenClass
+from .rotation import ProbeScreenRotation
+from .settings import ProbeScreenSettings
+from .zero import ProbeScreenZero
 
 
 def get_handlers(halcomp, builder, useropts):
     return [
         ProbeScreenClass(halcomp, builder, useropts),
+        ProbeScreenSettings(halcomp, builder, useropts),
         ProbeScreenJog(halcomp, builder, useropts),
+        ProbeScreenZero(halcomp, builder, useropts),
+        ProbeScreenRotation(halcomp, builder, useropts),
     ]
