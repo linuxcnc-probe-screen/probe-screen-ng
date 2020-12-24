@@ -413,21 +413,6 @@ class ProbeScreenClass(ProbeScreenBase):
     # --------------  Command buttons -----------------
     #               Measurement outside
     # -------------------------------------------------
-    # Down
-    @restore_mode
-    def on_down_released(self, gtkbutton, data=None):
-        self.command.mode(linuxcnc.MODE_MDI)
-        self.command.wait_complete()
-        # Start down.ngc
-        if self.ocode("o<psng_down> call") == -1:
-            return
-        a = self.probed_position_with_offsets()
-        self.lb_probe_z.set_text("%.4f" % float(a[2]))
-        self.add_history(
-            gtkbutton.get_tooltip_text(), "Z", 0, 0, 0, 0, 0, 0, 0, 0, a[2], 0, 0
-        )
-        self.set_zerro("Z", 0, 0, a[2])
-
     # X+
     @restore_mode
     def on_xp_released(self, gtkbutton, data=None):
@@ -2103,6 +2088,7 @@ class ProbeScreenClass(ProbeScreenBase):
         else:
             self.halcomp["toolchange-changed"] = False
 
+    # Read the ini file config value
     def get_tool_sensor_data(self):
         xpos = float(self.inifile.find("TOOLSENSOR", "X"))
         ypos = float(self.inifile.find("TOOLSENSOR", "Y"))
@@ -2112,6 +2098,7 @@ class ProbeScreenClass(ProbeScreenBase):
         revrott = float(self.inifile.find("TOOLSENSOR", "REV_ROTATION_SPEED"))
         return xpos, ypos, zpos, maxprobe, tsdiam, revrott
 
+    # Spinbox for setter height with autosave value inside machine pref file
     def on_spbtn_probe_height_value_changed(self, gtkspinbutton, data=None):
         self.halcomp["probeheight"] = gtkspinbutton.get_value()
         self.prefs.putpref("probeheight", gtkspinbutton.get_value(), float)
@@ -2122,7 +2109,9 @@ class ProbeScreenClass(ProbeScreenBase):
             self.buffer.delete(i, self.buffer.get_end_iter())
         i.set_line(0)
         self.buffer.insert(i, "%s \n" % c)
+        self.set_zerro("Z", 0, 0, a[2])
 
+    # Spinbox for block height with autosave value inside machine pref file
     @restore_mode
     def on_spbtn_block_height_value_changed(self, gtkspinbutton, data=None):
         blockheight = gtkspinbutton.get_value()
@@ -2151,6 +2140,21 @@ class ProbeScreenClass(ProbeScreenBase):
         i.set_line(0)
         self.buffer.insert(i, "%s \n" % c)
 
+    # Down probe to table for measuring it and use for calculate tool setter height and can set G10 L20 Z0 if you tick auto zero
+    @restore_mode
+    def on_down_released(self, gtkbutton, data=None):
+        self.command.mode(linuxcnc.MODE_MDI)
+        self.command.wait_complete()
+        # Start down.ngc
+        if self.ocode("o<psng_down> call") == -1:
+            return
+        a = self.probed_position_with_offsets()
+        self.lb_probe_z.set_text("%.4f" % float(a[2]))
+        self.add_history(
+            gtkbutton.get_tooltip_text(), "Z", 0, 0, 0, 0, 0, 0, 0, 0, a[2], 0, 0
+        )
+
+    # Down probe to tool setter for measuring it vs table probing result
     @restore_mode
     def clicked_btn_probe_tool_setter(self, gtkbutton, data=None):
         self.command.mode(linuxcnc.MODE_MDI)
@@ -2164,6 +2168,7 @@ class ProbeScreenClass(ProbeScreenBase):
             gtkbutton.get_tooltip_text(), "Z", 0, 0, 0, 0, 0, 0, 0, 0, a[2], 0, 0
         )
 
+    # Down probe to workpiece for measuring it vs Know tool setter height
     @restore_mode
     def clicked_btn_probe_workpiece(self, gtkbutton, data=None):
         self.command.mode(linuxcnc.MODE_MDI)
@@ -2177,6 +2182,7 @@ class ProbeScreenClass(ProbeScreenBase):
             gtkbutton.get_tooltip_text(), "Z", 0, 0, 0, 0, 0, 0, 0, 0, a[2], 0, 0
         )
 
+    # Tickbox from gui for enable disable remap (with saving pref)
     def on_chk_use_tool_measurement_toggled(self, gtkcheckbutton, data=None):
         if gtkcheckbutton.get_active():
             self.frm_probe_pos.set_sensitive(True)
