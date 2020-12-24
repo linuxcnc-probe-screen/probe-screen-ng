@@ -19,7 +19,7 @@ jobs:
     - name: Run Black (Python Code Formatter)
       uses: lgeiger/black-action@master
       with:
-        path: psng/python/
+        args: psng/python/
 
     - name: Run isort (Python Import Sorter)
       uses: olance/isort-action@v1.1.0
