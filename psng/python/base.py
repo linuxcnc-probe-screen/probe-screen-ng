@@ -24,6 +24,7 @@ import gtk
 import linuxcnc
 
 from .configparser import ProbeScreenConfigParser
+from .util import restore_task_mode
 
 CONFIGPATH1 = os.environ["CONFIG_DIR"]
 
@@ -69,7 +70,11 @@ class ProbeScreenBase(object):
     #  MDI Command Methods
     #
     # --------------------------
+    @restore_task_mode
     def gcode(self, s, data=None):
+        self.command.mode(linuxcnc.MODE_MDI)
+        self.command.wait_complete()
+
         for l in s.split("\n"):
             # Search for G1 followed by a space, otherwise we'll catch G10 too.
             if "G1 " in l:
@@ -80,7 +85,11 @@ class ProbeScreenBase(object):
                 return -1
         return 0
 
+    @restore_task_mode
     def ocode(self, s, data=None):
+        self.command.mode(linuxcnc.MODE_MDI)
+        self.command.wait_complete()
+
         self.command.mdi(s)
         self.stat.poll()
         while self.stat.interp_state != linuxcnc.INTERP_IDLE:
