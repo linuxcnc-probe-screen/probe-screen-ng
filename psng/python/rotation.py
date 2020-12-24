@@ -34,12 +34,13 @@ class ProbeScreenRotation(ProbeScreenBase):
         self.hal_led_auto_rott = self.builder.get_object("hal_led_auto_rott")
         self.chk_auto_rott = self.builder.get_object("chk_auto_rott")
         self.spbtn_offs_angle = self.builder.get_object("spbtn_offs_angle")
-        
+
         self.chk_auto_rott.set_active(self.prefs.getpref("chk_auto_rott", False, bool))
         self.spbtn_offs_angle.set_value(self.prefs.getpref("ps_offs_angle", 0.0, float))
 
         self.halcomp.newpin("ps_offs_angle", hal.HAL_FLOAT, hal.HAL_OUT)
         self.halcomp.newpin("auto_rott", hal.HAL_BIT, hal.HAL_OUT)
+
         if self.chk_auto_rott.get_active():
             self.halcomp["auto_rott"] = True
             self.hal_led_auto_rott.hal_pin.set(1)
@@ -55,7 +56,7 @@ class ProbeScreenRotation(ProbeScreenBase):
 
     def on_btn_set_angle_released(self, gtkbutton, data=None):
         self.prefs.putpref("ps_offs_angle", self.spbtn_offs_angle.get_value(), float)
-        
+
         self.display_result_a(self.spbtn_offs_angle.get_value())
 
         s = "G10 L2 P0"
@@ -131,9 +132,7 @@ class ProbeScreenRotation(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         ypres = float(a[1]) + 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_yp(ypres)
-        alfa = math.degrees(
-            math.atan2(ypres - ycres, self.halcomp["ps_edge_lenght"])
-        )
+        alfa = math.degrees(math.atan2(ypres - ycres, self.halcomp["ps_edge_lenght"]))
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "YcYpA",
@@ -206,9 +205,7 @@ class ProbeScreenRotation(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         ymres = float(a[1]) - 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_ym(ymres)
-        alfa = math.degrees(
-            math.atan2(ycres - ymres, self.halcomp["ps_edge_lenght"])
-        )
+        alfa = math.degrees(math.atan2(ycres - ymres, self.halcomp["ps_edge_lenght"]))
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "YmYcA",
@@ -279,9 +276,7 @@ class ProbeScreenRotation(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         xpres = float(a[0]) + 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_xp(xpres)
-        alfa = math.degrees(
-            math.atan2(xcres - xpres, self.halcomp["ps_edge_lenght"])
-        )
+        alfa = math.degrees(math.atan2(xcres - xpres, self.halcomp["ps_edge_lenght"]))
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XcXpA",
@@ -352,9 +347,7 @@ class ProbeScreenRotation(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         xmres = float(a[0]) - 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_xm(xmres)
-        alfa = math.degrees(
-            math.atan2(xcres - xmres, self.halcomp["ps_edge_lenght"])
-        )
+        alfa = math.degrees(math.atan2(xcres - xmres, self.halcomp["ps_edge_lenght"]))
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmXcA",
