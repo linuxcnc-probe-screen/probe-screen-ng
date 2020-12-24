@@ -116,11 +116,11 @@ class ProbeScreenJog(ProbeScreenBase):
         elif jogincr.endswith("cm"):
             scale = self._from_internal_linear_unit(10 / 25.4)
         elif jogincr.endswith("um"):
-            scale = self._from_internal_linear_unit(.001 / 25.4)
+            scale = self._from_internal_linear_unit(0.001 / 25.4)
         elif jogincr.endswith("in") or jogincr.endswith("inch"):
-            scale = self._from_internal_linear_unit(1.)
+            scale = self._from_internal_linear_unit(1.0)
         elif jogincr.endswith("mil"):
-            scale = self._from_internal_linear_unit(.001)
+            scale = self._from_internal_linear_unit(0.001)
         else:
             scale = 1
         jogincr = jogincr.rstrip(" inchmuil")
