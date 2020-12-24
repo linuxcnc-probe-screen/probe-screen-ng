@@ -18,7 +18,6 @@ import sys  # handle system calls
 import time
 
 import gtk  # base for pygtk widgets and constants
-import gtk.glade
 import hal  # base hal class to react to hal signals
 import hal_glib  # needed to make our own hal pins
 import linuxcnc  # to get our own error sytsem

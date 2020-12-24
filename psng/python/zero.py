@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #
 # Copyright (c) 2015 Serguei Glavatski ( verser  from cnc-club.ru )
+# Copyright (c) 2020 Probe Screen NG Developers
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -18,6 +19,7 @@
 import gtk  # base for pygtk widgets and constants
 import hal  # base hal class to react to hal signals
 import linuxcnc
+import pango
 
 from .base import ProbeScreenBase
 
