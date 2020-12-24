@@ -1439,7 +1439,8 @@ class ProbeScreenClass(ProbeScreenBase):
         if self.gcode(s) == -1:
             return
         # move Z to start point
-        self.z_clearance_up()
+        if self.z_clearance_up() == -1:
+            return
         self.set_zerro("XY")
 
     # --------------  Command buttons -----------------
@@ -1980,7 +1981,8 @@ class ProbeScreenClass(ProbeScreenBase):
         if self.gcode(s) == -1:
             return
         # move Z to start point
-        self.z_clearance_up()
+        if self.z_clearance_up() == -1:
+            return
         self.set_zerro("XY")
 
     # Ly IN
@@ -2051,7 +2053,8 @@ class ProbeScreenClass(ProbeScreenBase):
         if self.gcode(s) == -1:
             return
         # move Z to start point
-        self.z_clearance_up()
+        if self.z_clearance_up() == -1:
+            return
         self.set_zerro("XY")
 
     # TOOL DIA
