@@ -68,6 +68,19 @@ class ProbeScreenBase(object):
         # VCP Reload Action
         self._vcp_action_reload = self.builder.get_object("vcp_action_reload")
 
+        # Results Display
+        self._lb_probe_xp = self.builder.get_object("lb_probe_xp")
+        self._lb_probe_yp = self.builder.get_object("lb_probe_yp")
+        self._lb_probe_xm = self.builder.get_object("lb_probe_xm")
+        self._lb_probe_ym = self.builder.get_object("lb_probe_ym")
+        self._lb_probe_lx = self.builder.get_object("lb_probe_lx")
+        self._lb_probe_ly = self.builder.get_object("lb_probe_ly")
+        self._lb_probe_z = self.builder.get_object("lb_probe_z")
+        self._lb_probe_d = self.builder.get_object("lb_probe_d")
+        self._lb_probe_xc = self.builder.get_object("lb_probe_xc")
+        self._lb_probe_yc = self.builder.get_object("lb_probe_yc")
+        self._lb_probe_a = self.builder.get_object("lb_probe_a")
+
     # --------------------------
     #
     #  MDI Command Methods
@@ -236,8 +249,8 @@ class ProbeScreenBase(object):
         i.set_line(0)
         self.buffer.insert(i, "%s \n" % c)
 
-    # displays a warning dialog
     def warning_dialog(self, message, secondary=None, title=_("Operator Message")):
+        """ displays a warning dialog """
         dialog = gtk.MessageDialog(
             self.window,
             gtk.DIALOG_DESTROY_WITH_PARENT,
@@ -253,3 +266,95 @@ class ProbeScreenBase(object):
         responce = dialog.run()
         dialog.destroy()
         return responce == gtk.RESPONSE_OK
+
+    def display_result_xp(self, value):
+        self._lb_probe_xp.set_text("%.4f" % value)
+
+    def display_result_yp(self, value):
+        self._lb_probe_yp.set_text("%.4f" % value)
+
+    def display_result_xm(self, value):
+        self._lb_probe_xm.set_text("%.4f" % value)
+
+    def display_result_ym(self, value):
+        self._lb_probe_ym.set_text("%.4f" % value)
+
+    def display_result_lx(self, value):
+        self._lb_probe_lx.set_text("%.4f" % value)
+
+    def display_result_ly(self, value):
+        self._lb_probe_ly.set_text("%.4f" % value)
+
+    def display_result_z(self, value):
+        self._lb_probe_z.set_text("%.4f" % value)
+
+    def display_result_d(self, value):
+        self._lb_probe_d.set_text("%.4f" % value)
+
+    def display_result_xc(self, value):
+        self._lb_probe_xc.set_text("%.4f" % value)
+
+    def display_result_yc(self, value):
+        self._lb_probe_yc.set_text("%.4f" % value)
+
+    def display_result_a(self, value):
+        self._lb_probe_a.set_text("%.3f" % value)
+
+    # --------------------------
+    #
+    #  Generic Probe Movement Methods
+    #
+    # --------------------------
+    def z_clearance_down(self, data=None):
+        # move Z - z_clearance
+        s = """G91
+        G1 Z-%f
+        G90""" % (
+            self.halcomp["ps_z_clearance"]
+        )
+        if self.gcode(s) == -1:
+            return -1
+        return 0
+
+    def z_clearance_up(self, data=None):
+        # move Z + z_clearance
+        s = """G91
+        G1 Z%f
+        G90""" % (
+            self.halcomp["ps_z_clearance"]
+        )
+        if self.gcode(s) == -1:
+            return -1
+        return 0
+
+    # --------------------------
+    #
+    #  Generic Position Calculations
+    #
+    # --------------------------
+    def probed_position_with_offsets(self):
+        self.stat.poll()
+        probed_position = list(self.stat.probed_position)
+        coord = list(self.stat.probed_position)
+        g5x_offset = list(self.stat.g5x_offset)
+        g92_offset = list(self.stat.g92_offset)
+        tool_offset = list(self.stat.tool_offset)
+
+        for i in range(0, len(probed_position) - 1):
+            coord[i] = (
+                probed_position[i] - g5x_offset[i] - g92_offset[i] - tool_offset[i]
+            )
+        angl = self.stat.rotation_xy
+        res = self._rott00_point(coord[0], coord[1], -angl)
+        coord[0] = res[0]
+        coord[1] = res[1]
+        return coord
+
+    def _rott00_point(self, x1=0.0, y1=0.0, a1=0.0):
+        """ rotate around 0,0 point coordinates """
+        coord = [x1, y1]
+        if a1 != 0:
+            t = math.radians(a1)
+            coord[0] = x1 * math.cos(t) - y1 * math.sin(t)
+            coord[1] = x1 * math.sin(t) + y1 * math.cos(t)
+        return coord
