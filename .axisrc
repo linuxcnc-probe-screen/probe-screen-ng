@@ -36,7 +36,7 @@ def my_remove(self, widgets):
     else:
         widgets[0].destroy()
     if len(self.widgets) == 0:
-        ucomp["error"]=False
+        probe_user_comp["error"]=False
         self.place_forget()
 
 LivePlotter.error_task = my_error_task
