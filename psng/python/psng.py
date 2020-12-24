@@ -2109,7 +2109,6 @@ class ProbeScreenClass(ProbeScreenBase):
             self.buffer.delete(i, self.buffer.get_end_iter())
         i.set_line(0)
         self.buffer.insert(i, "%s \n" % c)
-        self.set_zerro("Z", 0, 0, a[2])
 
     # Spinbox for block height with autosave value inside machine pref file
     @restore_mode
@@ -2153,6 +2152,7 @@ class ProbeScreenClass(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(), "Z", 0, 0, 0, 0, 0, 0, 0, 0, a[2], 0, 0
         )
+        self.set_zerro("Z", 0, 0, a[2])
 
     # Down probe to tool setter for measuring it vs table probing result
     @restore_mode
