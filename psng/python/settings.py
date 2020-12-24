@@ -18,7 +18,6 @@
 
 import gtk  # base for pygtk widgets and constants
 import hal  # base hal class to react to hal signals
-import linuxcnc
 import pango
 
 from .base import ProbeScreenBase
