@@ -65,6 +65,9 @@ class ProbeScreenBase(object):
         # Warning Dialog
         self.window = builder.get_object("window1")
 
+        # VCP Reload Action
+        self._vcp_action_reload = self.builder.get_object("vcp_action_reload")
+
     # --------------------------
     #
     #  MDI Command Methods
@@ -175,6 +178,10 @@ class ProbeScreenBase(object):
                 temp = os.path.join(CONFIGPATH1, "%s.pref" % machinename)
         print("****  probe_screen GETINIINFO **** \n Preference file path: %s" % temp)
         return temp
+
+    def vcp_reload(self):
+        """ Realods the VCP - e.g. after changing changing changing origin/zero points """
+        self._vcp_action_reload.emit("activate")
 
     # --------------------------
     #

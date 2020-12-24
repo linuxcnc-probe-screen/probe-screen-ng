@@ -43,9 +43,9 @@ class ProbeScreenClass(ProbeScreenBase):
     def rott_point(self, x1=0.0, y1=0.0, a1=0.0):
         coord = [x1, y1]
         if a1 != 0:
-            if self.chk_set_zero.get_active():
-                xc = self.spbtn_offs_x.get_value()
-                yc = self.spbtn_offs_y.get_value()
+            if self.halcomp["set_zero"]:
+                xc = self.halcomp["ps_offs_x"]
+                yc = self.halcomp["ps_offs_y"]
             else:
                 self.stat.poll()
                 xc = (
@@ -99,12 +99,6 @@ class ProbeScreenClass(ProbeScreenBase):
         coord[1] = res[1]
         return coord
 
-    # Set Zero check
-    def on_chk_set_zero_toggled(self, gtkcheckbutton, data=None):
-        self.halcomp["set_zero"] = gtkcheckbutton.get_active()
-        self.hal_led_set_zero.hal_pin.set(gtkcheckbutton.get_active())
-        self.prefs.putpref("chk_set_zero", gtkcheckbutton.get_active(), bool)
-
     # Auto Rot check
     def on_chk_auto_rott_toggled(self, gtkcheckbutton, data=None):
         self.halcomp["auto_rott"] = gtkcheckbutton.get_active()
@@ -112,7 +106,7 @@ class ProbeScreenClass(ProbeScreenBase):
         self.prefs.putpref("chk_auto_rott", gtkcheckbutton.get_active(), bool)
 
     def set_zerro(self, s="XYZ", x=0.0, y=0.0, z=0.0):
-        if self.chk_set_zero.get_active():
+        if self.halcomp["set_zero"]:
             #  Z current position
             self.stat.poll()
             tmpz = (
@@ -124,13 +118,13 @@ class ProbeScreenClass(ProbeScreenBase):
             c = "G10 L20 P0"
             s = s.upper()
             if "X" in s:
-                x += self.spbtn_offs_x.get_value()
+                x += self.halcomp["ps_offs_x"]
                 c += " X%s" % x
             if "Y" in s:
-                y += self.spbtn_offs_y.get_value()
+                y += self.halcomp["ps_offs_y"]
                 c += " Y%s" % y
             if "Z" in s:
-                tmpz = tmpz - z + self.spbtn_offs_z.get_value()
+                tmpz = tmpz - z + self.halcomp["ps_offs_z"]
                 c += " Z%s" % tmpz
             self.gcode(c)
             time.sleep(1)
@@ -140,9 +134,9 @@ class ProbeScreenClass(ProbeScreenBase):
         self.lb_probe_a.set_text("%.3f" % a)
         if self.chk_auto_rott.get_active():
             s = "G10 L2 P0"
-            if self.chk_set_zero.get_active():
-                s += " X%s" % self.spbtn_offs_x.get_value()
-                s += " Y%s" % self.spbtn_offs_y.get_value()
+            if self.halcomp["set_zero"]:
+                s += " X%s" % self.halcomp["ps_offs_x"]
+                s += " Y%s" % self.halcomp["ps_offs_y"]
             else:
                 self.stat.poll()
                 x = self.stat.position[0]
@@ -212,27 +206,6 @@ class ProbeScreenClass(ProbeScreenBase):
         else:
             gtkspinbutton.modify_font(pango.FontDescription("italic"))
 
-    def on_spbtn_offs_x_key_press_event(self, gtkspinbutton, data=None):
-        keyname = gtk.gdk.keyval_name(data.keyval)
-        if keyname == "Return":
-            gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        else:
-            gtkspinbutton.modify_font(pango.FontDescription("italic"))
-
-    def on_spbtn_offs_y_key_press_event(self, gtkspinbutton, data=None):
-        keyname = gtk.gdk.keyval_name(data.keyval)
-        if keyname == "Return":
-            gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        else:
-            gtkspinbutton.modify_font(pango.FontDescription("italic"))
-
-    def on_spbtn_offs_z_key_press_event(self, gtkspinbutton, data=None):
-        keyname = gtk.gdk.keyval_name(data.keyval)
-        if keyname == "Return":
-            gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        else:
-            gtkspinbutton.modify_font(pango.FontDescription("italic"))
-
     def on_spbtn_offs_angle_key_press_event(self, gtkspinbutton, data=None):
         keyname = gtk.gdk.keyval_name(data.keyval)
         if keyname == "Return":
@@ -279,21 +252,6 @@ class ProbeScreenClass(ProbeScreenBase):
         gtkspinbutton.modify_font(pango.FontDescription("normal"))
         self.halcomp["ps_z_clearance"] = gtkspinbutton.get_value()
         self.prefs.putpref("ps_z_clearance", gtkspinbutton.get_value(), float)
-
-    def on_spbtn_offs_x_value_changed(self, gtkspinbutton, data=None):
-        gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        self.halcomp["ps_offs_x"] = gtkspinbutton.get_value()
-        self.prefs.putpref("ps_offs_x", gtkspinbutton.get_value(), float)
-
-    def on_spbtn_offs_y_value_changed(self, gtkspinbutton, data=None):
-        gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        self.halcomp["ps_offs_y"] = gtkspinbutton.get_value()
-        self.prefs.putpref("ps_offs_y", gtkspinbutton.get_value(), float)
-
-    def on_spbtn_offs_z_value_changed(self, gtkspinbutton, data=None):
-        gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        self.halcomp["ps_offs_z"] = gtkspinbutton.get_value()
-        self.prefs.putpref("ps_offs_z", gtkspinbutton.get_value(), float)
 
     def on_spbtn_offs_angle_value_changed(self, gtkspinbutton, data=None):
         gtkspinbutton.modify_font(pango.FontDescription("normal"))
@@ -348,32 +306,14 @@ class ProbeScreenClass(ProbeScreenBase):
         self.lb_probe_ly.set_text("%.4f" % res)
         return res
 
-    # --------------  Touch off buttons -----------------
-    def on_btn_set_x_released(self, gtkbutton, data=None):
-        self.prefs.putpref("ps_offs_x", self.spbtn_offs_x.get_value(), float)
-        self.gcode("G10 L20 P0 X%f" % self.spbtn_offs_x.get_value())
-        self.vcp_action_reload.emit("activate")
-        time.sleep(1)
-
-    def on_btn_set_y_released(self, gtkbutton, data=None):
-        self.prefs.putpref("ps_offs_y", self.spbtn_offs_y.get_value(), float)
-        self.gcode("G10 L20 P0 Y%f" % self.spbtn_offs_y.get_value())
-        self.vcp_action_reload.emit("activate")
-        time.sleep(1)
-
-    def on_btn_set_z_released(self, gtkbutton, data=None):
-        self.prefs.putpref("ps_offs_z", self.spbtn_offs_z.get_value(), float)
-        self.gcode("G10 L20 P0 Z%f" % self.spbtn_offs_z.get_value())
-        self.vcp_action_reload.emit("activate")
-        time.sleep(1)
-
+    # --------------  Rotate buttons -----------------
     def on_btn_set_angle_released(self, gtkbutton, data=None):
         self.prefs.putpref("ps_offs_angle", self.spbtn_offs_angle.get_value(), float)
         self.lb_probe_a.set_text("%.3f" % self.spbtn_offs_angle.get_value())
         s = "G10 L2 P0"
-        if self.chk_set_zero.get_active():
-            s += " X%.4f" % self.spbtn_offs_x.get_value()
-            s += " Y%.4f" % self.spbtn_offs_y.get_value()
+        if self.halcomp["set_zero"]:
+            s += " X%.4f" % self.halcomp["ps_offs_x"]
+            s += " Y%.4f" % self.halcomp["ps_offs_y"]
         else:
             self.stat.poll()
             x = self.stat.position[0]
@@ -2194,7 +2134,7 @@ class ProbeScreenClass(ProbeScreenBase):
             )
         # set koordinate system to new origin
         self.gcode("G10 L2 P0 Z%s" % blockheight)
-        self.vcp_action_reload.emit("activate")
+        self.vcp_reload()
         c = "Workpiece Height = " + "%.4f" % gtkspinbutton.get_value()
         i = self.buffer.get_end_iter()
         if i.get_line() > 1000:
@@ -2267,8 +2207,6 @@ class ProbeScreenClass(ProbeScreenBase):
             self.prefs.getpref("use_toolmeasurement", False, bool)
         )
 
-        self.chk_set_zero = self.builder.get_object("chk_set_zero")
-        self.chk_set_zero.set_active(self.prefs.getpref("chk_set_zero", False, bool))
         self.chk_auto_rott = self.builder.get_object("chk_auto_rott")
         self.chk_auto_rott.set_active(self.prefs.getpref("chk_auto_rott", False, bool))
         self.xpym = self.builder.get_object("xpym")
@@ -2294,12 +2232,8 @@ class ProbeScreenClass(ProbeScreenBase):
         self.spbtn1_edge_lenght = self.builder.get_object("spbtn1_edge_lenght")
 
         self.hal_led_set_m6 = self.builder.get_object("hal_led_set_m6")
-        self.hal_led_set_zero = self.builder.get_object("hal_led_set_zero")
         self.hal_led_auto_rott = self.builder.get_object("hal_led_auto_rott")
 
-        self.spbtn_offs_x = self.builder.get_object("spbtn_offs_x")
-        self.spbtn_offs_y = self.builder.get_object("spbtn_offs_y")
-        self.spbtn_offs_z = self.builder.get_object("spbtn_offs_z")
         self.spbtn_offs_angle = self.builder.get_object("spbtn_offs_angle")
 
         self.lb_probe_xp = self.builder.get_object("lb_probe_xp")
@@ -2320,8 +2254,6 @@ class ProbeScreenClass(ProbeScreenBase):
         self.ly_in = self.builder.get_object("ly_in")
         self.tool_dia = self.builder.get_object("tool_dia")
 
-        self.vcp_action_reload = self.builder.get_object("vcp_action_reload")
-
         self.halcomp.newpin("ps_searchvel", hal.HAL_FLOAT, hal.HAL_OUT)
         self.halcomp.newpin("ps_probevel", hal.HAL_FLOAT, hal.HAL_OUT)
         self.halcomp.newpin("ps_z_clearance", hal.HAL_FLOAT, hal.HAL_OUT)
@@ -2330,18 +2262,11 @@ class ProbeScreenClass(ProbeScreenBase):
         self.halcomp.newpin("ps_probe_diam", hal.HAL_FLOAT, hal.HAL_OUT)
         self.halcomp.newpin("ps_xy_clearance", hal.HAL_FLOAT, hal.HAL_OUT)
         self.halcomp.newpin("ps_edge_lenght", hal.HAL_FLOAT, hal.HAL_OUT)
-        self.halcomp.newpin("ps_offs_x", hal.HAL_FLOAT, hal.HAL_OUT)
-        self.halcomp.newpin("ps_offs_y", hal.HAL_FLOAT, hal.HAL_OUT)
-        self.halcomp.newpin("ps_offs_z", hal.HAL_FLOAT, hal.HAL_OUT)
         self.halcomp.newpin("ps_offs_angle", hal.HAL_FLOAT, hal.HAL_OUT)
         self.halcomp.newpin("use_toolmeasurement", hal.HAL_BIT, hal.HAL_OUT)
         if self.chk_use_tool_measurement.get_active():
             self.halcomp["use_toolmeasurement"] = True
             self.hal_led_set_m6.hal_pin.set(1)
-        self.halcomp.newpin("set_zero", hal.HAL_BIT, hal.HAL_OUT)
-        if self.chk_set_zero.get_active():
-            self.halcomp["set_zero"] = True
-            self.hal_led_set_zero.hal_pin.set(1)
         self.halcomp.newpin("auto_rott", hal.HAL_BIT, hal.HAL_OUT)
         if self.chk_auto_rott.get_active():
             self.halcomp["auto_rott"] = True
@@ -2379,9 +2304,6 @@ class ProbeScreenClass(ProbeScreenBase):
             self.prefs.getpref("ps_edge_lenght", tup[7], float)
         )
 
-        self.spbtn_offs_x.set_value(self.prefs.getpref("ps_offs_x", 0.0, float))
-        self.spbtn_offs_y.set_value(self.prefs.getpref("ps_offs_y", 0.0, float))
-        self.spbtn_offs_z.set_value(self.prefs.getpref("ps_offs_z", 0.0, float))
         self.spbtn_offs_angle.set_value(self.prefs.getpref("ps_offs_angle", 0.0, float))
 
         self.halcomp["ps_searchvel"] = self.spbtn1_search_vel.get_value()
@@ -2392,9 +2314,6 @@ class ProbeScreenClass(ProbeScreenBase):
         self.halcomp["ps_probe_diam"] = self.spbtn1_probe_diam.get_value()
         self.halcomp["ps_xy_clearance"] = self.spbtn1_xy_clearance.get_value()
         self.halcomp["ps_edge_lenght"] = self.spbtn1_edge_lenght.get_value()
-        self.halcomp["ps_offs_x"] = self.spbtn_offs_x.get_value()
-        self.halcomp["ps_offs_y"] = self.spbtn_offs_y.get_value()
-        self.halcomp["ps_offs_z"] = self.spbtn_offs_z.get_value()
         self.halcomp["ps_offs_angle"] = self.spbtn_offs_angle.get_value()
         self.halcomp["ps_error"] = 0.0
 

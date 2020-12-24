@@ -17,10 +17,12 @@
 
 from .jog import ProbeScreenJog
 from .psng import ProbeScreenClass
+from .zero import ProbeScreenZero
 
 
 def get_handlers(halcomp, builder, useropts):
     return [
         ProbeScreenClass(halcomp, builder, useropts),
         ProbeScreenJog(halcomp, builder, useropts),
+        ProbeScreenZero(halcomp, builder, useropts),
     ]
