@@ -1482,8 +1482,8 @@ class ProbeScreenClass(ProbeScreenBase):
             else:
                 print(
                     "toolchange abort",
-                    toolnumber,
-                    self.halcomp["toolchange-prep-number"],
+                    self.stat.tool_in_spindle,
+                    self.halcomp["toolchange-number"],
                 )
                 self.command.abort()
                 self.halcomp["toolchange-number"] = self.stat.tool_in_spindle
