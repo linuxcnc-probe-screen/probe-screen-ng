@@ -1,4 +1,4 @@
-o<psng_down> sub
+o<psng_probe_table> sub
 o<psng_hook> call [3]
 
 #<z>=#<_z> (save current Z position)
@@ -13,5 +13,5 @@ G90
 (back to start point)
 G1 Z#<z> F#<_ini[TOOLSENSOR]RAPID_SPEED>
 	
-o<psng_down> endsub
+o<psng_probe_table> endsub
 M2

@@ -1507,6 +1507,7 @@ class ProbeScreenClass(ProbeScreenBase):
 
     # Spinbox for setter height with autosave value inside machine pref file
     def on_spbtn_probe_height_value_changed(self, gtkspinbutton, data=None):
+        gtkspinbutton.modify_font(pango.FontDescription("normal "))
         self.halcomp["probeheight"] = gtkspinbutton.get_value()
         self.prefs.putpref("probeheight", gtkspinbutton.get_value(), float)
         c = "TS Height = " + "%.4f" % gtkspinbutton.get_value()
@@ -1519,6 +1520,7 @@ class ProbeScreenClass(ProbeScreenBase):
 
     # Spinbox for block height with autosave value inside machine pref file
     def on_spbtn_block_height_value_changed(self, gtkspinbutton, data=None):
+        gtkspinbutton.modify_font(pango.FontDescription("normal "))
         blockheight = gtkspinbutton.get_value()
         if blockheight != False:
             self.halcomp["blockheight"] = blockheight
@@ -1544,9 +1546,9 @@ class ProbeScreenClass(ProbeScreenBase):
         self.buffer.insert(i, "%s \n" % c)
 
     # Down probe to table for measuring it and use for calculate tool setter height and can set G10 L20 Z0 if you tick auto zero
-    def on_down_released(self, gtkbutton, data=None):
-        # Start down.ngc
-        if self.ocode("o<psng_down> call") == -1:
+    def on_btn_probe_table_released(self, gtkbutton, data=None):
+        # Start psng_probe_table.ngc
+        if self.ocode("o<psng_probe_table> call") == -1:
             return
         a = self.probed_position_with_offsets()
         self.display_result_z(float(a[2]))
@@ -1556,7 +1558,7 @@ class ProbeScreenClass(ProbeScreenBase):
         self.set_zerro("Z", 0, 0, a[2])
 
     # Down probe to tool setter for measuring it vs table probing result
-    def clicked_btn_probe_tool_setter(self, gtkbutton, data=None):
+    def on_btn_probe_tool_setter_released(self, gtkbutton, data=None):
         # Start psng_probe_tool_setter.ngc
         if self.ocode("o<psng_probe_tool_setter> call") == -1:
             return
@@ -1567,7 +1569,7 @@ class ProbeScreenClass(ProbeScreenBase):
         )
 
     # Down probe to workpiece for measuring it vs Know tool setter height
-    def clicked_btn_probe_workpiece(self, gtkbutton, data=None):
+    def on_btn_probe_workpiece_relesead(self, gtkbutton, data=None):
         # Start psng_probe_workpiece.ngc
         if self.ocode("o<psng_probe_workpiece> call") == -1:
             return
