@@ -1,48 +1,58 @@
-#root_window.tk.call("wm","geometry",".","1024x768")
-root_window.attributes("-fullscreen",1)
+# Copyright (c) 2020 Probe Screen NG Developers
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
 
-def my_error_task(self):
-    """
-    Overrides the Axis LivePlotter.error_task method
-    
-    This is needed as otherwise, AXIS would consume the error+show a
-    popup, and the probe screen would never have an opportunity to
-    know there was an error. 
-    """
-    error = e.poll()
-    while error:
-        kind, text = error
-        if kind in (linuxcnc.NML_ERROR, linuxcnc.OPERATOR_ERROR):
-            icon = "error"
-            # Signal to Probe Screen that an error has occurred
-            probe_user_comp["error"]=True
-        else:
-            icon = "info"
-        notifications.add(icon, text)
-        error = e.poll()
-    self.error_after = self.win.after(200, self.error_task)
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program; If not, see <http://www.gnu.org/licenses/>.
+
+# This AXIS RC file adds support for an error pin, mirroring the
+# gmocappy.error pin's behaviour for AXIS.
+
+
+def _remaining_error_count(widgets):
+    """ Returns the count of remaining error messages """
+    count = 0
+    for i, item in enumerate(widgets):
+        frame, icon, text, button, iname = item
+        if iname == "icon_std_error":
+            count += 1
+    return count
+
+
+def my_add(self, iconname, message):
+    """ Signal to PSNG that an error has occurred. """
+    self.original_add(iconname, message)
+
+    if iconname == "error":
+        probe_user_comp["error"] = True
+
 
 def my_remove(self, widgets):
-    """
-    Overrides the Axis Notification.remove method
-    
-    This is used to reset the probe screen error pin when the user discards
-    all error/info popups.
-    """
-    self.widgets.remove(widgets)
-    if len(self.cache) < 10:
-        widgets[0].pack_forget()
-        self.cache.append(widgets)
-    else:
-        widgets[0].destroy()
-    if len(self.widgets) == 0:
-        probe_user_comp["error"]=False
-        self.place_forget()
+    """ Signal to PSNG when all errors have been cleared. """
+    self.original_remove(widgets)
 
-LivePlotter.error_task = my_error_task
+    if _remaining_error_count(self.widgets) == 0:
+        probe_user_comp["error"] = False
+
+
+# Rename the original add/remove method so we can retain the ability to call them
+Notification.original_add = Notification.add
+Notification.original_remove = Notification.remove
+
+# Replace the add/remove methods with a wrapped version that manages an error pin
+Notification.add = my_add
 Notification.remove = my_remove
 
 if hal_present == 1:
+    # Add an probe.user.error pin
     probe_user_comp = hal.component("probe.user")
-    probe_user_comp.newpin("error", hal.HAL_BIT, hal.HAL_IN)
+    probe_user_comp.newpin("error", hal.HAL_BIT, hal.HAL_OUT)
     probe_user_comp.ready()
