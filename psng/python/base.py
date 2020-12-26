@@ -141,10 +141,10 @@ class ProbeScreenBase(object):
                 "halcmd getp gmoccapy.error ", shell=True, stdout=PIPE
             ).stdout.read()
         if error:
-            self.command.mode(linuxcnc.MODE_MANUAL)
-            self.command.wait_complete()
             kind, text = error
             if kind in (linuxcnc.NML_ERROR, linuxcnc.OPERATOR_ERROR):
+                self.command.mode(linuxcnc.MODE_MANUAL)
+                self.command.wait_complete()
                 self.add_history("Error NML: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                 print("error NML", text)
                 return -1
@@ -155,11 +155,11 @@ class ProbeScreenBase(object):
                 return 0
         else:
             if "TRUE" in error_pin:
+                self.command.mode(linuxcnc.MODE_MANUAL)
+                self.command.wait_complete()
                 text = "User probe error"
                 self.add_history("Error PSNG: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                 print("error PSNG", text)
-                self.command.mode(linuxcnc.MODE_MANUAL)
-                self.command.wait_complete()
                 return -1
 
         return 0
