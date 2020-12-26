@@ -144,21 +144,20 @@ class ProbeScreenBase(object):
             self.command.mode(linuxcnc.MODE_MANUAL)
             self.command.wait_complete()
             kind, text = error
-            self.add_history("Error: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
             if kind in (linuxcnc.NML_ERROR, linuxcnc.OPERATOR_ERROR):
-                print("error", text)
+                self.add_history("Error NML: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                print("error NML", text)
                 return -1
             else:
                 # Info messages are not errors
-                print("info", text)
+                self.add_history("Info NML: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                print("info NML", text)
                 return 0
         else:
             if "TRUE" in error_pin:
                 text = "User probe error"
-                self.add_history(
-                    "Error: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                )
-                print("error", text)
+                self.add_history("Error PSNG: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                print("error PSNG", text)
                 self.command.mode(linuxcnc.MODE_MANUAL)
                 self.command.wait_complete()
                 return -1
