@@ -20,7 +20,7 @@ import gtk  # base for pygtk widgets and constants
 import hal  # base hal class to react to hal signals
 import pango
 
-from .base import ProbeScreenBase
+from .base import ProbeScreenBafse
 
 
 class ProbeScreenSettings(ProbeScreenBase):
@@ -101,7 +101,7 @@ class ProbeScreenSettings(ProbeScreenBase):
         else:
             gtkspinbutton.modify_font(pango.FontDescription("italic"))
 
-    def on_spbtn_probe_height_key_press_event(self, gtkspinbutton, data=None):
+    def on_spbtn_setter_height_key_press_event(self, gtkspinbutton, data=None):
         keyname = gtk.gdk.keyval_name(data.keyval)
         #        print "Key %s (%d) was pressed" % (keyname, data.keyval)
         if keyname == "Return":
