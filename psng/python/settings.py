@@ -20,7 +20,7 @@ import gtk  # base for pygtk widgets and constants
 import hal  # base hal class to react to hal signals
 import pango
 
-from .base import ProbeScreenBafse
+from .base import ProbeScreenBase
 
 
 class ProbeScreenSettings(ProbeScreenBase):
