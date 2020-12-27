@@ -1508,7 +1508,7 @@ class ProbeScreenClass(ProbeScreenBase):
         return xpos, ypos, zpos, maxprobe, tsdiam, revrott
 
     # Spinbox for setter height with autosave value inside machine pref file
-    def on_spbtn_probe_height_value_changed(self, gtkspinbutton, data=None):
+    def on_spbtn_setter_height_value_changed(self, gtkspinbutton, data=None):
         gtkspinbutton.modify_font(pango.FontDescription("normal "))
         self.halcomp["setterheight"] = gtkspinbutton.get_value()
         self.prefs.putpref("setterheight", gtkspinbutton.get_value(), float)
@@ -1526,7 +1526,7 @@ class ProbeScreenClass(ProbeScreenBase):
         blockheight = gtkspinbutton.get_value()
         if blockheight != False:
             self.halcomp["blockheight"] = blockheight
-            self.halcomp["setterheight"] = self.spbtn_probe_height.get_value()
+            self.halcomp["setterheight"] = self.spbtn_setter_height.get_value()
         else:
             self.prefs.putpref("blockheight", 0.0, float)
             print(_("Conversion error in btn_block_height"))
@@ -1565,7 +1565,7 @@ class ProbeScreenClass(ProbeScreenBase):
         if self.ocode("o<psng_probe_tool_setter> call") == -1:
             return
         a = self.stat.probed_position
-        self.spbtn_probe_height.set_value(float(a[2]))
+        self.spbtn_setter_height.set_value(float(a[2]))
         self.add_history(
             gtkbutton.get_tooltip_text(), "Z", 0, 0, 0, 0, 0, 0, 0, 0, a[2], 0, 0
         )
@@ -1586,7 +1586,7 @@ class ProbeScreenClass(ProbeScreenBase):
         if gtkcheckbutton.get_active():
             self.frm_probe_pos.set_sensitive(True)
             self.halcomp["use_toolmeasurement"] = True
-            self.halcomp["setterheight"] = self.spbtn_probe_height.get_value()
+            self.halcomp["setterheight"] = self.spbtn_setter_height.get_value()
             self.halcomp["blockheight"] = self.spbtn_block_height.get_value()
         else:
             self.frm_probe_pos.set_sensitive(False)
@@ -1644,7 +1644,7 @@ class ProbeScreenClass(ProbeScreenBase):
         # For Auto Tool Measurement
         # set the title of the window
         self.frm_probe_pos = self.builder.get_object("frm_probe_pos")
-        self.spbtn_probe_height = self.builder.get_object("spbtn_probe_height")
+        self.spbtn_setter_height = self.builder.get_object("spbtn_setter_height")
         self.spbtn_block_height = self.builder.get_object("spbtn_block_height")
         self.btn_probe_tool_setter = self.builder.get_object("btn_probe_tool_setter")
         self.btn_probe_workpiece = self.builder.get_object("btn_probe_workpiece")
@@ -1686,7 +1686,7 @@ class ProbeScreenClass(ProbeScreenBase):
             print(_("**** no valid probe config in INI File ****"))
             print(_("**** disabled auto tool measurement ****"))
         else:
-            self.spbtn_probe_height.set_value(
+            self.spbtn_setter_height.set_value(
                 self.prefs.getpref("setterheight", 0.0, float)
             )
             self.spbtn_block_height.set_value(
@@ -1696,7 +1696,7 @@ class ProbeScreenClass(ProbeScreenBase):
             if self.chk_use_tool_measurement.get_active():
                 self.frm_probe_pos.set_sensitive(True)
                 self.halcomp["use_toolmeasurement"] = True
-                self.halcomp["setterheight"] = self.spbtn_probe_height.get_value()
+                self.halcomp["setterheight"] = self.spbtn_setter_height.get_value()
                 self.halcomp["blockheight"] = self.spbtn_block_height.get_value()
             else:
                 self.frm_probe_pos.set_sensitive(False)
