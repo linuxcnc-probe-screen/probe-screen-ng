@@ -25,5 +25,5 @@ o<psng_hook> sub
 ; value "6".
 #<hooked_macro> = #1
 
-o<psng_hook> endsub
+o<psng_hook> endsub [0]
 M2

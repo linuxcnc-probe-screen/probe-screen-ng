@@ -1,5 +1,10 @@
 o<psng_probe_tool_setter> sub
+
+; Call the PSNG Hook and check return value
 o<psng_hook> call [4]
+o10 if [#<_value> LT 0]
+(ABORT, PSNG hook indicated a failure: #<_value>)
+o10 endif
 
 ; first go up then move to tool sensor position
 G90

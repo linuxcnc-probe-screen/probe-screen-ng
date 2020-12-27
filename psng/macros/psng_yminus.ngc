@@ -1,5 +1,10 @@
 o<psng_yminus> sub
+
+; Call the PSNG Hook and check return value
 o<psng_hook> call [8]
+o10 if [#<_value> LT 0]
+(ABORT, PSNG hook indicated a failure: #<_value>)
+o10 endif
 
 #<y>=#<_y> (save start Y position)
 G91
