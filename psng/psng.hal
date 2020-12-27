@@ -11,5 +11,3 @@ net tool-changed           probe.toolchange-changed     =>   iocontrol.0.tool-ch
 net tool-number            probe.toolchange-number      <=   iocontrol.0.tool-number
 net tool-prep-number       probe.toolchange-prep-number <=   iocontrol.0.tool-prep-number
 net tool-prep-loop         iocontrol.0.tool-prepare     <=   iocontrol.0.tool-prepared
-net tool-diameter          probe.toolchange-diameter    <=   halui.tool.diameter
-
