@@ -19,6 +19,7 @@
 import math
 import os
 import sys
+import time
 from datetime import datetime
 from subprocess import PIPE, Popen
 
@@ -57,8 +58,6 @@ class ProbeScreenBase(object):
         self.command = linuxcnc.command()
         self.stat = linuxcnc.stat()
         self.stat.poll()
-        self.e = linuxcnc.error_channel()
-        self.e.poll()
 
         # History Area
         textarea = builder.get_object("textview1")
@@ -121,47 +120,34 @@ class ProbeScreenBase(object):
         return 0
 
     def error_poll(self):
-        # TODO: The method is essentially a giant race condition. AXIS UI
-        # is also polling the error channel, and the first poller to
-        # receive an error will be the only poller to get that specific
-        # error. As a hacky workaround for this, we override the error
-        # polling method in .axisrc to add an .error pin we can use for
-        # times where the AXIS UI built in polling wins the race. However,
-        # when this code wins the race - the AXIS UI build in method will
-        # not receive the error - so no popup will be shown.
-        # This code should probably be reworked - though I don't know we'll
-        # be able to do much better without changes in AXIS UI.
-        error = self.e.poll()
         if "axis" in self.display:
+            # AXIS polls for errors every 0.2 seconds, so we wait slightly longer to make sure it's happened.
+            time.sleep(0.25)
             error_pin = Popen(
                 "halcmd getp probe.user.error ", shell=True, stdout=PIPE
             ).stdout.read()
-        else:
+
+        elif "gmoccapy" in self.display:
+            # gmoccapy polls for errors every 0.25 seconds, OR whatever value is in the [DISPLAY]CYCLE_TIME ini
+            # setting, so we wait slightly longer to make sure it's happened.
+            ms = int(self.inifile.find("DISPLAY", "CYCLE_TIME") or 250) + 50
+            time.sleep(ms / 100)
+
             error_pin = Popen(
                 "halcmd getp gmoccapy.error ", shell=True, stdout=PIPE
             ).stdout.read()
-        if error:
+
+        else:
+            print("Unable to poll %s GUI for errors" % self.display)
+            return -1
+
+        if "TRUE" in error_pin:
+            text = "See notification popup"
+            self.add_history("Error: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            print("error", text)
             self.command.mode(linuxcnc.MODE_MANUAL)
             self.command.wait_complete()
-            kind, text = error
-            self.add_history("Error: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            if kind in (linuxcnc.NML_ERROR, linuxcnc.OPERATOR_ERROR):
-                print("error", text)
-                return -1
-            else:
-                # Info messages are not errors
-                print("info", text)
-                return 0
-        else:
-            if "TRUE" in error_pin:
-                text = "User probe error"
-                self.add_history(
-                    "Error: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                )
-                print("error", text)
-                self.command.mode(linuxcnc.MODE_MANUAL)
-                self.command.wait_complete()
-                return -1
+            return -1
 
         return 0
 
