@@ -342,6 +342,7 @@ class ProbeScreenBase(object):
                 tmpz = tmpz - z + self.halcomp["ps_offs_z"]
                 c += " Z%s" % tmpz
             self.gcode(c)
+            self.vcp_reload()
             time.sleep(1)
 
     def probed_position_with_offsets(self):

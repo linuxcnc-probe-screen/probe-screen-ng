@@ -74,6 +74,7 @@ class ProbeScreenRotation(ProbeScreenBase):
         s += " R%.4f" % self.spbtn_offs_angle.get_value()
         print("s=", s)
         self.gcode(s)
+        self.vcp_reload()
         time.sleep(1)
 
     def on_spbtn_offs_angle_key_press_event(self, gtkspinbutton, data=None):
@@ -388,4 +389,5 @@ class ProbeScreenRotation(ProbeScreenBase):
                 s += " Y%s" % y
             s += " R%s" % a
             self.gcode(s)
+            self.vcp_reload()
             time.sleep(1)
