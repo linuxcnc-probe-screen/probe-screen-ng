@@ -189,7 +189,6 @@ class ProbeScreenBase(object):
     #  History and Logging Methods
     #
     # --------------------------
-
     def add_history(
         self,
         tool_tip_text,
@@ -320,6 +319,30 @@ class ProbeScreenBase(object):
     #  Generic Position Calculations
     #
     # --------------------------
+    def set_zerro(self, s="XYZ", x=0.0, y=0.0, z=0.0):
+        if self.halcomp["set_zero"]:
+            #  Z current position
+            self.stat.poll()
+            tmpz = (
+                self.stat.position[2]
+                - self.stat.g5x_offset[2]
+                - self.stat.g92_offset[2]
+                - self.stat.tool_offset[2]
+            )
+            c = "G10 L20 P0"
+            s = s.upper()
+            if "X" in s:
+                x += self.halcomp["ps_offs_x"]
+                c += " X%s" % x
+            if "Y" in s:
+                y += self.halcomp["ps_offs_y"]
+                c += " Y%s" % y
+            if "Z" in s:
+                tmpz = tmpz - z + self.halcomp["ps_offs_z"]
+                c += " Z%s" % tmpz
+            self.gcode(c)
+            time.sleep(1)
+
     def probed_position_with_offsets(self):
         self.stat.poll()
         probed_position = list(self.stat.probed_position)
@@ -346,3 +369,29 @@ class ProbeScreenBase(object):
             coord[0] = x1 * math.cos(t) - y1 * math.sin(t)
             coord[1] = x1 * math.sin(t) + y1 * math.cos(t)
         return coord
+
+    def lenght_x(self):
+        res = 0
+        if self._lb_probe_xm.get_text() == "" or self._lb_probe_xp.get_text() == "":
+            return res
+        xm = float(self._lb_probe_xm.get_text())
+        xp = float(self._lb_probe_xp.get_text())
+        if xm < xp:
+            res = xp - xm
+        else:
+            res = xm - xp
+        self.display_result_lx(res)
+        return res
+
+    def lenght_y(self):
+        res = 0
+        if self._lb_probe_ym.get_text() == "" or self._lb_probe_yp.get_text() == "":
+            return res
+        ym = float(self._lb_probe_ym.get_text())
+        yp = float(self._lb_probe_yp.get_text())
+        if ym < yp:
+            res = yp - ym
+        else:
+            res = ym - yp
+        self.display_result_ly(res)
+        return res

@@ -18,17 +18,21 @@
 import linuxcnc  # to get our own error system
 
 from .jog import ProbeScreenJog
-from .psng import ProbeScreenClass
+from .length_measurement import ProbeScreenLengthMeasurement
 from .rotation import ProbeScreenRotation
 from .settings import ProbeScreenSettings
+from .tool_measurement import ProbeScreenToolMeasurement
+from .workpiece_measurement import ProbeScreenWorkpieceMeasurement
 from .zero import ProbeScreenZero
 
 
 def get_handlers(halcomp, builder, useropts):
     return [
-        ProbeScreenClass(halcomp, builder, useropts),
         ProbeScreenSettings(halcomp, builder, useropts),
         ProbeScreenJog(halcomp, builder, useropts),
         ProbeScreenZero(halcomp, builder, useropts),
         ProbeScreenRotation(halcomp, builder, useropts),
+        ProbeScreenToolMeasurement(halcomp, builder, useropts),
+        ProbeScreenWorkpieceMeasurement(halcomp, builder, useropts),
+        ProbeScreenLengthMeasurement(halcomp, builder, useropts),
     ]
