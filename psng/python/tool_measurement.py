@@ -16,10 +16,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; If not, see <http://www.gnu.org/licenses/>.
 
-import gtk
+import sys
+import os
 import hal
 import hal_glib
-import pango
 
 from .base import ProbeScreenBase
 
@@ -127,9 +127,8 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         self.on_common_spbtn_key_press_event("setterheight", gtkspinbutton, data)
 
     def on_spbtn_setter_height_value_changed(self, gtkspinbutton, data=None):
-        gtkspinbutton.modify_font(pango.FontDescription("normal "))
-        self.halcomp["setterheight"] = gtkspinbutton.get_value()
-        self.prefs.putpref("setterheight", gtkspinbutton.get_value(), float)
+        self.on_common_spbtn_value_changed("setterheight", gtkspinbutton, data)
+
         c = "TS Height = " + "%.4f" % gtkspinbutton.get_value()
         i = self.buffer.get_end_iter()
         if i.get_line() > 1000:
@@ -143,22 +142,10 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         self.on_common_spbtn_key_press_event("blockheight", gtkspinbutton, data)
 
     def on_spbtn_block_height_value_changed(self, gtkspinbutton, data=None):
-        gtkspinbutton.modify_font(pango.FontDescription("normal "))
-        blockheight = gtkspinbutton.get_value()
-        if blockheight != False:
-            self.halcomp["blockheight"] = blockheight
-            self.halcomp["setterheight"] = self.spbtn_setter_height.get_value()
-        else:
-            self.prefs.putpref("blockheight", 0.0, float)
-            print(_("Conversion error in btn_block_height"))
-            self._add_alarm_entry(_("Offset conversion error because off wrong entry"))
-            self.warning_dialog(
-                self,
-                _("Conversion error in btn_block_height!"),
-                _("Please enter only numerical values\nValues have not been applied"),
-            )
+        self.on_common_spbtn_value_changed("blockheight", gtkspinbutton, data)
+
         # set koordinate system to new origin
-        self.gcode("G10 L2 P0 Z%s" % blockheight)
+        self.gcode("G10 L2 P0 Z%s" % gtkspinbutton.get_value())
         self.vcp_reload()
         c = "Workpiece Height = " + "%.4f" % gtkspinbutton.get_value()
         i = self.buffer.get_end_iter()

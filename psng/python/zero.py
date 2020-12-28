@@ -16,9 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; If not, see <http://www.gnu.org/licenses/>.
 
-import gtk  # base for pygtk widgets and constants
-import hal  # base hal class to react to hal signals
-import pango
+import hal
 
 from .base import ProbeScreenBase
 
@@ -67,9 +65,7 @@ class ProbeScreenZero(ProbeScreenBase):
         self.on_common_spbtn_key_press_event("ps_offs_x", gtkspinbutton, data)
 
     def on_spbtn_offs_x_value_changed(self, gtkspinbutton, data=None):
-        gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        self.halcomp["ps_offs_x"] = gtkspinbutton.get_value()
-        self.prefs.putpref("ps_offs_x", gtkspinbutton.get_value(), float)
+        self.on_common_spbtn_key_press_event("ps_offs_x", gtkspinbutton, data)
 
     def on_btn_set_x_released(self, gtkbutton, data=None):
         self.prefs.putpref("ps_offs_x", self.spbtn_offs_x.get_value(), float)
@@ -80,9 +76,7 @@ class ProbeScreenZero(ProbeScreenBase):
         self.on_common_spbtn_key_press_event("ps_offs_y", gtkspinbutton, data)
 
     def on_spbtn_offs_y_value_changed(self, gtkspinbutton, data=None):
-        gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        self.halcomp["ps_offs_y"] = gtkspinbutton.get_value()
-        self.prefs.putpref("ps_offs_y", gtkspinbutton.get_value(), float)
+        self.on_common_spbtn_key_press_event("ps_offs_y", gtkspinbutton, data)
 
     def on_btn_set_y_released(self, gtkbutton, data=None):
         self.prefs.putpref("ps_offs_y", self.spbtn_offs_y.get_value(), float)
@@ -93,9 +87,7 @@ class ProbeScreenZero(ProbeScreenBase):
         self.on_common_spbtn_key_press_event("ps_offs_z", gtkspinbutton, data)
 
     def on_spbtn_offs_z_value_changed(self, gtkspinbutton, data=None):
-        gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        self.halcomp["ps_offs_z"] = gtkspinbutton.get_value()
-        self.prefs.putpref("ps_offs_z", gtkspinbutton.get_value(), float)
+        self.on_common_spbtn_key_press_event("ps_offs_z", gtkspinbutton, data)
 
     def on_btn_set_z_released(self, gtkbutton, data=None):
         self.prefs.putpref("ps_offs_z", self.spbtn_offs_z.get_value(), float)
