@@ -1488,8 +1488,10 @@ class ProbeScreenClass(ProbeScreenBase):
                     self.halcomp["toolchange-prep-number"],
                 )
                 self.command.abort()
-                self.halcomp["toolchange-prep-number"] = toolnumber                          
-                self.halcomp["toolchange-change"] = False                                     # Is there any reason to do this to input pin ?
+                self.halcomp["toolchange-prep-number"] = toolnumber
+                self.halcomp[
+                    "toolchange-change"
+                ] = False  # Is there any reason to do this to input pin ?
                 self.halcomp["toolchange-changed"] = True
                 self.messg = _("Tool Change has been aborted!\n")
                 self.messg += _("The old tool will remain set!")
@@ -1652,7 +1654,7 @@ class ProbeScreenClass(ProbeScreenBase):
         self.messg = " "
 
         self.change_text = builder.get_object("change-text")
-        self.halcomp.newpin("number", hal.HAL_FLOAT, hal.HAL_IN)                                      # Seem to be unused
+        self.halcomp.newpin("number", hal.HAL_FLOAT, hal.HAL_IN)  # Seem to be unused
         # make the pins for tool measurement
         self.halcomp.newpin("setterheight", hal.HAL_FLOAT, hal.HAL_OUT)
         self.halcomp.newpin("blockheight", hal.HAL_FLOAT, hal.HAL_OUT)
@@ -1662,7 +1664,7 @@ class ProbeScreenClass(ProbeScreenBase):
         self.halcomp.newpin("toolchange-changed", hal.HAL_BIT, hal.HAL_OUT)
         pin = self.halcomp.newpin("toolchange-change", hal.HAL_BIT, hal.HAL_IN)
         hal_glib.GPin(pin).connect("value_changed", self.on_tool_change)
-        #self.halcomp["toolchange-prep-number"] = self.stat.tool_in_spindle                            # self.stat.tool_in_spindle no more used
+        # self.halcomp["toolchange-prep-number"] = self.stat.tool_in_spindle                            # self.stat.tool_in_spindle no more used
         # tool measurement probe settings
         (
             self.xpos,
