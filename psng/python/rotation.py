@@ -19,9 +19,7 @@
 import math
 import time
 
-import gtk  # base for pygtk widgets and constants
-import hal  # base hal class to react to hal signals
-import pango
+import hal
 
 from .base import ProbeScreenBase
 
@@ -79,16 +77,10 @@ class ProbeScreenRotation(ProbeScreenBase):
         time.sleep(1)
 
     def on_spbtn_offs_angle_key_press_event(self, gtkspinbutton, data=None):
-        keyname = gtk.gdk.keyval_name(data.keyval)
-        if keyname == "Return":
-            gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        else:
-            gtkspinbutton.modify_font(pango.FontDescription("italic"))
+        self.on_common_spbtn_key_press_event("ps_offs_angle", gtkspinbutton, data)
 
     def on_spbtn_offs_angle_value_changed(self, gtkspinbutton, data=None):
-        gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        self.halcomp["ps_offs_angle"] = gtkspinbutton.get_value()
-        self.prefs.putpref("ps_offs_angle", gtkspinbutton.get_value(), float)
+        self.on_common_spbtn_value_changed("ps_offs_angle", gtkspinbutton, data)
 
     # Y+Y+
     def on_angle_yp_released(self, gtkbutton, data=None):

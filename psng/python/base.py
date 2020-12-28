@@ -25,6 +25,7 @@ from subprocess import PIPE, Popen
 
 import gtk
 import linuxcnc
+import pango
 
 from .configparser import ProbeScreenConfigParser
 from .util import restore_task_mode
@@ -395,3 +396,33 @@ class ProbeScreenBase(object):
             res = ym - yp
         self.display_result_ly(res)
         return res
+
+    # --------------------------
+    #
+    #  Generic UI Methods
+    #
+    # --------------------------
+    def on_common_spbtn_key_press_event(self, pin_name, gtkspinbutton, data=None):
+        keyname = gtk.gdk.keyval_name(data.keyval)
+        if keyname == "Return":
+            # Drop the Italics
+            gtkspinbutton.modify_font(pango.FontDescription("normal"))
+        elif keyname == "Escape":
+            # Restore the original value
+            gtkspinbutton.set_value(self.halcomp[pin_name])
+
+            # Drop the Italics
+            gtkspinbutton.modify_font(pango.FontDescription("normal"))
+        else:
+            # Set to Italics
+            gtkspinbutton.modify_font(pango.FontDescription("italic"))
+
+    def on_common_spbtn_value_changed(self, pin_name, gtkspinbutton, data=None, _type=float):
+        # Drop the Italics
+        gtkspinbutton.modify_font(pango.FontDescription("normal"))
+
+        # Update the pin
+        self.halcomp[pin_name] = gtkspinbutton.get_value()
+
+        # Update the preferences
+        self.prefs.putpref(pin_name, gtkspinbutton.get_value(), _type)
