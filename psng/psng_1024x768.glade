@@ -2454,7 +2454,7 @@
                                         <property name="tooltip_text" translatable="yes">Workpiece Heidht</property>
                                         <property name="related_action">vcp_action_reload</property>
                                         <property name="use_action_appearance">False</property>
-                                        <signal name="clicked" handler="on_btn_probe_workpiece_releseade" swapped="no"/>
+                                        <signal name="clicked" handler="on_btn_probe_workpiece_released" swapped="no"/>
                                         <child>
                                           <object class="GtkImage" id="image46">
                                             <property name="visible">True</property>

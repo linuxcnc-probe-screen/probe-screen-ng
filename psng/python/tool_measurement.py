@@ -168,7 +168,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         )
 
     # Down probe to workpiece for measuring it vs Know tool setter height
-    def on_btn_probe_workpiece_relesead(self, gtkbutton, data=None):
+    def on_btn_probe_workpiece_released(self, gtkbutton, data=None):
         # Start psng_probe_workpiece.ngc
         if self.ocode("o<psng_probe_workpiece> call") == -1:
             return
