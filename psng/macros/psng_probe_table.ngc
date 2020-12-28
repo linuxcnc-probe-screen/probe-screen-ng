@@ -1,5 +1,10 @@
 o<psng_probe_table> sub
+
+; Call the PSNG Hook and check return value
 o<psng_hook> call [3]
+o10 if [#<_value> LT 0]
+(ABORT, PSNG hook indicated a failure: #<_value>)
+o10 endif
 
 #<z>=#<_z> (save current Z position)
 G91
