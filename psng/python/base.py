@@ -417,7 +417,9 @@ class ProbeScreenBase(object):
             # Set to Italics
             gtkspinbutton.modify_font(pango.FontDescription("italic"))
 
-    def on_common_spbtn_value_changed(self, pin_name, gtkspinbutton, data=None, _type=float):
+    def on_common_spbtn_value_changed(
+        self, pin_name, gtkspinbutton, data=None, _type=float
+    ):
         # Drop the Italics
         gtkspinbutton.modify_font(pango.FontDescription("normal"))
 
