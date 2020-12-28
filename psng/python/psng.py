@@ -1453,11 +1453,13 @@ class ProbeScreenClass(ProbeScreenBase):
     def on_tool_change(self, gtkbutton, data=None):
         change = self.halcomp["toolchange-change"]
         toolnumber = self.halcomp["toolchange-number"]
-        print("toolnumber =", toolnumber, change)
+        toolprepnumber = self.halcomp["toolchange-prep-number"]
+        print("tool-number =", toolnumber)
+        print("tool_prep_number =", toolprepnumber, change)
         if change:
-            # if toolnumber = 0 we will get an error because we will not be able to get
+            # if toolprepnumber = 0 we will get an error because we will not be able to get
             # any tooldescription, so we avoid that case
-            if toolnumber == 0:
+            if toolprepnumber == 0:
                 message = _("Please remove the mounted tool and press OK when done")
             else:
                 tooltable = self.inifile.find("EMCIO", "TOOL_TABLE")
@@ -1472,22 +1474,22 @@ class ProbeScreenClass(ProbeScreenBase):
                 CONFIGPATH = os.environ["CONFIG_DIR"]
                 toolfile = os.path.join(CONFIGPATH, tooltable)
                 self.tooledit1.set_filename(toolfile)
-                tooldescr = self.tooledit1.get_toolinfo(toolnumber)[16]
+                tooldescr = self.tooledit1.get_toolinfo(toolprepnumber)[16]
                 message = _(
                     "Please change to tool\n\n# {0:d}     {1}\n\n then click OK."
-                ).format(toolnumber, tooldescr)
+                ).format(toolprepnumber, tooldescr)
             result = self.warning_dialog(message, title=_("Manual Toolchange"))
             if result:
                 self.halcomp["toolchange-changed"] = True
             else:
                 print(
                     "toolchange abort",
-                    self.stat.tool_in_spindle,
-                    self.halcomp["toolchange-number"],
+                    toolnumber,
+                    self.halcomp["toolchange-prep-number"],
                 )
                 self.command.abort()
-                self.halcomp["toolchange-number"] = self.stat.tool_in_spindle
-                self.halcomp["toolchange-change"] = False
+                self.halcomp["toolchange-prep-number"] = toolnumber                          
+                self.halcomp["toolchange-change"] = False                                     # Is there any reason to do this to input pin ?
                 self.halcomp["toolchange-changed"] = True
                 self.messg = _("Tool Change has been aborted!\n")
                 self.messg += _("The old tool will remain set!")
@@ -1506,10 +1508,10 @@ class ProbeScreenClass(ProbeScreenBase):
         return xpos, ypos, zpos, maxprobe, tsdiam, revrott
 
     # Spinbox for setter height with autosave value inside machine pref file
-    def on_spbtn_probe_height_value_changed(self, gtkspinbutton, data=None):
+    def on_spbtn_setter_height_value_changed(self, gtkspinbutton, data=None):
         gtkspinbutton.modify_font(pango.FontDescription("normal "))
-        self.halcomp["probeheight"] = gtkspinbutton.get_value()
-        self.prefs.putpref("probeheight", gtkspinbutton.get_value(), float)
+        self.halcomp["setterheight"] = gtkspinbutton.get_value()
+        self.prefs.putpref("setterheight", gtkspinbutton.get_value(), float)
         c = "TS Height = " + "%.4f" % gtkspinbutton.get_value()
         i = self.buffer.get_end_iter()
         if i.get_line() > 1000:
@@ -1524,7 +1526,7 @@ class ProbeScreenClass(ProbeScreenBase):
         blockheight = gtkspinbutton.get_value()
         if blockheight != False:
             self.halcomp["blockheight"] = blockheight
-            self.halcomp["probeheight"] = self.spbtn_probe_height.get_value()
+            self.halcomp["setterheight"] = self.spbtn_setter_height.get_value()
         else:
             self.prefs.putpref("blockheight", 0.0, float)
             print(_("Conversion error in btn_block_height"))
@@ -1563,7 +1565,7 @@ class ProbeScreenClass(ProbeScreenBase):
         if self.ocode("o<psng_probe_tool_setter> call") == -1:
             return
         a = self.stat.probed_position
-        self.spbtn_probe_height.set_value(float(a[2]))
+        self.spbtn_setter_height.set_value(float(a[2]))
         self.add_history(
             gtkbutton.get_tooltip_text(), "Z", 0, 0, 0, 0, 0, 0, 0, 0, a[2], 0, 0
         )
@@ -1584,12 +1586,12 @@ class ProbeScreenClass(ProbeScreenBase):
         if gtkcheckbutton.get_active():
             self.frm_probe_pos.set_sensitive(True)
             self.halcomp["use_toolmeasurement"] = True
-            self.halcomp["probeheight"] = self.spbtn_probe_height.get_value()
+            self.halcomp["setterheight"] = self.spbtn_setter_height.get_value()
             self.halcomp["blockheight"] = self.spbtn_block_height.get_value()
         else:
             self.frm_probe_pos.set_sensitive(False)
             self.halcomp["use_toolmeasurement"] = False
-            self.halcomp["probeheight"] = 0.0
+            self.halcomp["setterheight"] = 0.0
             self.halcomp["blockheight"] = 0.0
         self.prefs.putpref("use_toolmeasurement", gtkcheckbutton.get_active(), bool)
         self.hal_led_set_m6.hal_pin.set(gtkcheckbutton.get_active())
@@ -1642,7 +1644,7 @@ class ProbeScreenClass(ProbeScreenBase):
         # For Auto Tool Measurement
         # set the title of the window
         self.frm_probe_pos = self.builder.get_object("frm_probe_pos")
-        self.spbtn_probe_height = self.builder.get_object("spbtn_probe_height")
+        self.spbtn_setter_height = self.builder.get_object("spbtn_setter_height")
         self.spbtn_block_height = self.builder.get_object("spbtn_block_height")
         self.btn_probe_tool_setter = self.builder.get_object("btn_probe_tool_setter")
         self.btn_probe_workpiece = self.builder.get_object("btn_probe_workpiece")
@@ -1650,16 +1652,17 @@ class ProbeScreenClass(ProbeScreenBase):
         self.messg = " "
 
         self.change_text = builder.get_object("change-text")
-        self.halcomp.newpin("number", hal.HAL_FLOAT, hal.HAL_IN)  # Seem to be unused
+        self.halcomp.newpin("number", hal.HAL_FLOAT, hal.HAL_IN)                                      # Seem to be unused
         # make the pins for tool measurement
-        self.halcomp.newpin("probeheight", hal.HAL_FLOAT, hal.HAL_OUT)
+        self.halcomp.newpin("setterheight", hal.HAL_FLOAT, hal.HAL_OUT)
         self.halcomp.newpin("blockheight", hal.HAL_FLOAT, hal.HAL_OUT)
         # for manual tool change dialog
         self.halcomp.newpin("toolchange-number", hal.HAL_S32, hal.HAL_IN)
+        self.halcomp.newpin("toolchange-prep-number", hal.HAL_S32, hal.HAL_IN)
         self.halcomp.newpin("toolchange-changed", hal.HAL_BIT, hal.HAL_OUT)
         pin = self.halcomp.newpin("toolchange-change", hal.HAL_BIT, hal.HAL_IN)
         hal_glib.GPin(pin).connect("value_changed", self.on_tool_change)
-        self.halcomp["toolchange-number"] = self.stat.tool_in_spindle
+        #self.halcomp["toolchange-prep-number"] = self.stat.tool_in_spindle                            # self.stat.tool_in_spindle no more used
         # tool measurement probe settings
         (
             self.xpos,
@@ -1683,8 +1686,8 @@ class ProbeScreenClass(ProbeScreenBase):
             print(_("**** no valid probe config in INI File ****"))
             print(_("**** disabled auto tool measurement ****"))
         else:
-            self.spbtn_probe_height.set_value(
-                self.prefs.getpref("probeheight", 0.0, float)
+            self.spbtn_setter_height.set_value(
+                self.prefs.getpref("setterheight", 0.0, float)
             )
             self.spbtn_block_height.set_value(
                 self.prefs.getpref("blockheight", 0.0, float)
@@ -1693,7 +1696,7 @@ class ProbeScreenClass(ProbeScreenBase):
             if self.chk_use_tool_measurement.get_active():
                 self.frm_probe_pos.set_sensitive(True)
                 self.halcomp["use_toolmeasurement"] = True
-                self.halcomp["probeheight"] = self.spbtn_probe_height.get_value()
+                self.halcomp["setterheight"] = self.spbtn_setter_height.get_value()
                 self.halcomp["blockheight"] = self.spbtn_block_height.get_value()
             else:
                 self.frm_probe_pos.set_sensitive(False)

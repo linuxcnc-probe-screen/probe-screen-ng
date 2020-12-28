@@ -48,7 +48,7 @@
     <property name="step_increment">0.10000000000000001</property>
     <property name="page_increment">1</property>
   </object>
-  <object class="GtkAdjustment" id="adj_probe_height">
+  <object class="GtkAdjustment" id="adj_setter_height">
     <property name="lower">-2000</property>
     <property name="upper">2000</property>
     <property name="step_increment">1</property>
@@ -2469,7 +2469,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkSpinButton" id="spbtn_probe_height">
+                                      <object class="GtkSpinButton" id="spbtn_setter_height">
                                         <property name="width_request">90</property>
                                         <property name="height_request">26</property>
                                         <property name="visible">True</property>
@@ -2481,11 +2481,11 @@
                                         <property name="secondary_icon_activatable">False</property>
                                         <property name="primary_icon_sensitive">True</property>
                                         <property name="secondary_icon_sensitive">True</property>
-                                        <property name="adjustment">adj_probe_height</property>
+                                        <property name="adjustment">adj_setter_height</property>
                                         <property name="digits">3</property>
                                         <property name="numeric">True</property>
-                                        <signal name="key-press-event" handler="on_spbtn_probe_height_key_press_event" swapped="no"/>
-                                        <signal name="value-changed" handler="on_spbtn_probe_height_value_changed" swapped="no"/>
+                                        <signal name="key-press-event" handler="on_spbtn_setter_height_key_press_event" swapped="no"/>
+                                        <signal name="value-changed" handler="on_spbtn_setter_height_value_changed" swapped="no"/>
                                       </object>
                                       <packing>
                                         <property name="x">63</property>

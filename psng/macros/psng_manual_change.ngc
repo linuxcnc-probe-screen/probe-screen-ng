@@ -65,16 +65,16 @@ G90
 G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
 
 #<touch_result> = #5063
-#<probeheight> = #<_hal[probe.probeheight]>
+#<setterheight> = #<_hal[probe.setterheight]>
 #<blockheight> = #<_hal[probe.blockheight]>
 
-;(DEBUG, #<touch_result>  #<probeheight>  #<blockheight>)
+;(DEBUG, #<touch_result>  #<setterheight>  #<blockheight>)
 
-G10 L1 P#<tool> Z[#<touch_result> - #<_hal[probe.probeheight]> + #<_hal[probe.blockheight]>]
+G10 L1 P#<tool> Z[#<touch_result> - #<_hal[probe.setterheight]> + #<_hal[probe.blockheight]>]
 G43
 
 ;G10 L1 P#<tool> Z#<touch_result>
-;G10 L2 P0 Z[#<workpieceheight> + #<probeheight> + #<touch_result>]
+;G10 L2 P0 Z[#<workpieceheight> + #<setterheight> + #<touch_result>]
 
 ; signal success be returning a value > 0:
 o<psng_manual_change> endsub [1]
