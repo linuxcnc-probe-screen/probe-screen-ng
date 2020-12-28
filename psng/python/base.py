@@ -120,6 +120,14 @@ class ProbeScreenBase(object):
         return 0
 
     def error_poll(self):
+        
+        abort_halui = Popen(
+            "halcmd getp halui.abort ", shell=True, stdout=PIPE
+        ).stdout.read()
+        stop_halui = Popen(
+            "halcmd getp halui.program.stop ", shell=True, stdout=PIPE
+        ).stdout.read()
+        
         if "axis" in self.display:
             # AXIS polls for errors every 0.2 seconds, so we wait slightly longer to make sure it's happened.
             time.sleep(0.25)
@@ -139,6 +147,14 @@ class ProbeScreenBase(object):
 
         else:
             print("Unable to poll %s GUI for errors" % self.display)
+            return -1
+
+        if "TRUE" in abort_halui or "TRUE" in stop_halui:
+            text = "Program stopped by user"
+            self.add_history("Error: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            print("Error", text)
+            self.command.mode(linuxcnc.MODE_MANUAL)
+            self.command.wait_complete()
             return -1
 
         if "TRUE" in error_pin:
