@@ -9,7 +9,7 @@
 ; Hooked Macro ID -> Name Table
 ;
 ; 1 = psng_manual_change
-; 2 = psng_gotots
+; 2 = psng_tool_diameter
 ; 3 = psng_down
 ; 4 = psng_probe_tool_setter
 ; 5 = psng_probe_workpiece
