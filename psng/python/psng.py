@@ -1510,6 +1510,14 @@ class ProbeScreenClass(ProbeScreenBase):
         return xpos, ypos, zpos, maxprobe, tsdiam, revrott
 
     # Spinbox for setter height with autosave value inside machine pref file
+    def on_spbtn_setter_height_key_press_event(self, gtkspinbutton, data=None):
+        keyname = gtk.gdk.keyval_name(data.keyval)
+        #        print "Key %s (%d) was pressed" % (keyname, data.keyval)
+        if keyname == "Return":
+            gtkspinbutton.modify_font(pango.FontDescription("normal"))
+        else:
+            gtkspinbutton.modify_font(pango.FontDescription("italic"))
+
     def on_spbtn_setter_height_value_changed(self, gtkspinbutton, data=None):
         gtkspinbutton.modify_font(pango.FontDescription("normal "))
         self.halcomp["setterheight"] = gtkspinbutton.get_value()
@@ -1523,6 +1531,14 @@ class ProbeScreenClass(ProbeScreenBase):
         self.buffer.insert(i, "%s \n" % c)
 
     # Spinbox for block height with autosave value inside machine pref file
+    def on_spbtn_block_height_key_press_event(self, gtkspinbutton, data=None):
+        keyname = gtk.gdk.keyval_name(data.keyval)
+        #        print "Key %s (%d) was pressed" % (keyname, data.keyval)
+        if keyname == "Return":
+            gtkspinbutton.modify_font(pango.FontDescription("normal"))
+        else:
+            gtkspinbutton.modify_font(pango.FontDescription("italic"))
+
     def on_spbtn_block_height_value_changed(self, gtkspinbutton, data=None):
         gtkspinbutton.modify_font(pango.FontDescription("normal "))
         blockheight = gtkspinbutton.get_value()
