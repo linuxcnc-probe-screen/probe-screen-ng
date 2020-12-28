@@ -19,7 +19,6 @@ import linuxcnc  # to get our own error system
 
 from .jog import ProbeScreenJog
 from .length_measurement import ProbeScreenLengthMeasurement
-from .psng import ProbeScreenClass
 from .rotation import ProbeScreenRotation
 from .settings import ProbeScreenSettings
 from .tool_measurement import ProbeScreenToolMeasurement
@@ -29,7 +28,6 @@ from .zero import ProbeScreenZero
 
 def get_handlers(halcomp, builder, useropts):
     return [
-        ProbeScreenClass(halcomp, builder, useropts),
         ProbeScreenSettings(halcomp, builder, useropts),
         ProbeScreenJog(halcomp, builder, useropts),
         ProbeScreenZero(halcomp, builder, useropts),
