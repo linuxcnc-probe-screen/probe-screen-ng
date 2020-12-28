@@ -79,11 +79,7 @@ class ProbeScreenRotation(ProbeScreenBase):
         time.sleep(1)
 
     def on_spbtn_offs_angle_key_press_event(self, gtkspinbutton, data=None):
-        keyname = gtk.gdk.keyval_name(data.keyval)
-        if keyname == "Return":
-            gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        else:
-            gtkspinbutton.modify_font(pango.FontDescription("italic"))
+        self.on_common_spbtn_key_press_event("ps_offs_angle", gtkspinbutton, data)
 
     def on_spbtn_offs_angle_value_changed(self, gtkspinbutton, data=None):
         gtkspinbutton.modify_font(pango.FontDescription("normal"))

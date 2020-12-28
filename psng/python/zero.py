@@ -64,11 +64,7 @@ class ProbeScreenZero(ProbeScreenBase):
         self.prefs.putpref("chk_set_zero", gtkcheckbutton.get_active(), bool)
 
     def on_spbtn_offs_x_key_press_event(self, gtkspinbutton, data=None):
-        keyname = gtk.gdk.keyval_name(data.keyval)
-        if keyname == "Return":
-            gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        else:
-            gtkspinbutton.modify_font(pango.FontDescription("italic"))
+        self.on_common_spbtn_key_press_event("ps_offs_x", gtkspinbutton, data)
 
     def on_spbtn_offs_x_value_changed(self, gtkspinbutton, data=None):
         gtkspinbutton.modify_font(pango.FontDescription("normal"))
@@ -81,11 +77,7 @@ class ProbeScreenZero(ProbeScreenBase):
         self.vcp_reload()
 
     def on_spbtn_offs_y_key_press_event(self, gtkspinbutton, data=None):
-        keyname = gtk.gdk.keyval_name(data.keyval)
-        if keyname == "Return":
-            gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        else:
-            gtkspinbutton.modify_font(pango.FontDescription("italic"))
+        self.on_common_spbtn_key_press_event("ps_offs_y", gtkspinbutton, data)
 
     def on_spbtn_offs_y_value_changed(self, gtkspinbutton, data=None):
         gtkspinbutton.modify_font(pango.FontDescription("normal"))
@@ -98,11 +90,7 @@ class ProbeScreenZero(ProbeScreenBase):
         self.vcp_reload()
 
     def on_spbtn_offs_z_key_press_event(self, gtkspinbutton, data=None):
-        keyname = gtk.gdk.keyval_name(data.keyval)
-        if keyname == "Return":
-            gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        else:
-            gtkspinbutton.modify_font(pango.FontDescription("italic"))
+        self.on_common_spbtn_key_press_event("ps_offs_z", gtkspinbutton, data)
 
     def on_spbtn_offs_z_value_changed(self, gtkspinbutton, data=None):
         gtkspinbutton.modify_font(pango.FontDescription("normal"))
