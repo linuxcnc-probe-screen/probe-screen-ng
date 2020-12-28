@@ -93,22 +93,6 @@ class ProbeScreenSettings(ProbeScreenBase):
     # ----------------
     # Settings Buttons
     # ----------------
-    def on_spbtn_block_height_key_press_event(self, gtkspinbutton, data=None):
-        keyname = gtk.gdk.keyval_name(data.keyval)
-        #        print "Key %s (%d) was pressed" % (keyname, data.keyval)
-        if keyname == "Return":
-            gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        else:
-            gtkspinbutton.modify_font(pango.FontDescription("italic"))
-
-    def on_spbtn_setter_height_key_press_event(self, gtkspinbutton, data=None):
-        keyname = gtk.gdk.keyval_name(data.keyval)
-        #        print "Key %s (%d) was pressed" % (keyname, data.keyval)
-        if keyname == "Return":
-            gtkspinbutton.modify_font(pango.FontDescription("normal"))
-        else:
-            gtkspinbutton.modify_font(pango.FontDescription("italic"))
-
     def on_spbtn1_search_vel_key_press_event(self, gtkspinbutton, data=None):
         keyname = gtk.gdk.keyval_name(data.keyval)
         #        print "Key %s (%d) was pressed" % (keyname, data.keyval)
