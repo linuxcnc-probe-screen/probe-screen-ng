@@ -1,4 +1,4 @@
-o<psng_gotots> sub
+o<psng_tool_diameter> subhttps://github.com/alkabal/probe-screen-ng/blob/patch-1/psng/macros/psng_gotots.ngc
 o<psng_hook> call [2]
 
 ; first go up then move to tool sensor position
@@ -16,6 +16,6 @@ G4 P0.5
 G38.2 Z[-#<_hal[probe.ps_probe_latch]>*2]
 G1 Z4 F#<_ini[TOOLSENSOR]RAPID_SPEED>
 G90
-o<psng_gotots> endsub
+o<psng_tool_diameter> endsub
 M2
 
