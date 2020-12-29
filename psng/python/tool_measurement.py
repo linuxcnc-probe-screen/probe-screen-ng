@@ -193,8 +193,8 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
     # Probe tool Diameter
     def on_tool_dia_released(self, gtkbutton, data=None):
         # move XY to Tool Setter point
-        # Start gotots.ngc
-        if self.ocode("o<psng_gotots> call") == -1:
+        # Start psng_tool_diameter.ngc
+        if self.ocode("o<psng_tool_diameter> call") == -1:
             return
         # move X - edge_lenght- xy_clearance
         s = """G91

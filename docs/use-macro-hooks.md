@@ -14,12 +14,12 @@ at the start of each PSNG macro call. For example:
 o<psng_hook> sub
 #<hooked_macro> = #1
 
-O100 if [#<hooked_macro> EQ psng_manual_change]
+O100 if [#<hooked_macro> EQ 1]
 ; Do something specific to o<psng_manual_change> here
 O100 return
 
-O100 elseif  if [#<hooked_macro> EQ psng_gotots]
-; Do something specific to o<psng_gotots> here
+O100 elseif  if [#<hooked_macro> EQ 2]
+; Do something specific to o<psng_tool_diameter> here
 O100 return
 O100 endif
 
