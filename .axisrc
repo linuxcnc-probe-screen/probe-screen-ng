@@ -42,17 +42,35 @@ def my_remove(self, widgets):
     if _remaining_error_count(self.widgets) == 0:
         probe_user_comp["error"] = False
 
+root_window.tk.call('.toolbar.program_stop','configure','-command','my_task_stop')
+
+def my_task_stop(*event):
+    #print 'hijacked stop command'
+    probe_user_comp["abort"] = True
+    #self.original_task_stop(*event)                      # bug : self not defined
+    if s.task_mode == linuxcnc.MODE_AUTO and vars.running_line.get() != 0:
+        o.set_highlight_line(vars.running_line.get())
+    c.abort()
+    c.wait_complete()  
+    time.sleep(0.5)
+    probe_user_comp["abort"] = False
 
 # Rename the original add/remove method so we can retain the ability to call them
 Notification.original_add = Notification.add
 Notification.original_remove = Notification.remove
+#TclCommands.original_task_stop = TclCommands.task_stop    # bug : self not defined
 
 # Replace the add/remove methods with a wrapped version that manages an error pin
 Notification.add = my_add
 Notification.remove = my_remove
+TclCommands.task_stop = my_task_stop
+commands = TclCommands(root_window)
+
 
 if hal_present == 1:
     # Add an probe.user.error pin
-    probe_user_comp = hal.component("probe.user")
+    probe_user_comp = hal.component("axisui.user")
     probe_user_comp.newpin("error", hal.HAL_BIT, hal.HAL_OUT)
+    probe_user_comp.newpin("abort", hal.HAL_BIT, hal.HAL_OUT)
     probe_user_comp.ready()
+    
