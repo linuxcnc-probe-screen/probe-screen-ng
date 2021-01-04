@@ -369,6 +369,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
                     "toolchange-change"
                 ] = False  # Is there any reason to do this to input pin ?
                 self.halcomp["toolchange-changed"] = True
+                message = _("**** TOOLCHANGE ABORTED ****")
                 self.warning_dialog(message)
         else:
             self.halcomp["toolchange-changed"] = False
