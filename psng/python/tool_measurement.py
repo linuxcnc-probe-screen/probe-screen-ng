@@ -180,7 +180,6 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         if self.ocode("o<psng_probe_table> call") == -1:
             return
         a = self.probed_position_with_offsets()
-        self.display_result_z(float(a[2]))
         self.add_history(gtkbutton.get_tooltip_text(), "Z", z=a[2])
         self.set_zerro("Z", 0, 0, a[2])
 
@@ -230,12 +229,10 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
 
         if self.ocode("o<psng_xminus> call") == -1:
             return
-        # show X result
+        # Calculate X result
         a = self.probed_position_with_offsets()
         xmres = float(a[0]) - 0.5 * self.halcomp["ps_probe_diam"]
-        self.length_x()
         xcres = 0.5 * (xpres + xmres)
-        self.display_result_xc(xcres)
         # move Z to start point up
         if self.z_clearance_up() == -1:
             return
@@ -259,7 +256,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         # Start yplus.ngc
         if self.ocode("o<psng_yplus> call") == -1:
             return
-        # show Y result
+        # Calculate Y result
         a = self.probed_position_with_offsets()
         ypres = float(a[1]) + 0.5 * self.halcomp["ps_probe_diam"]
         # move Z to start point up
@@ -284,16 +281,14 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         # Start xminus.ngc
         if self.ocode("o<psng_yminus> call") == -1:
             return
-        # show Y result
+        # Calculate Y result
         a = self.probed_position_with_offsets()
         ymres = float(a[1]) - 0.5 * self.halcomp["ps_probe_diam"]
-        self.length_y()
+
         # find, show and move to finded  point
         ycres = 0.5 * (ypres + ymres)
-        self.display_result_yc(ycres)
         diam = self.halcomp["ps_probe_diam"] + (ymres - ypres - self.tsdiam)
 
-        self.display_result_d(diam)
         # move Z to start point up
         if self.z_clearance_up() == -1:
             return

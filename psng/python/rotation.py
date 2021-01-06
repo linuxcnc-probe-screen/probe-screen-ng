@@ -104,10 +104,10 @@ class ProbeScreenRotation(ProbeScreenBase):
         # Start psng_yplus.ngc
         if self.ocode("o<psng_yplus> call") == -1:
             return
-        # show Y result
+        # Calculate Y result
         a = self.probed_position_with_offsets()
         ycres = float(a[1]) + 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_yc(ycres)
+
         # move Z to start point
         if self.z_clearance_up() == -1:
             return
@@ -124,11 +124,11 @@ class ProbeScreenRotation(ProbeScreenBase):
         # Start psng_yplus.ngc
         if self.ocode("o<psng_yplus> call") == -1:
             return
-        # show Y result
+        # Calculate Y result
         a = self.probed_position_with_offsets()
         ypres = float(a[1]) + 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_yp(ypres)
         alfa = math.degrees(math.atan2(ypres - ycres, self.halcomp["ps_edge_length"]))
+
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "YcYpA",
@@ -168,10 +168,9 @@ class ProbeScreenRotation(ProbeScreenBase):
         # Start psng_yminus.ngc
         if self.ocode("o<psng_yminus> call") == -1:
             return
-        # show Y result
+        # Calculate Y result
         a = self.probed_position_with_offsets()
         ycres = float(a[1]) - 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_yc(ycres)
 
         # move Z to start point
         if self.z_clearance_up() == -1:
@@ -189,11 +188,11 @@ class ProbeScreenRotation(ProbeScreenBase):
         # Start psng_yminus.ngc
         if self.ocode("o<psng_yminus> call") == -1:
             return
-        # show Y result
+        # Calculate Y result
         a = self.probed_position_with_offsets()
         ymres = float(a[1]) - 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_ym(ymres)
         alfa = math.degrees(math.atan2(ycres - ymres, self.halcomp["ps_edge_length"]))
+
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "YmYcA",
@@ -232,10 +231,10 @@ class ProbeScreenRotation(ProbeScreenBase):
         # Start psng_xplus.ngc
         if self.ocode("o<psng_xplus> call") == -1:
             return
-        # show X result
+        # Calculate X result
         a = self.probed_position_with_offsets()
         xcres = float(a[0]) + 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_xc(xcres)
+
         # move Z to start point
         if self.z_clearance_up() == -1:
             return
@@ -252,11 +251,11 @@ class ProbeScreenRotation(ProbeScreenBase):
         # Start psng_xplus.ngc
         if self.ocode("o<psng_xplus> call") == -1:
             return
-        # show X result
+        # Calculate X result
         a = self.probed_position_with_offsets()
         xpres = float(a[0]) + 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_xp(xpres)
         alfa = math.degrees(math.atan2(xcres - xpres, self.halcomp["ps_edge_length"]))
+
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XcXpA",
@@ -295,10 +294,10 @@ class ProbeScreenRotation(ProbeScreenBase):
         # Start psng_xminus.ngc
         if self.ocode("o<psng_xminus> call") == -1:
             return
-        # show X result
+        # Calculate X result
         a = self.probed_position_with_offsets()
         xcres = float(a[0]) - 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_xc(xcres)
+
         # move Z to start point
         if self.z_clearance_up() == -1:
             return
@@ -318,8 +317,8 @@ class ProbeScreenRotation(ProbeScreenBase):
         # show X result
         a = self.probed_position_with_offsets()
         xmres = float(a[0]) - 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_xm(xmres)
         alfa = math.degrees(math.atan2(xcres - xmres, self.halcomp["ps_edge_length"]))
+
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmXcA",
