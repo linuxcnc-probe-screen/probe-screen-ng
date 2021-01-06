@@ -1,5 +1,10 @@
 o<psng_probe_table> sub
+
+; BEGIN PSNG PREAMBLE
+M73 ; Save and autorestore model states. This will be used only in case of error, otherwise we will invalidate it.
+o<psng_modal_save> call
 o<psng_hook> call [3]
+; END PSNG PREAMBLE
 
 #<z>=#<_z> (save current Z position)
 G91
@@ -12,6 +17,11 @@ G38.2 Z[-#<_hal[probe.ps_probe_latch]>*2]
 G90
 (back to start point)
 G1 Z#<z> F#<_ini[TOOLSENSOR]RAPID_SPEED>
-	
+
+; BEGIN PSNG POSTAMBLE
+M71 ; Invalidate Modal Autorestore
+o<psng_modal_restore> call
+; END PSNG POSTAMBLE
+
 o<psng_probe_table> endsub
 M2

@@ -1,5 +1,10 @@
 o<psng_tool_diameter> sub
+
+; BEGIN PSNG PREAMBLE
+M73 ; Save and autorestore model states. This will be used only in case of error, otherwise we will invalidate it.
+o<psng_modal_save> call
 o<psng_hook> call [2]
+; END PSNG PREAMBLE
 
 ; first go up then move to tool sensor position
 G90
@@ -15,7 +20,11 @@ F #<_hal[probe.ps_probevel]>
 G4 P0.5
 G38.2 Z[-#<_hal[probe.ps_probe_latch]>*2]
 G1 Z4 F#<_ini[TOOLSENSOR]RAPID_SPEED>
-G90
+
+; BEGIN PSNG POSTAMBLE
+M71 ; Invalidate Modal Autorestore
+o<psng_modal_restore> call
+; END PSNG POSTAMBLE
+
 o<psng_tool_diameter> endsub
 M2
-

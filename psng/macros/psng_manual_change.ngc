@@ -1,7 +1,12 @@
 ; manual toolchange with automatic tool length probe
 
 o<psng_manual_change> sub
+
+; BEGIN PSNG PREAMBLE
+M73 ; Save and autorestore model states. This will be used only in case of error, otherwise we will invalidate it.
+o<psng_modal_save> call
 o<psng_hook> call [1]
+; END PSNG PREAMBLE
 
 ;(debug, in change tool_in_spindle=#<tool_in_spindle> current_pocket=#<current_pocket>)
 ;(debug, selected_tool=#<selected_tool> selected_pocket=#<selected_pocket>)
@@ -68,15 +73,14 @@ G53 G0 Z[#<_ini[CHANGE_POSITION]Z>]
 #<setterheight> = #<_hal[probe.setterheight]>
 #<blockheight> = #<_hal[probe.blockheight]>
 
-;(DEBUG, #<touch_result>  #<setterheight>  #<blockheight>)
-
 G10 L1 P#<tool> Z[#<touch_result> - #<_hal[probe.setterheight]> + #<_hal[probe.blockheight]>]
 G43
 
-;G10 L1 P#<tool> Z#<touch_result>
-;G10 L2 P0 Z[#<workpieceheight> + #<setterheight> + #<touch_result>]
+; BEGIN PSNG POSTAMBLE
+M71 ; Invalidate Modal Autorestore
+o<psng_modal_restore> call
+; END PSNG POSTAMBLE
 
-; signal success be returning a value > 0:
+; signal success by returning a value > 0:
 o<psng_manual_change> endsub [1]
 m2
-
