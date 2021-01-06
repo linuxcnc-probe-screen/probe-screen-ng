@@ -1,5 +1,5 @@
 ; Restores modal states from global named paramaters
-o<psng_modal_restore> sub
+o<_psng_modal_restore> sub
 
 ; Restore absolute / incremental
 o<restore_absolute> if [#<_psng_absolute>]
@@ -18,5 +18,5 @@ o<restore_metric> endif
 ; Restore feed - MUST be done after restoring metric/imperal
 F#<_psng_feed>
 
-o<psng_modal_restore> endsub
+o<_psng_modal_restore> endsub
 M2

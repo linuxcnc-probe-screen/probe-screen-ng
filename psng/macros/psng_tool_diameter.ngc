@@ -2,29 +2,35 @@ o<psng_tool_diameter> sub
 
 ; BEGIN PSNG PREAMBLE
 M73 ; Save and autorestore model states. This will be used only in case of error, otherwise we will invalidate it.
-o<psng_modal_save> call
-o<psng_hook> call [2]
+o<_psng_modal_save> call
+o<_psng_hook> call [2]
 ; END PSNG PREAMBLE
 
-; first go up then move to tool sensor position
+; Ensure we're in G90 / absolute mode
 G90
+
+; First go up & then move to tool sensor position
 G53 G0 Z[#<_ini[AXIS_Z]MAX_LIMIT>+#<_ini[PROBE_SCREEN]Z_SAFE_TRAVEL_OFFSET>]
 G53 G0 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
 G53 G0 Z[#<_ini[TOOLSENSOR]Z>]
 
-G91
-F #<_hal[probe.ps_searchvel]>
-G38.2 Z #<_ini[TOOLSENSOR]MAXPROBE>
-G1 Z[#<_hal[probe.ps_probe_latch]>] F#<_ini[TOOLSENSOR]RAPID_SPEED>
-F #<_hal[probe.ps_probevel]>
-G4 P0.5
-G38.2 Z[-#<_hal[probe.ps_probe_latch]>*2]
-G1 Z4 F#<_ini[TOOLSENSOR]RAPID_SPEED>
+; Probe Tool Sensor
+o<_psng_probe_z> call [#<_ini[TOOLSENSOR]MAXPROBE>] [1]
+O1 if [<_value> EQ -1]
+    M72 ; Restore modal state
+    (ABORT, Probe already tripped when starting G38.3 move)
+O1 elif [<_value> EQ -2]
+    M72 ; Restore modal state
+    (ABORT, Probe failed to make contact with Tool Sensor)
+O1 endif
+
+; Move off the Tool Sensor
+G53 G0 Z[#<_ini[TOOLSENSOR]Z>]
 
 ; BEGIN PSNG POSTAMBLE
 M71 ; Invalidate Modal Autorestore
 o<psng_modal_restore> call
 ; END PSNG POSTAMBLE
 
-o<psng_tool_diameter> endsub
+o<_psng_tool_diameter> endsub
 M2
