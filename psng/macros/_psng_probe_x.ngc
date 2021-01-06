@@ -3,58 +3,12 @@
 
 o<_psng_probe_x> sub
 
-; Save and autorestore model states
-M73
-
 ; Paramaters for this macro
 #<search_distance> = #1
 #<search_direction> = #2
 
-; Set incremental mode
-G91
+; Call the Probe Routine with X axis specified
+o<_psng_probe> call [#<search_distance>] [#<search_direction>] [1]
 
-; Set Search Feed Rate
-F[#<_hal[probe.ps_searchvel]>]
-
-; Check if probe is already tripped
-O1 if [#<_hal[motion.probe-input]> EQ 1]
-    O1 return [-1]
-O1 endif
-
-; Perform the Search
-G38.3 X[#<search_distance>*#<search_direction>]
-
-; Check to see if we failed to make contact
-O2 if [#5070 EQ 0]
-    O2 return [-2]
-O2 endif
-
-; Move away and allow a half second for the probe to clear
-G1 X[#<_hal[probe.ps_probe_latch]>*#<search_direction>]
-G4 P0.5
-
-; Set Probe Feed Rate
-F[#<_hal[probe.ps_probevel]>]
-
-; Check if probe is already tripped
-O3 if [#<_hal[motion.probe-input]> EQ 1]
-    O3 return [-1]
-O3 endif
-
-; Perform the Probe
-G38.3 X-[#<_hal[probe.ps_probe_latch]>*2*#<search_direction>]
-
-; Check to see if we failed to make contact
-O4 if [#5070 EQ 0]
-    O4 return [-2]
-O4 endif
-
-; Set Search Feed Rate
-F[#<_hal[probe.ps_searchvel]>]
-
-; Move away and allow a half second for the probe to clear
-G1 X[#<_hal[probe.ps_probe_latch]>*#<search_direction>]
-G4 P0.5
-
-o<_psng_probe_x> endsub [0]
+o<_psng_probe_x> endsub [#<_value>]
 M2
