@@ -371,7 +371,7 @@ class ProbeScreenBase(object):
             coord[1] = x1 * math.sin(t) + y1 * math.cos(t)
         return coord
 
-    def lenght_x(self):
+    def length_x(self):
         res = 0
         if self._lb_probe_xm.get_text() == "" or self._lb_probe_xp.get_text() == "":
             return res
@@ -384,7 +384,7 @@ class ProbeScreenBase(object):
         self.display_result_lx(res)
         return res
 
-    def lenght_y(self):
+    def length_y(self):
         res = 0
         if self._lb_probe_ym.get_text() == "" or self._lb_probe_yp.get_text() == "":
             return res

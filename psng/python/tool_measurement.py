@@ -196,7 +196,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         # Start psng_tool_diameter.ngc
         if self.ocode("o<psng_tool_diameter> call") == -1:
             return
-        # move X - edge_lenght- xy_clearance
+        # move X - edge_length- xy_clearance
         s = """G91
         G1 X-%f
         G90""" % (
@@ -239,7 +239,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         # show X result
         a = self.probed_position_with_offsets()
         xmres = float(a[0]) - 0.5 * self.halcomp["ps_probe_diam"]
-        self.lenght_x()
+        self.length_x()
         xcres = 0.5 * (xpres + xmres)
         self.display_result_xc(xcres)
         # move Z to start point up
@@ -293,7 +293,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         # show Y result
         a = self.probed_position_with_offsets()
         ymres = float(a[1]) - 0.5 * self.halcomp["ps_probe_diam"]
-        self.lenght_y()
+        self.length_y()
         # find, show and move to finded  point
         ycres = 0.5 * (ypres + ymres)
         self.display_result_yc(ycres)

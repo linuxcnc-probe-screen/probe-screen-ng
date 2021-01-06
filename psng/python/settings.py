@@ -37,7 +37,7 @@ class ProbeScreenSettings(ProbeScreenBase):
         self.spbtn1_probe_latch = self.builder.get_object("spbtn1_probe_latch")
         self.spbtn1_probe_diam = self.builder.get_object("spbtn1_probe_diam")
         self.spbtn1_xy_clearance = self.builder.get_object("spbtn1_xy_clearance")
-        self.spbtn1_edge_lenght = self.builder.get_object("spbtn1_edge_lenght")
+        self.spbtn1_edge_length = self.builder.get_object("spbtn1_edge_length")
 
         if self.inifile.find("TRAJ", "LINEAR_UNITS") not in ["metric", "mm"]:
             # default values for inches
@@ -66,8 +66,8 @@ class ProbeScreenSettings(ProbeScreenBase):
         self.spbtn1_xy_clearance.set_value(
             self.prefs.getpref("ps_xy_clearance", tup[6], float)
         )
-        self.spbtn1_edge_lenght.set_value(
-            self.prefs.getpref("ps_edge_lenght", tup[7], float)
+        self.spbtn1_edge_length.set_value(
+            self.prefs.getpref("ps_edge_length", tup[7], float)
         )
 
         self.halcomp.newpin("ps_searchvel", hal.HAL_FLOAT, hal.HAL_OUT)
@@ -77,7 +77,7 @@ class ProbeScreenSettings(ProbeScreenBase):
         self.halcomp.newpin("ps_probe_latch", hal.HAL_FLOAT, hal.HAL_OUT)
         self.halcomp.newpin("ps_probe_diam", hal.HAL_FLOAT, hal.HAL_OUT)
         self.halcomp.newpin("ps_xy_clearance", hal.HAL_FLOAT, hal.HAL_OUT)
-        self.halcomp.newpin("ps_edge_lenght", hal.HAL_FLOAT, hal.HAL_OUT)
+        self.halcomp.newpin("ps_edge_length", hal.HAL_FLOAT, hal.HAL_OUT)
 
         self.halcomp["ps_searchvel"] = self.spbtn1_search_vel.get_value()
         self.halcomp["ps_probevel"] = self.spbtn1_probe_vel.get_value()
@@ -86,7 +86,7 @@ class ProbeScreenSettings(ProbeScreenBase):
         self.halcomp["ps_probe_latch"] = self.spbtn1_probe_latch.get_value()
         self.halcomp["ps_probe_diam"] = self.spbtn1_probe_diam.get_value()
         self.halcomp["ps_xy_clearance"] = self.spbtn1_xy_clearance.get_value()
-        self.halcomp["ps_edge_lenght"] = self.spbtn1_edge_lenght.get_value()
+        self.halcomp["ps_edge_length"] = self.spbtn1_edge_length.get_value()
 
     # ----------------
     # Settings Buttons
@@ -127,11 +127,11 @@ class ProbeScreenSettings(ProbeScreenBase):
     def on_spbtn1_xy_clearance_value_changed(self, gtkspinbutton, data=None):
         self.on_common_spbtn_value_changed("ps_xy_clearance", gtkspinbutton, data)
 
-    def on_spbtn1_edge_lenght_key_press_event(self, gtkspinbutton, data=None):
-        self.on_common_spbtn_key_press_event("ps_edge_lenght", gtkspinbutton, data)
+    def on_spbtn1_edge_length_key_press_event(self, gtkspinbutton, data=None):
+        self.on_common_spbtn_key_press_event("ps_edge_length", gtkspinbutton, data)
 
-    def on_spbtn1_edge_lenght_value_changed(self, gtkspinbutton, data=None):
-        self.on_common_spbtn_value_changed("ps_edge_lenght", gtkspinbutton, data)
+    def on_spbtn1_edge_length_value_changed(self, gtkspinbutton, data=None):
+        self.on_common_spbtn_value_changed("ps_edge_length", gtkspinbutton, data)
 
     def on_spbtn1_z_clearance_key_press_event(self, gtkspinbutton, data=None):
         self.on_common_spbtn_key_press_event("ps_z_clearance", gtkspinbutton, data)

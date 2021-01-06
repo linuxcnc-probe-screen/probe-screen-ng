@@ -63,14 +63,14 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         xres = float(a[0] + 0.5 * self.halcomp["ps_probe_diam"])
         self.display_result_xp(xres)
-        self.lenght_x()
+        self.length_x()
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XpLx",
             0,
             0,
             xres,
-            self.lenght_x(),
+            self.length_x(),
             0,
             0,
             0,
@@ -106,7 +106,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         yres = float(a[1]) + 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_yp(yres)
-        self.lenght_y()
+        self.length_y()
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "YpLy",
@@ -117,7 +117,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
             0,
             0,
             yres,
-            self.lenght_y(),
+            self.length_y(),
             0,
             0,
             0,
@@ -149,14 +149,14 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         xres = float(a[0] - 0.5 * self.halcomp["ps_probe_diam"])
         self.display_result_xm(xres)
-        self.lenght_x()
+        self.length_x()
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmLx",
             xres,
             0,
             0,
-            self.lenght_x(),
+            self.length_x(),
             0,
             0,
             0,
@@ -192,7 +192,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         yres = float(a[1]) - 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_ym(yres)
-        self.lenght_y()
+        self.length_y()
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "YmLy",
@@ -203,7 +203,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
             yres,
             0,
             0,
-            self.lenght_y(),
+            self.length_y(),
             0,
             0,
             0,
@@ -221,12 +221,12 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
     # Move Probe manual under corner 2-3 mm
     # X+Y+
     def on_xpyp_released(self, gtkbutton, data=None):
-        # move X - xy_clearance Y + edge_lenght
+        # move X - xy_clearance Y + edge_length
         s = """G91
         G1 X-%f Y%f
         G90""" % (
             self.halcomp["ps_xy_clearance"],
-            self.halcomp["ps_edge_lenght"],
+            self.halcomp["ps_edge_length"],
         )
         if self.gcode(s) == -1:
             return
@@ -239,13 +239,13 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         xres = float(a[0] + 0.5 * self.halcomp["ps_probe_diam"])
         self.display_result_xp(xres)
-        self.lenght_x()
+        self.length_x()
         # move Z to start point up
         if self.z_clearance_up() == -1:
             return
 
-        # move X + edge_lenght +xy_clearance,  Y - edge_lenght - xy_clearance
-        tmpxy = self.halcomp["ps_edge_lenght"] + self.halcomp["ps_xy_clearance"]
+        # move X + edge_length +xy_clearance,  Y - edge_length - xy_clearance
+        tmpxy = self.halcomp["ps_edge_length"] + self.halcomp["ps_xy_clearance"]
         s = """G91
         G1 X%f Y-%f
         G90""" % (
@@ -263,18 +263,18 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         yres = float(a[1]) + 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_yp(yres)
-        self.lenght_y()
+        self.length_y()
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XpLxYpLy",
             0,
             0,
             xres,
-            self.lenght_x(),
+            self.length_x(),
             0,
             0,
             yres,
-            self.lenght_y(),
+            self.length_y(),
             0,
             0,
             0,
@@ -290,12 +290,12 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # X+Y-
     def on_xpym_released(self, gtkbutton, data=None):
-        # move X - xy_clearance Y + edge_lenght
+        # move X - xy_clearance Y + edge_length
         s = """G91
         G1 X-%f Y-%f
         G90""" % (
             self.halcomp["ps_xy_clearance"],
-            self.halcomp["ps_edge_lenght"],
+            self.halcomp["ps_edge_length"],
         )
         if self.gcode(s) == -1:
             return
@@ -308,13 +308,13 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         xres = float(a[0] + 0.5 * self.halcomp["ps_probe_diam"])
         self.display_result_xp(xres)
-        self.lenght_x()
+        self.length_x()
         # move Z to start point up
         if self.z_clearance_up() == -1:
             return
 
-        # move X + edge_lenght +xy_clearance,  Y + edge_lenght + xy_clearance
-        tmpxy = self.halcomp["ps_edge_lenght"] + self.halcomp["ps_xy_clearance"]
+        # move X + edge_length +xy_clearance,  Y + edge_length + xy_clearance
+        tmpxy = self.halcomp["ps_edge_length"] + self.halcomp["ps_xy_clearance"]
         s = """G91
         G1 X%f Y%f
         G90""" % (
@@ -338,11 +338,11 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
             0,
             0,
             xres,
-            self.lenght_x(),
+            self.length_x(),
             yres,
             0,
             0,
-            self.lenght_y(),
+            self.length_y(),
             0,
             0,
             0,
@@ -358,12 +358,12 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # X-Y+
     def on_xmyp_released(self, gtkbutton, data=None):
-        # move X + xy_clearance Y + edge_lenght
+        # move X + xy_clearance Y + edge_length
         s = """G91
         G1 X%f Y%f
         G90""" % (
             self.halcomp["ps_xy_clearance"],
-            self.halcomp["ps_edge_lenght"],
+            self.halcomp["ps_edge_length"],
         )
         if self.gcode(s) == -1:
             return
@@ -376,13 +376,13 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         xres = float(a[0] - 0.5 * self.halcomp["ps_probe_diam"])
         self.display_result_xm(xres)
-        self.lenght_x()
+        self.length_x()
         # move Z to start point up
         if self.z_clearance_up() == -1:
             return
 
-        # move X - edge_lenght - xy_clearance,  Y - edge_lenght - xy_clearance
-        tmpxy = self.halcomp["ps_edge_lenght"] + self.halcomp["ps_xy_clearance"]
+        # move X - edge_length - xy_clearance,  Y - edge_length - xy_clearance
+        tmpxy = self.halcomp["ps_edge_length"] + self.halcomp["ps_xy_clearance"]
         s = """G91
         G1 X-%f Y-%f
         G90""" % (
@@ -400,18 +400,18 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         yres = float(a[1]) + 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_yp(yres)
-        self.lenght_y()
+        self.length_y()
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmLxYpLy",
             xres,
             0,
             0,
-            self.lenght_x(),
+            self.length_x(),
             0,
             0,
             yres,
-            self.lenght_y(),
+            self.length_y(),
             0,
             0,
             0,
@@ -427,12 +427,12 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # X-Y-
     def on_xmym_released(self, gtkbutton, data=None):
-        # move X + xy_clearance Y - edge_lenght
+        # move X + xy_clearance Y - edge_length
         s = """G91
         G1 X%f Y-%f
         G90""" % (
             self.halcomp["ps_xy_clearance"],
-            self.halcomp["ps_edge_lenght"],
+            self.halcomp["ps_edge_length"],
         )
         if self.gcode(s) == -1:
             return
@@ -445,13 +445,13 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         xres = float(a[0] - 0.5 * self.halcomp["ps_probe_diam"])
         self.display_result_xm(xres)
-        self.lenght_x()
+        self.length_x()
         # move Z to start point up
         if self.z_clearance_up() == -1:
             return
 
-        # move X - edge_lenght - xy_clearance,  Y + edge_lenght + xy_clearance
-        tmpxy = self.halcomp["ps_edge_lenght"] + self.halcomp["ps_xy_clearance"]
+        # move X - edge_length - xy_clearance,  Y + edge_length + xy_clearance
+        tmpxy = self.halcomp["ps_edge_length"] + self.halcomp["ps_xy_clearance"]
         s = """G91
         G1 X-%f Y%f
         G90""" % (
@@ -469,18 +469,18 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         yres = float(a[1]) - 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_ym(yres)
-        self.lenght_y()
+        self.length_y()
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmLxYmLy",
             xres,
             0,
             0,
-            self.lenght_x(),
+            self.length_x(),
             yres,
             0,
             0,
-            self.lenght_y(),
+            self.length_y(),
             0,
             0,
             0,
@@ -496,8 +496,8 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # Center X+ X- Y+ Y-
     def on_xy_center_released(self, gtkbutton, data=None):
-        # move X - edge_lenght- xy_clearance
-        tmpx = self.halcomp["ps_edge_lenght"] + self.halcomp["ps_xy_clearance"]
+        # move X - edge_length- xy_clearance
+        tmpx = self.halcomp["ps_edge_length"] + self.halcomp["ps_xy_clearance"]
         s = """G91
         G1 X-%f
         G90""" % (
@@ -518,8 +518,8 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         if self.z_clearance_up() == -1:
             return
 
-        # move X + 2 edge_lenght + 2 xy_clearance
-        tmpx = 2 * (self.halcomp["ps_edge_lenght"] + self.halcomp["ps_xy_clearance"])
+        # move X + 2 edge_length + 2 xy_clearance
+        tmpx = 2 * (self.halcomp["ps_edge_length"] + self.halcomp["ps_xy_clearance"])
         s = """G91
         G1 X%f
         G90""" % (
@@ -537,7 +537,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         xmres = float(a[0]) - 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_xm(xmres)
-        self.lenght_x()
+        self.length_x()
         xcres = 0.5 * (xpres + xmres)
         self.display_result_xc(xcres)
         # move Z to start point up
@@ -550,8 +550,8 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         if self.gcode(s) == -1:
             return
 
-        # move Y - edge_lenght- xy_clearance
-        tmpy = self.halcomp["ps_edge_lenght"] + self.halcomp["ps_xy_clearance"]
+        # move Y - edge_length- xy_clearance
+        tmpy = self.halcomp["ps_edge_length"] + self.halcomp["ps_xy_clearance"]
         s = """G91
         G1 Y-%f
         G90""" % (
@@ -572,8 +572,8 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         if self.z_clearance_up() == -1:
             return
 
-        # move Y + 2 edge_lenght + 2 xy_clearance
-        tmpy = 2 * (self.halcomp["ps_edge_lenght"] + self.halcomp["ps_xy_clearance"])
+        # move Y + 2 edge_length + 2 xy_clearance
+        tmpy = 2 * (self.halcomp["ps_edge_length"] + self.halcomp["ps_xy_clearance"])
         s = """G91
         G1 Y%f
         G90""" % (
@@ -590,7 +590,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         ymres = float(a[1]) - 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_ym(ymres)
-        self.lenght_y()
+        self.length_y()
         # find, show and move to finded  point
         ycres = 0.5 * (ypres + ymres)
         self.display_result_yc(ycres)
@@ -602,11 +602,11 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
             xmres,
             xcres,
             xpres,
-            self.lenght_x(),
+            self.length_x(),
             ymres,
             ycres,
             ypres,
-            self.lenght_y(),
+            self.length_y(),
             0,
             diam,
             0,
@@ -628,12 +628,12 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
     # Move Probe manual under corner 2-3 mm
     # X+Y+
     def on_xpyp1_released(self, gtkbutton, data=None):
-        # move Y - edge_lenght X - xy_clearance
+        # move Y - edge_length X - xy_clearance
         s = """G91
         G1 X-%f Y-%f
         G90""" % (
             self.halcomp["ps_xy_clearance"],
-            self.halcomp["ps_edge_lenght"],
+            self.halcomp["ps_edge_length"],
         )
         if self.gcode(s) == -1:
             return
@@ -646,10 +646,10 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         xres = float(a[0]) + 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_xp(xres)
-        self.lenght_x()
+        self.length_x()
 
-        # move X - edge_lenght Y - xy_clearance
-        tmpxy = self.halcomp["ps_edge_lenght"] - self.halcomp["ps_xy_clearance"]
+        # move X - edge_length Y - xy_clearance
+        tmpxy = self.halcomp["ps_edge_length"] - self.halcomp["ps_xy_clearance"]
         s = """G91
         G1 X-%f Y%f
         G90""" % (
@@ -665,18 +665,18 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         yres = float(a[1]) + 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_yp(yres)
-        self.lenght_y()
+        self.length_y()
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XpLxYpLy",
             0,
             0,
             xres,
-            self.lenght_x(),
+            self.length_x(),
             0,
             0,
             yres,
-            self.lenght_y(),
+            self.length_y(),
             0,
             0,
             0,
@@ -692,12 +692,12 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # X+Y-
     def on_xpym1_released(self, gtkbutton, data=None):
-        # move Y + edge_lenght X - xy_clearance
+        # move Y + edge_length X - xy_clearance
         s = """G91
         G1 X-%f Y%f
         G90""" % (
             self.halcomp["ps_xy_clearance"],
-            self.halcomp["ps_edge_lenght"],
+            self.halcomp["ps_edge_length"],
         )
         if self.gcode(s) == -1:
             return
@@ -710,10 +710,10 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         xres = float(a[0]) + 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_xp(xres)
-        self.lenght_x()
+        self.length_x()
 
-        # move X - edge_lenght Y + xy_clearance
-        tmpxy = self.halcomp["ps_edge_lenght"] - self.halcomp["ps_xy_clearance"]
+        # move X - edge_length Y + xy_clearance
+        tmpxy = self.halcomp["ps_edge_length"] - self.halcomp["ps_xy_clearance"]
         s = """G91
         G1 X-%f Y-%f
         G90""" % (
@@ -729,18 +729,18 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         yres = float(a[1]) - 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_ym(yres)
-        self.lenght_y()
+        self.length_y()
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XpLxYmLy",
             0,
             0,
             xres,
-            self.lenght_x(),
+            self.length_x(),
             yres,
             0,
             0,
-            self.lenght_y(),
+            self.length_y(),
             0,
             0,
             0,
@@ -756,12 +756,12 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # X-Y+
     def on_xmyp1_released(self, gtkbutton, data=None):
-        # move Y - edge_lenght X + xy_clearance
+        # move Y - edge_length X + xy_clearance
         s = """G91
         G1 X%f Y-%f
         G90""" % (
             self.halcomp["ps_xy_clearance"],
-            self.halcomp["ps_edge_lenght"],
+            self.halcomp["ps_edge_length"],
         )
         if self.gcode(s) == -1:
             return
@@ -774,10 +774,10 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         xres = float(a[0]) - 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_xm(xres)
-        self.lenght_x()
+        self.length_x()
 
-        # move X + edge_lenght Y - xy_clearance
-        tmpxy = self.halcomp["ps_edge_lenght"] - self.halcomp["ps_xy_clearance"]
+        # move X + edge_length Y - xy_clearance
+        tmpxy = self.halcomp["ps_edge_length"] - self.halcomp["ps_xy_clearance"]
         s = """G91
         G1 X%f Y%f
         G90""" % (
@@ -794,18 +794,18 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         yres = float(a[1]) + 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_yp(yres)
-        self.lenght_y()
+        self.length_y()
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmLxYpLy",
             xres,
             0,
             0,
-            self.lenght_x(),
+            self.length_x(),
             0,
             0,
             yres,
-            self.lenght_y(),
+            self.length_y(),
             0,
             0,
             0,
@@ -821,12 +821,12 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # X-Y-
     def on_xmym1_released(self, gtkbutton, data=None):
-        # move Y + edge_lenght X + xy_clearance
+        # move Y + edge_length X + xy_clearance
         s = """G91
         G1 X%f Y%f
         G90""" % (
             self.halcomp["ps_xy_clearance"],
-            self.halcomp["ps_edge_lenght"],
+            self.halcomp["ps_edge_length"],
         )
         if self.gcode(s) == -1:
             return
@@ -839,10 +839,10 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         xres = float(a[0]) - 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_xm(xres)
-        self.lenght_x()
+        self.length_x()
 
-        # move X + edge_lenght Y - xy_clearance
-        tmpxy = self.halcomp["ps_edge_lenght"] - self.halcomp["ps_xy_clearance"]
+        # move X + edge_length Y - xy_clearance
+        tmpxy = self.halcomp["ps_edge_length"] - self.halcomp["ps_xy_clearance"]
         s = """G91
         G1 X%f Y-%f
         G90""" % (
@@ -858,18 +858,18 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         yres = float(a[1]) - 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_ym(yres)
-        self.lenght_y()
+        self.length_y()
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmLxYmLy",
             xres,
             0,
             0,
-            self.lenght_x(),
+            self.length_x(),
             yres,
             0,
             0,
-            self.lenght_y(),
+            self.length_y(),
             0,
             0,
             0,
@@ -887,8 +887,8 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
     def on_xy_hole_released(self, gtkbutton, data=None):
         if self.z_clearance_down() == -1:
             return
-        # move X - edge_lenght Y + xy_clearance
-        tmpx = self.halcomp["ps_edge_lenght"] - self.halcomp["ps_xy_clearance"]
+        # move X - edge_length Y + xy_clearance
+        tmpx = self.halcomp["ps_edge_length"] - self.halcomp["ps_xy_clearance"]
         s = """G91
         G1 X-%f
         G90""" % (
@@ -904,8 +904,8 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         xmres = float(a[0]) - 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_xm(xmres)
 
-        # move X +2 edge_lenght - 2 xy_clearance
-        tmpx = 2 * (self.halcomp["ps_edge_lenght"] - self.halcomp["ps_xy_clearance"])
+        # move X +2 edge_length - 2 xy_clearance
+        tmpx = 2 * (self.halcomp["ps_edge_length"] - self.halcomp["ps_xy_clearance"])
         s = """G91
         G1 X%f
         G90""" % (
@@ -920,7 +920,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         xpres = float(a[0]) + 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_xp(xpres)
-        self.lenght_x()
+        self.length_x()
         xcres = 0.5 * (xmres + xpres)
         self.display_result_xc(xcres)
 
@@ -929,8 +929,8 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         if self.gcode(s) == -1:
             return
 
-        # move Y - edge_lenght + xy_clearance
-        tmpy = self.halcomp["ps_edge_lenght"] - self.halcomp["ps_xy_clearance"]
+        # move Y - edge_length + xy_clearance
+        tmpy = self.halcomp["ps_edge_length"] - self.halcomp["ps_xy_clearance"]
         s = """G91
         G1 Y-%f
         G90""" % (
@@ -946,8 +946,8 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         ymres = float(a[1]) - 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_ym(ymres)
 
-        # move Y +2 edge_lenght - 2 xy_clearance
-        tmpy = 2 * (self.halcomp["ps_edge_lenght"] - self.halcomp["ps_xy_clearance"])
+        # move Y +2 edge_length - 2 xy_clearance
+        tmpy = 2 * (self.halcomp["ps_edge_length"] - self.halcomp["ps_xy_clearance"])
         s = """G91
         G1 Y%f
         G90""" % (
@@ -962,7 +962,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         ypres = float(a[1]) + 0.5 * self.halcomp["ps_probe_diam"]
         self.display_result_yp(ypres)
-        self.lenght_y()
+        self.length_y()
         # find, show and move to finded  point
         ycres = 0.5 * (ymres + ypres)
         self.display_result_yc(ycres)
@@ -974,11 +974,11 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
             xmres,
             xcres,
             xpres,
-            self.lenght_x(),
+            self.length_x(),
             ymres,
             ycres,
             ypres,
-            self.lenght_y(),
+            self.length_y(),
             0,
             diam,
             0,
