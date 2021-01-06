@@ -12,8 +12,16 @@ M73
 #<search_axis> = #3
 
 O1 if [#<search_axis> GT 3]
-; Unknown / Unsupported AXIS for Probe
+    ; Unknown / Unsupported AXIS for Probe
     O1 return [-99]
+O1 endif
+
+O1 if [#<_hal[probe.ps_searchvel]> LE 0]
+    O1 return [-98] ; indicate searchvel <= 0
+O1 endif
+
+O1 if [#<_hal[probe.ps_probevel]> LE 0]
+    O1 return [-97] ; indicate probevel <= 0
 O1 endif
 
 ; Set incremental mode
