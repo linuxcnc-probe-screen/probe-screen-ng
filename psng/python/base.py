@@ -144,7 +144,7 @@ class ProbeScreenBase(object):
 
         if "TRUE" in error_pin:
             text = "See notification popup"
-            self.add_history("Error: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            self.add_history("Error: %s" % text)
             print("error", text)
             self.command.mode(linuxcnc.MODE_MANUAL)
             self.command.wait_complete()

@@ -67,17 +67,8 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XpLx",
-            0,
-            0,
-            xres,
-            self.length_x(),
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
+            xp=xres,
+            lx=self.length_x(),
         )
         # move Z to start point up
         if self.z_clearance_up() == -1:
@@ -110,17 +101,8 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "YpLy",
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            yres,
-            self.length_y(),
-            0,
-            0,
-            0,
+            yp=yres,
+            ly=self.length_y(),
         )
         # move Z to start point up
         if self.z_clearance_up() == -1:
@@ -153,17 +135,8 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmLx",
-            xres,
-            0,
-            0,
-            self.length_x(),
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
+            xm=xres,
+            lx=self.length_x(),
         )
         # move Z to start point up
         if self.z_clearance_up() == -1:
@@ -196,17 +169,8 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "YmLy",
-            0,
-            0,
-            0,
-            0,
-            yres,
-            0,
-            0,
-            self.length_y(),
-            0,
-            0,
-            0,
+            ym=yres,
+            ly=self.length_y(),
         )
         # move Z to start point up
         if self.z_clearance_up() == -1:
@@ -267,17 +231,10 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XpLxYpLy",
-            0,
-            0,
-            xres,
-            self.length_x(),
-            0,
-            0,
-            yres,
-            self.length_y(),
-            0,
-            0,
-            0,
+            xp=xres,
+            lx=self.length_x(),
+            yp=yres,
+            ly=self.length_y(),
         )
         # move Z to start point up
         if self.z_clearance_up() == -1:
@@ -335,17 +292,10 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XpLxYmLy",
-            0,
-            0,
-            xres,
-            self.length_x(),
-            yres,
-            0,
-            0,
-            self.length_y(),
-            0,
-            0,
-            0,
+            xp=xres,
+            lx=self.length_x(),
+            ym=yres,
+            ly=self.length_y(),
         )
         # move Z to start point up
         if self.z_clearance_up() == -1:
@@ -404,17 +354,10 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmLxYpLy",
-            xres,
-            0,
-            0,
-            self.length_x(),
-            0,
-            0,
-            yres,
-            self.length_y(),
-            0,
-            0,
-            0,
+            xm=xres,
+            lx=self.length_x(),
+            yp=yres,
+            ly=self.length_y(),
         )
         # move Z to start point up
         if self.z_clearance_up() == -1:
@@ -473,17 +416,10 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmLxYmLy",
-            xres,
-            0,
-            0,
-            self.length_x(),
-            yres,
-            0,
-            0,
-            self.length_y(),
-            0,
-            0,
-            0,
+            xm=xres,
+            lx=self.length_x(),
+            ym=yres,
+            ly=self.length_y(),
         )
         # move Z to start point up
         if self.z_clearance_up() == -1:
@@ -599,17 +535,15 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmXcXpLxYmYcYpLyD",
-            xmres,
-            xcres,
-            xpres,
-            self.length_x(),
-            ymres,
-            ycres,
-            ypres,
-            self.length_y(),
-            0,
-            diam,
-            0,
+            xm=xmres,
+            xc=xcres,
+            xp=xpres,
+            lx=self.length_x(),
+            ym=ymres,
+            yc=ycres,
+            yp=ypres,
+            ly=self.length_y(),
+            d=diam,
         )
         # move Z to start point up
         if self.z_clearance_up() == -1:
@@ -669,17 +603,10 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XpLxYpLy",
-            0,
-            0,
-            xres,
-            self.length_x(),
-            0,
-            0,
-            yres,
-            self.length_y(),
-            0,
-            0,
-            0,
+            xp=xres,
+            lx=self.length_x(),
+            yp=yres,
+            ly=self.length_y(),
         )
         # move Z to start point
         if self.z_clearance_up() == -1:
@@ -733,17 +660,10 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XpLxYmLy",
-            0,
-            0,
-            xres,
-            self.length_x(),
-            yres,
-            0,
-            0,
-            self.length_y(),
-            0,
-            0,
-            0,
+            xp=xres,
+            lx=self.length_x(),
+            ym=yres,
+            ly=self.length_y(),
         )
         # move Z to start point
         if self.z_clearance_up() == -1:
@@ -798,17 +718,10 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmLxYpLy",
-            xres,
-            0,
-            0,
-            self.length_x(),
-            0,
-            0,
-            yres,
-            self.length_y(),
-            0,
-            0,
-            0,
+            xm=xres,
+            lx=self.length_x(),
+            yp=yres,
+            ly=self.length_y(),
         )
         # move Z to start point
         if self.z_clearance_up() == -1:
@@ -862,17 +775,10 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmLxYmLy",
-            xres,
-            0,
-            0,
-            self.length_x(),
-            yres,
-            0,
-            0,
-            self.length_y(),
-            0,
-            0,
-            0,
+            xm=xres,
+            lx=self.length_x(),
+            ym=yres,
+            ly=self.length_y(),
         )
         # move Z to start point
         if self.z_clearance_up() == -1:
@@ -971,17 +877,15 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmXcXpLxYmYcYpLyD",
-            xmres,
-            xcres,
-            xpres,
-            self.length_x(),
-            ymres,
-            ycres,
-            ypres,
-            self.length_y(),
-            0,
-            diam,
-            0,
+            xm=xmres,
+            xc=xcres,
+            xp=xpres,
+            lx=self.length_x(),
+            ym=ymres,
+            yc=ycres,
+            yp=ypres,
+            ly=self.length_y(),
+            d=diam,
         )
         # move to center
         s = "G1 Y%f" % (ycres)

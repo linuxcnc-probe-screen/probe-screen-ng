@@ -89,17 +89,10 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmXcXpLx",
-            xmres,
-            xcres,
-            xpres,
-            self.length_x(),
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
+            xm=xmres,
+            xc=xcres,
+            xp=xpres,
+            lx=self.length_x(),
         )
         # move Z to start point up
         if self.z_clearance_up() == -1:
@@ -163,17 +156,10 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "YmYcYpLy",
-            0,
-            0,
-            0,
-            0,
-            ymres,
-            ycres,
-            ypres,
-            self.length_y(),
-            0,
-            0,
-            0,
+            ym=ymres,
+            yc=ycres,
+            yp=ypres,
+            ly=self.length_y(),
         )
         # move Z to start point up
         if self.z_clearance_up() == -1:
@@ -227,17 +213,10 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmXcXpLx",
-            xmres,
-            xcres,
-            xpres,
-            self.length_x(),
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
+            xm=xmres,
+            xc=xcres,
+            xp=xpres,
+            lx=self.length_x(),
         )
         # move X to new center
         s = """G1 X%f""" % (xcres)
@@ -292,17 +271,10 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "YmYcYpLy",
-            0,
-            0,
-            0,
-            0,
-            ymres,
-            ycres,
-            ypres,
-            self.length_y(),
-            0,
-            0,
-            0,
+            ym=ymres,
+            yc=ycres,
+            yp=ypres,
+            ly=self.length_y(),
         )
         # move to center
         s = "G1 Y%f" % (ycres)

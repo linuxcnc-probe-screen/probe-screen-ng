@@ -132,17 +132,9 @@ class ProbeScreenRotation(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "YcYpA",
-            0,
-            0,
-            0,
-            0,
-            0,
-            ycres,
-            ypres,
-            0,
-            0,
-            0,
-            alfa,
+            yc=ycres,
+            yp=ypres,
+            a=alfa,
         )
 
         # move Z to start point
@@ -205,17 +197,9 @@ class ProbeScreenRotation(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "YmYcA",
-            0,
-            0,
-            0,
-            0,
-            ymres,
-            ycres,
-            0,
-            0,
-            0,
-            0,
-            alfa,
+            ym=ymres,
+            yc=ycres,
+            a=alfa,
         )
         # move Z to start point
         if self.z_clearance_up() == -1:
@@ -276,17 +260,9 @@ class ProbeScreenRotation(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XcXpA",
-            0,
-            xcres,
-            xpres,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            alfa,
+            xc=xcres,
+            xp=xpres,
+            a=alfa,
         )
         # move Z to start point
         if self.z_clearance_up() == -1:
@@ -347,17 +323,9 @@ class ProbeScreenRotation(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmXcA",
-            xmres,
-            xcres,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            alfa,
+            xm=xmres,
+            xc=xcres,
+            a=alfa,
         )
         # move Z to start point
         if self.z_clearance_up() == -1:

@@ -163,9 +163,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
             return
         a = self.stat.probed_position
         self.spbtn_setter_height.set_value(float(a[2]))
-        self.add_history(
-            gtkbutton.get_tooltip_text(), "Z", 0, 0, 0, 0, 0, 0, 0, 0, a[2], 0, 0
-        )
+        self.add_history(gtkbutton.get_tooltip_text(), "Z", z=a[2])
 
     # Down probe to workpiece for measuring it vs Know tool setter height
     def on_btn_probe_workpiece_released(self, gtkbutton, data=None):
@@ -174,9 +172,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
             return
         a = self.stat.probed_position
         self.spbtn_block_height.set_value(float(a[2]))
-        self.add_history(
-            gtkbutton.get_tooltip_text(), "Z", 0, 0, 0, 0, 0, 0, 0, 0, a[2], 0, 0
-        )
+        self.add_history(gtkbutton.get_tooltip_text(), "Z", z=a[2])
 
     # Down probe to table for measuring it and use for calculate tool setter height and can set G10 L20 Z0 if you tick auto zero
     def on_btn_probe_table_released(self, gtkbutton, data=None):
@@ -185,9 +181,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
             return
         a = self.probed_position_with_offsets()
         self.display_result_z(float(a[2]))
-        self.add_history(
-            gtkbutton.get_tooltip_text(), "Z", 0, 0, 0, 0, 0, 0, 0, 0, a[2], 0, 0
-        )
+        self.add_history(gtkbutton.get_tooltip_text(), "Z", z=a[2])
         self.set_zerro("Z", 0, 0, a[2])
 
     # Probe tool Diameter
@@ -308,17 +302,10 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XcYcZD",
-            0,
-            xcres,
-            0,
-            0,
-            0,
-            ycres,
-            0,
-            0,
-            tmpz,
-            diam,
-            0,
+            xc=xcres,
+            yc=ycres,
+            z=tmpz,
+            d=diam,
         )
         # move to finded  point
         s = "G1 Y%f" % ycres
