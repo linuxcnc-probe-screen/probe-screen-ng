@@ -210,26 +210,37 @@ class ProbeScreenBase(object):
         c = datetime.now().strftime("%H:%M:%S  ") + "{0: <10}".format(tool_tip_text)
         if "Xm" in s:
             c += "X-=%.4f " % xm
+            self.display_result_xm(xm)
         if "Xc" in s:
             c += "Xc=%.4f " % xc
+            self.display_result_xc(xc)
         if "Xp" in s:
             c += "X+=%.4f " % xp
+            self.display_result_xp(xp)
         if "Lx" in s:
             c += "Lx=%.4f " % lx
+            self.display_result_lx(lx)
         if "Ym" in s:
             c += "Y-=%.4f " % ym
+            self.display_result_lx(ym)
         if "Yc" in s:
             c += "Yc=%.4f " % yc
+            self.display_result_yc(yc)
         if "Yp" in s:
             c += "Y+=%.4f " % yp
+            self.display_result_yp(yp)
         if "Ly" in s:
             c += "Ly=%.4f " % ly
+            self.display_result_ly(ly)
         if "Z" in s:
             c += "Z=%.4f " % z
+            self.display_result_z(z)
         if "D" in s:
             c += "D=%.4f" % d
+            self.display_result_d(d)
         if "A" in s:
             c += "Angle=%.3f" % a
+            self.display_result_a(a)
         i = self.buffer.get_end_iter()
         if i.get_line() > 1000:
             i.backward_line()
