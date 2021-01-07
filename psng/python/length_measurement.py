@@ -56,7 +56,7 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
         # show X result
         a = self.probed_position_with_offsets()
         xpres = float(a[0]) + 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_xp(xpres)
+
         # move Z to start point up
         if self.z_clearance_up() == -1:
             return
@@ -79,27 +79,18 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
         # Start psng_xminus.ngc
         if self.ocode("o<psng_xminus> call") == -1:
             return
-        # show X result
+        # Calculate X result
         a = self.probed_position_with_offsets()
         xmres = float(a[0]) - 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_xm(xmres)
-        self.length_x()
         xcres = 0.5 * (xpres + xmres)
-        self.display_result_xc(xcres)
+
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmXcXpLx",
-            xmres,
-            xcres,
-            xpres,
-            self.length_x(),
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
+            xm=xmres,
+            xc=xcres,
+            xp=xpres,
+            lx=self.length_x(xm=xmres, xp=xpres),
         )
         # move Z to start point up
         if self.z_clearance_up() == -1:
@@ -126,10 +117,10 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
         # Start psng_yplus.ngc
         if self.ocode("o<psng_yplus> call") == -1:
             return
-        # show Y result
+        # Calculate Y result
         a = self.probed_position_with_offsets()
         ypres = float(a[1]) + 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_yp(ypres)
+
         # move Z to start point up
         if self.z_clearance_up() == -1:
             return
@@ -155,25 +146,17 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
         # show Y result
         a = self.probed_position_with_offsets()
         ymres = float(a[1]) - 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_ym(ymres)
-        self.length_y()
+
         # find, show and move to finded  point
         ycres = 0.5 * (ypres + ymres)
-        self.display_result_yc(ycres)
+
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "YmYcYpLy",
-            0,
-            0,
-            0,
-            0,
-            ymres,
-            ycres,
-            ypres,
-            self.length_y(),
-            0,
-            0,
-            0,
+            ym=ymres,
+            yc=ycres,
+            yp=ypres,
+            ly=self.length_y(ym=ymres, yp=ypres),
         )
         # move Z to start point up
         if self.z_clearance_up() == -1:
@@ -200,10 +183,9 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
         # Start psng_xminus.ngc
         if self.ocode("o<psng_xminus> call") == -1:
             return
-        # show X result
+        # Calculate X result
         a = self.probed_position_with_offsets()
         xmres = float(a[0]) - 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_xm(xmres)
 
         # move X +2 edge_length - 2 xy_clearance
         tmpx = 2 * (self.halcomp["ps_edge_length"] - self.halcomp["ps_xy_clearance"])
@@ -217,27 +199,18 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
         # Start psng_xplus.ngc
         if self.ocode("o<psng_xplus> call") == -1:
             return
-        # show X result
+        # Calculate X result
         a = self.probed_position_with_offsets()
         xpres = float(a[0]) + 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_xp(xpres)
-        self.length_x()
         xcres = 0.5 * (xmres + xpres)
-        self.display_result_xc(xcres)
+
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XmXcXpLx",
-            xmres,
-            xcres,
-            xpres,
-            self.length_x(),
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
+            xm=xmres,
+            xc=xcres,
+            xp=xpres,
+            lx=self.length_x(xm=xmres, xp=xpres),
         )
         # move X to new center
         s = """G1 X%f""" % (xcres)
@@ -264,10 +237,10 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
         # Start psng_yminus.ngc
         if self.ocode("o<psng_yminus> call") == -1:
             return
-        # show Y result
+
+        # Calculate Y result
         a = self.probed_position_with_offsets()
         ymres = float(a[1]) - 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_ym(ymres)
 
         # move Y +2 edge_length - 2 xy_clearance
         tmpy = 2 * (self.halcomp["ps_edge_length"] - self.halcomp["ps_xy_clearance"])
@@ -281,29 +254,22 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
         # Start psng_yplus.ngc
         if self.ocode("o<psng_yplus> call") == -1:
             return
-        # show Y result
+        # Calculate Y result
         a = self.probed_position_with_offsets()
         ypres = float(a[1]) + 0.5 * self.halcomp["ps_probe_diam"]
-        self.display_result_yp(ypres)
-        self.length_y()
+
         # find, show and move to finded  point
         ycres = 0.5 * (ymres + ypres)
-        self.display_result_yc(ycres)
+
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "YmYcYpLy",
-            0,
-            0,
-            0,
-            0,
-            ymres,
-            ycres,
-            ypres,
-            self.length_y(),
-            0,
-            0,
-            0,
+            ym=ymres,
+            yc=ycres,
+            yp=ypres,
+            ly=self.length_y(ym=ymres, yp=ypres),
         )
+
         # move to center
         s = "G1 Y%f" % (ycres)
         if self.gcode(s) == -1:

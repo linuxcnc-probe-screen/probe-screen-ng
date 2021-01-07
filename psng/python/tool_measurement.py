@@ -163,9 +163,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
             return
         a = self.stat.probed_position
         self.spbtn_setter_height.set_value(float(a[2]))
-        self.add_history(
-            gtkbutton.get_tooltip_text(), "Z", 0, 0, 0, 0, 0, 0, 0, 0, a[2], 0, 0
-        )
+        self.add_history(gtkbutton.get_tooltip_text(), "Z", z=a[2])
 
     # Down probe to workpiece for measuring it vs Know tool setter height
     def on_btn_probe_workpiece_released(self, gtkbutton, data=None):
@@ -174,9 +172,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
             return
         a = self.stat.probed_position
         self.spbtn_block_height.set_value(float(a[2]))
-        self.add_history(
-            gtkbutton.get_tooltip_text(), "Z", 0, 0, 0, 0, 0, 0, 0, 0, a[2], 0, 0
-        )
+        self.add_history(gtkbutton.get_tooltip_text(), "Z", z=a[2])
 
     # Down probe to table for measuring it and use for calculate tool setter height and can set G10 L20 Z0 if you tick auto zero
     def on_btn_probe_table_released(self, gtkbutton, data=None):
@@ -184,10 +180,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         if self.ocode("o<psng_probe_table> call") == -1:
             return
         a = self.probed_position_with_offsets()
-        self.display_result_z(float(a[2]))
-        self.add_history(
-            gtkbutton.get_tooltip_text(), "Z", 0, 0, 0, 0, 0, 0, 0, 0, a[2], 0, 0
-        )
+        self.add_history(gtkbutton.get_tooltip_text(), "Z", z=a[2])
         self.set_zerro("Z", 0, 0, a[2])
 
     # Probe tool Diameter
@@ -236,12 +229,10 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
 
         if self.ocode("o<psng_xminus> call") == -1:
             return
-        # show X result
+        # Calculate X result
         a = self.probed_position_with_offsets()
         xmres = float(a[0]) - 0.5 * self.halcomp["ps_probe_diam"]
-        self.length_x()
         xcres = 0.5 * (xpres + xmres)
-        self.display_result_xc(xcres)
         # move Z to start point up
         if self.z_clearance_up() == -1:
             return
@@ -265,7 +256,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         # Start yplus.ngc
         if self.ocode("o<psng_yplus> call") == -1:
             return
-        # show Y result
+        # Calculate Y result
         a = self.probed_position_with_offsets()
         ypres = float(a[1]) + 0.5 * self.halcomp["ps_probe_diam"]
         # move Z to start point up
@@ -290,16 +281,14 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         # Start xminus.ngc
         if self.ocode("o<psng_yminus> call") == -1:
             return
-        # show Y result
+        # Calculate Y result
         a = self.probed_position_with_offsets()
         ymres = float(a[1]) - 0.5 * self.halcomp["ps_probe_diam"]
-        self.length_y()
+
         # find, show and move to finded  point
         ycres = 0.5 * (ypres + ymres)
-        self.display_result_yc(ycres)
         diam = self.halcomp["ps_probe_diam"] + (ymres - ypres - self.tsdiam)
 
-        self.display_result_d(diam)
         # move Z to start point up
         if self.z_clearance_up() == -1:
             return
@@ -308,17 +297,10 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         self.add_history(
             gtkbutton.get_tooltip_text(),
             "XcYcZD",
-            0,
-            xcres,
-            0,
-            0,
-            0,
-            ycres,
-            0,
-            0,
-            tmpz,
-            diam,
-            0,
+            xc=xcres,
+            yc=ycres,
+            z=tmpz,
+            d=diam,
         )
         # move to finded  point
         s = "G1 Y%f" % ycres
