@@ -95,7 +95,7 @@ class ProbeScreenRotation(ProbeScreenBase):
         s = """G91
         G1 Y-%f
         G90""" % (
-            self.halcomp["ps_xy_clearance"].get_value()
+            self.halcomp["ps_xy_clearance"]
         )
         if self.gcode(s) == -1:
             return
@@ -159,7 +159,7 @@ class ProbeScreenRotation(ProbeScreenBase):
         s = """G91
         G1 Y%f
         G90""" % (
-            self.halcomp["ps_xy_clearance"].get_value()
+            self.halcomp["ps_xy_clearance"]
         )
         if self.gcode(s) == -1:
             return
@@ -222,7 +222,7 @@ class ProbeScreenRotation(ProbeScreenBase):
         s = """G91
         G1 X-%f
         G90""" % (
-            self.halcomp["ps_xy_clearance"].get_value()
+            self.halcomp["ps_xy_clearance"]
         )
         if self.gcode(s) == -1:
             return
@@ -285,7 +285,7 @@ class ProbeScreenRotation(ProbeScreenBase):
         s = """G91
         G1 X%f
         G90""" % (
-            self.halcomp["ps_xy_clearance"].get_value()
+            self.halcomp["ps_xy_clearance"]
         )
         if self.gcode(s) == -1:
             return
