@@ -13,10 +13,10 @@ M73
 ; Determine the Search Direction
 O1 if [#<search_distance> GE 0]
     ; Searching in the positive direction
-    O1 #<search_direction> = 1
+    #<search_direction> = 1
 O1 else
     ; Searching in the negative direction
-    O1 #<search_direction> = -1
+    #<search_direction> = -1
 O1 endif
 
 O2 if [#<search_axis> GT 3]

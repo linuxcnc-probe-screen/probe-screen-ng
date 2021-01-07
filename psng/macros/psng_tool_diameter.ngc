@@ -29,7 +29,7 @@ G53 G0 Z[#<_ini[TOOLSENSOR]Z>]
 
 ; BEGIN PSNG POSTAMBLE
 M71 ; Invalidate Modal Autorestore
-o<psng_modal_restore> call
+o<_psng_modal_restore> call
 ; END PSNG POSTAMBLE
 
 o<psng_tool_diameter> endsub
