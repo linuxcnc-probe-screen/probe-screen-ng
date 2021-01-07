@@ -85,9 +85,9 @@ F[#<_hal[probe.ps_probevel]>]
 M66 E0 L0
 
 ; Check if probe is already tripped
-;O21 if [#<_hal[motion.probe-input]> EQ 1]
-    ;O21 return [-1]
-;O21 endif
+O21 if [#<_hal[motion.probe-input]> EQ 1]
+    O21 return [-1]
+O21 endif
 
 ; Perform the Probe
 O22 if [#<search_axis> EQ 1]
