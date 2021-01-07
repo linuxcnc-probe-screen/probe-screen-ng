@@ -14,7 +14,7 @@ o<_psng_probe_y> call [#<_hal[probe.ps_probe_max]>] [-1]
 O1 if [#<_value> EQ -1]
     M72 ; Restore modal state
     (ABORT, Probe already tripped when starting G38.3 move)
-O1 elif [#<_value> EQ -2]
+O1 else if [#<_value> EQ -2]
     M72 ; Restore modal state
     (ABORT, Probe failed to make contact with workpiece)
 O1 endif

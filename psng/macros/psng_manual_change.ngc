@@ -54,7 +54,7 @@ o<_psng_probe_z> call [#<_ini[TOOLSENSOR]MAXPROBE>] [1]
 O1 if [#<_value> EQ -1]
     M72 ; Restore modal state
     O1 return [-3] ; indicate probe already tripped to epilog
-O1 elif [#<_value> EQ -2]
+O1 else if [#<_value> EQ -2]
     M72 ; Restore modal state
     O1 return [-4] ; indicate probe contact failure to epilog
 O1 endif
