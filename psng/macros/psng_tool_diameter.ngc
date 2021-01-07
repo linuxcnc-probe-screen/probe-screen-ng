@@ -16,10 +16,10 @@ G53 G0 Z[#<_ini[TOOLSENSOR]Z>]
 
 ; Probe Tool Sensor
 o<_psng_probe_z> call [#<_ini[TOOLSENSOR]MAXPROBE>] [1]
-O1 if [<_value> EQ -1]
+O1 if [<#_value> EQ -1]
     M72 ; Restore modal state
     (ABORT, Probe already tripped when starting G38.3 move)
-O1 elif [<_value> EQ -2]
+O1 elif [<#_value> EQ -2]
     M72 ; Restore modal state
     (ABORT, Probe failed to make contact with Tool Sensor)
 O1 endif
