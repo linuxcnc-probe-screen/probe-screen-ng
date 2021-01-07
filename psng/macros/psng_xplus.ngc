@@ -1,18 +1,34 @@
 o<psng_xplus> sub
-o<psng_hook> call [7]
 
-#<x>=#<_x> (save start X position)
-G91
-F #<_hal[probe.ps_searchvel]>
-G38.2 X[#<_hal[probe.ps_probe_max]>]
-G1 X[-#<_hal[probe.ps_probe_latch]>] F#<_ini[TOOLSENSOR]RAPID_SPEED>
-F #<_hal[probe.ps_probevel]>
-G4 P0.5
-G38.2 X[#<_hal[probe.ps_probe_latch]>*2]
-(print, probe X=#5061 )
+; BEGIN PSNG PREAMBLE
+M73 ; Save and autorestore model states. This will be used only in case of error, otherwise we will invalidate it.
+o<_psng_modal_save> call
+o<_psng_hook> call [6]
+; END PSNG PREAMBLE
+
+; Save starting X position
+#<x>=#<_x>
+
+; Ensure we're in G90 / absolute mode
 G90
-(back to start point)
-G1 X#<x> F#<_ini[TOOLSENSOR]RAPID_SPEED>
-	
+
+; Probe X Plus
+o<_psng_probe_x> call [#<_hal[probe.ps_probe_max]>]
+O1 if [#<_value> EQ -1]
+    M72 ; Restore modal state
+    (ABORT, Probe already tripped when starting G38.3 move)
+O1 else if [#<_value> EQ -2]
+    M72 ; Restore modal state
+    (ABORT, Probe failed to make contact with workpiece)
+O1 endif
+
+; Move back to starting X position
+G0 X#<x>
+
+; BEGIN PSNG POSTAMBLE
+M71 ; Invalidate Modal Autorestore
+o<_psng_modal_restore> call
+; END PSNG POSTAMBLE
+
 o<psng_xplus> endsub
 M2

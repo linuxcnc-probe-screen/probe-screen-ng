@@ -1,0 +1,9 @@
+; Saves modal states into global named paramaters
+o<_psng_modal_save> sub
+
+#<_psng_absolute> = #<_absolute>
+#<_psng_metric> = #<_metric>
+#<_psng_feed> = #<_feed>
+
+o<_psng_modal_save> endsub
+M2

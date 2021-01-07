@@ -1,0 +1,22 @@
+; Restores modal states from global named paramaters
+o<_psng_modal_restore> sub
+
+; Restore absolute / incremental
+o<restore_absolute> if [#<_psng_absolute>]
+    G90
+o<restore_absolute> else
+    G91
+o<restore_absolute> endif
+
+; Restore metric / imperial
+o<restore_metric> if [#<_psng_metric>]
+    G21
+o<restore_metric> else
+    G20
+o<restore_metric> endif
+
+; Restore feed - MUST be done after restoring metric/imperal
+F#<_psng_feed>
+
+o<_psng_modal_restore> endsub
+M2

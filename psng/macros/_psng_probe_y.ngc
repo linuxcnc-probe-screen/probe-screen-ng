@@ -1,0 +1,14 @@
+; Helper macro for containing functionality needed to
+; safely perform a G38.3 move.
+
+o<_psng_probe_y> sub
+
+; Paramaters for this macro
+#<search_distance> = #1
+#<search_direction> = #2
+
+; Call the Probe Routine with Y axis specified
+o<_psng_probe> call [#<search_distance>] [2]
+
+o<_psng_probe_y> endsub [#<_value>]
+M2

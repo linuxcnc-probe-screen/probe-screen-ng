@@ -1,0 +1,128 @@
+; Helper macro for containing functionality needed to
+; safely perform a G38.3 move.
+
+o<_psng_probe> sub
+
+; Save and autorestore model states
+M73
+
+; Paramaters for this macro
+#<search_distance> = #1
+#<search_axis> = #2
+
+; Determine the Search Direction
+O1 if [#<search_distance> GE 0]
+    ; Searching in the positive direction
+    #<search_direction> = 1
+O1 else
+    ; Searching in the negative direction
+    #<search_direction> = -1
+O1 endif
+
+O2 if [#<search_axis> GT 3]
+    ; Unknown / Unsupported AXIS for Probe
+    O2 return [-98]
+O2 endif
+
+O3 if [#<_hal[probe.ps_searchvel]> LE 0]
+    O3 return [-97] ; indicate searchvel <= 0
+O3 endif
+
+O4 if [#<_hal[probe.ps_probevel]> LE 0]
+    O4 return [-96] ; indicate probevel <= 0
+O4 endif
+
+; Set incremental mode
+G91
+
+; Set Search Feed Rate
+F[#<_hal[probe.ps_searchvel]>]
+
+; Force LinuxCNC to refresh hal pin states prior to reading HAL pin
+M66 E0 L0
+
+; Check if probe is already tripped
+O10 if [#<_hal[motion.probe-input]> EQ 1]
+    O10 return [-1]
+O10 endif
+
+; Perform the Search
+O11 if [#<search_axis> EQ 1]
+    ; X Axis
+    G38.3 X[#<search_distance>]
+O11 else if [#<search_axis> EQ 2]
+    ; Y Axis
+    G38.3 Y[#<search_distance>]
+O11 else if [#<search_axis> EQ 3]
+    ; Z Axis
+    G38.3 Z[#<search_distance>]
+O11 endif
+
+; Check to see if we failed to make contact
+O12 if [#5070 EQ 0]
+    O12 return [-2]
+O12 endif
+
+; Move away
+O13 if [#<search_axis> EQ 1]
+    ; X Axis
+    G1 X[-#<_hal[probe.ps_probe_latch]>*#<search_direction>]
+O13 else if [#<search_axis> EQ 2]
+    ; Y Axis
+    G1 Y[-#<_hal[probe.ps_probe_latch]>*#<search_direction>]
+O13 else if [#<search_axis> EQ 3]
+    ; Z Axis
+    G1 Z[-#<_hal[probe.ps_probe_latch]>*#<search_direction>]
+O13 endif
+
+; Allow a half second for the probe input to clear
+G4 P0.5
+
+; Set Probe Feed Rate
+F[#<_hal[probe.ps_probevel]>]
+
+; Force LinuxCNC to refresh hal pin states prior to reading HAL pin
+M66 E0 L0
+
+; Check if probe is already tripped
+O21 if [#<_hal[motion.probe-input]> EQ 1]
+    O21 return [-1]
+O21 endif
+
+; Perform the Probe
+O22 if [#<search_axis> EQ 1]
+    ; X Axis
+    G38.3 X[#<_hal[probe.ps_probe_latch]>*2*#<search_direction>]
+O22 else if [#<search_axis> EQ 2]
+    ; Y Axis
+    G38.3 Y[#<_hal[probe.ps_probe_latch]>*2*#<search_direction>]
+O22 else if [#<search_axis> EQ 3]
+    ; Z Axis
+    G38.3 Z[#<_hal[probe.ps_probe_latch]>*2*#<search_direction>]
+O22 endif
+
+; Check to see if we failed to make contact
+O23 if [#5070 EQ 0]
+    O23 return [-2]
+O23 endif
+
+; Set Search Feed Rate
+F[#<_hal[probe.ps_searchvel]>]
+
+; Move away and allow a half second for the probe to clear
+O24 if [#<search_axis> EQ 1]
+    ; X Axis
+    G1 X[-#<_hal[probe.ps_probe_latch]>*#<search_direction>]
+O24 else if [#<search_axis> EQ 2]
+    ; Y Axis
+    G1 Y[-#<_hal[probe.ps_probe_latch]>*#<search_direction>]
+O24 else if [#<search_axis> EQ 3]
+    ; Z Axis
+    G1 Z[-#<_hal[probe.ps_probe_latch]>*#<search_direction>]
+O24 endif
+
+; Allow a half second for the probe input to clear
+G4 P0.5
+
+o<_psng_probe> endsub [0]
+M2
