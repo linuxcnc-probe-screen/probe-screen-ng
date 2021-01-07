@@ -8,7 +8,7 @@ o<_psng_probe_y> sub
 #<search_direction> = #2
 
 ; Call the Probe Routine with Y axis specified
-o<_psng_probe> call [#<search_distance>] [#<search_direction>] [2]
+o<_psng_probe> call [#<search_distance>] [2]
 
 o<_psng_probe_y> endsub [#<_value>]
 M2

@@ -50,7 +50,7 @@ G53 G0 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
 G53 G0 Z[#<_ini[TOOLSENSOR]Z>]
 
 ; Measure Tool
-o<_psng_probe_z> call [#<_ini[TOOLSENSOR]MAXPROBE>] [1]
+o<_psng_probe_z> call [#<_ini[TOOLSENSOR]MAXPROBE>]
 O1 if [#<_value> EQ -1]
     M72 ; Restore modal state
     O1 return [-3] ; indicate probe already tripped to epilog

@@ -8,7 +8,7 @@ o<_psng_probe_z> sub
 #<search_direction> = #2
 
 ; Call the Probe Routine with Z axis specified
-o<_psng_probe> call [#<search_distance>] [#<search_direction>] [3]
+o<_psng_probe> call [#<search_distance>] [3]
 
 o<_psng_probe_z> endsub [#<_value>]
 M2

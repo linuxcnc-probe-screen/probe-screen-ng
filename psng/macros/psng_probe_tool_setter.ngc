@@ -20,7 +20,7 @@ G49
 G10 L20 P0 Z[#<_hal[axis.z.pos-cmd]>]
 
 ; Probe Tool Sensor
-o<_psng_probe_z> call [#<_ini[TOOLSENSOR]MAXPROBE>] [1]
+o<_psng_probe_z> call [#<_ini[TOOLSENSOR]MAXPROBE>]
 O1 if [#<_value> EQ -1]
     M72 ; Restore modal state
     (ABORT, Probe already tripped when starting G38.3 move)

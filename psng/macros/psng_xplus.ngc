@@ -13,7 +13,7 @@ o<_psng_hook> call [6]
 G90
 
 ; Probe X Plus
-o<_psng_probe_x> call [#<_hal[probe.ps_probe_max]>] [-1]
+o<_psng_probe_x> call [#<_hal[probe.ps_probe_max]>]
 O1 if [#<_value> EQ -1]
     M72 ; Restore modal state
     (ABORT, Probe already tripped when starting G38.3 move)

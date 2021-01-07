@@ -5,10 +5,9 @@ o<_psng_probe_x> sub
 
 ; Paramaters for this macro
 #<search_distance> = #1
-#<search_direction> = #2
 
 ; Call the Probe Routine with X axis specified
-o<_psng_probe> call [#<search_distance>] [#<search_direction>] [1]
+o<_psng_probe> call [#<search_distance>] [1]
 
 o<_psng_probe_x> endsub [#<_value>]
 M2

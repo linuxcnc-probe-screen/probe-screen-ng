@@ -8,21 +8,29 @@ M73
 
 ; Paramaters for this macro
 #<search_distance> = #1
-#<search_direction> = #2
-#<search_axis> = #3
+#<search_axis> = #2
 
-O1 if [#<search_axis> GT 3]
-    ; Unknown / Unsupported AXIS for Probe
-    O1 return [-99]
+; Determine the Search Direction
+O1 if [#<search_distance> GE 0]
+    ; Searching in the positive direction
+    O1 #<search_direction> = 1
+O1 else
+    ; Searching in the negative direction
+    O1 #<search_direction> = -1
 O1 endif
 
-O2 if [#<_hal[probe.ps_searchvel]> LE 0]
-    O2 return [-98] ; indicate searchvel <= 0
+O2 if [#<search_axis> GT 3]
+    ; Unknown / Unsupported AXIS for Probe
+    O2 return [-98]
 O2 endif
 
-O3 if [#<_hal[probe.ps_probevel]> LE 0]
-    O3 return [-97] ; indicate probevel <= 0
+O3 if [#<_hal[probe.ps_searchvel]> LE 0]
+    O3 return [-97] ; indicate searchvel <= 0
 O3 endif
+
+O4 if [#<_hal[probe.ps_probevel]> LE 0]
+    O4 return [-96] ; indicate probevel <= 0
+O4 endif
 
 ; Set incremental mode
 G91
@@ -41,13 +49,13 @@ O10 endif
 ; Perform the Search
 O11 if [#<search_axis> EQ 1]
     ; X Axis
-    G38.3 X[#<search_distance>*#<search_direction>]
+    G38.3 X[#<search_distance>]
 O11 else if [#<search_axis> EQ 2]
     ; Y Axis
-    G38.3 Y[#<search_distance>*#<search_direction>]
+    G38.3 Y[#<search_distance>]
 O11 else if [#<search_axis> EQ 3]
     ; Z Axis
-    G38.3 Z[#<search_distance>*#<search_direction>]
+    G38.3 Z[#<search_distance>]
 O11 endif
 
 ; Check to see if we failed to make contact
@@ -58,13 +66,13 @@ O12 endif
 ; Move away
 O13 if [#<search_axis> EQ 1]
     ; X Axis
-    G1 X[#<_hal[probe.ps_probe_latch]>*#<search_direction>]
+    G1 X[-#<_hal[probe.ps_probe_latch]>*#<search_direction>]
 O13 else if [#<search_axis> EQ 2]
     ; Y Axis
-    G1 Y[#<_hal[probe.ps_probe_latch]>*#<search_direction>]
+    G1 Y[-#<_hal[probe.ps_probe_latch]>*#<search_direction>]
 O13 else if [#<search_axis> EQ 3]
     ; Z Axis
-    G1 Z[#<_hal[probe.ps_probe_latch]>*#<search_direction>]
+    G1 Z[-#<_hal[probe.ps_probe_latch]>*#<search_direction>]
 O13 endif
 
 ; Allow a half second for the probe input to clear
@@ -84,13 +92,13 @@ M66 E0 L0
 ; Perform the Probe
 O22 if [#<search_axis> EQ 1]
     ; X Axis
-    G38.3 X-[#<_hal[probe.ps_probe_latch]>*2*#<search_direction>]
+    G38.3 X[#<_hal[probe.ps_probe_latch]>*2*#<search_direction>]
 O22 else if [#<search_axis> EQ 2]
     ; Y Axis
-    G38.3 Y-[#<_hal[probe.ps_probe_latch]>*2*#<search_direction>]
+    G38.3 Y[#<_hal[probe.ps_probe_latch]>*2*#<search_direction>]
 O22 else if [#<search_axis> EQ 3]
     ; Z Axis
-    G38.3 Z-[#<_hal[probe.ps_probe_latch]>*2*#<search_direction>]
+    G38.3 Z[#<_hal[probe.ps_probe_latch]>*2*#<search_direction>]
 O22 endif
 
 ; Check to see if we failed to make contact
@@ -104,13 +112,13 @@ F[#<_hal[probe.ps_searchvel]>]
 ; Move away and allow a half second for the probe to clear
 O24 if [#<search_axis> EQ 1]
     ; X Axis
-    G1 X[#<_hal[probe.ps_probe_latch]>*#<search_direction>]
+    G1 X[-#<_hal[probe.ps_probe_latch]>*#<search_direction>]
 O24 else if [#<search_axis> EQ 2]
     ; Y Axis
-    G1 Y[#<_hal[probe.ps_probe_latch]>*#<search_direction>]
+    G1 Y[-#<_hal[probe.ps_probe_latch]>*#<search_direction>]
 O24 else if [#<search_axis> EQ 3]
     ; Z Axis
-    G1 Z[#<_hal[probe.ps_probe_latch]>*#<search_direction>]
+    G1 Z[-#<_hal[probe.ps_probe_latch]>*#<search_direction>]
 O24 endif
 
 ; Allow a half second for the probe input to clear

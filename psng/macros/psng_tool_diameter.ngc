@@ -15,7 +15,7 @@ G53 G0 X[#<_ini[TOOLSENSOR]X>] Y[#<_ini[TOOLSENSOR]Y>]
 G53 G0 Z[#<_ini[TOOLSENSOR]Z>]
 
 ; Probe Tool Sensor
-o<_psng_probe_z> call [#<_ini[TOOLSENSOR]MAXPROBE>] [1]
+o<_psng_probe_z> call [#<_ini[TOOLSENSOR]MAXPROBE>]
 O1 if [<#_value> EQ -1]
     M72 ; Restore modal state
     (ABORT, Probe already tripped when starting G38.3 move)
@@ -32,5 +32,5 @@ M71 ; Invalidate Modal Autorestore
 o<psng_modal_restore> call
 ; END PSNG POSTAMBLE
 
-o<_psng_tool_diameter> endsub
+o<psng_tool_diameter> endsub
 M2
