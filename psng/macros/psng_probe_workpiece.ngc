@@ -11,6 +11,9 @@ G92.1
 G49
 G10 L20 P0 Z[#<_hal[axis.z.pos-cmd]>]
 
+; Ensure we're in G90 / absolute mode
+G90
+
 ; Probe the Workpiece
 o<_psng_probe_z> call [-#<_hal[probe.ps_probe_max]>] [1]
 O1 if [#<_value> EQ -1]

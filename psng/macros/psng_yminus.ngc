@@ -9,6 +9,9 @@ o<_psng_hook> call [8]
 ; Save starting Y position
 #<y>=#<_y>
 
+; Ensure we're in G90 / absolute mode
+G90
+
 ; Probe Y Minus
 o<_psng_probe_y> call [-#<_hal[probe.ps_probe_max]>] [1]
 O1 if [#<_value> EQ -1]

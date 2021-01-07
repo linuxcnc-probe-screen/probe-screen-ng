@@ -9,6 +9,9 @@ o<_psng_hook> call [3]
 ; Save current Z position
 #<z>=#<_z>
 
+; Ensure we're in G90 / absolute mode
+G90
+
 ; Probe Table
 o<_psng_probe_z> call [-#<_hal[probe.ps_probe_max]>] [1]
 O1 if [#<_value> EQ -1]
@@ -20,6 +23,7 @@ O1 else if [#<_value> EQ -2]
 O1 endif
 
 ; Move off the Table
+(debug, #<z>)
 G0 Z#<z>
 
 ; BEGIN PSNG POSTAMBLE
