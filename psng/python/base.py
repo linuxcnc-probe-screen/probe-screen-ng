@@ -144,7 +144,7 @@ class ProbeScreenBase(object):
 
         if "TRUE" in error_pin:
             text = "See notification popup"
-            self.add_history("Error: %s" % text, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            self.add_history("Error: %s" % text)
             print("error", text)
             self.command.mode(linuxcnc.MODE_MANUAL)
             self.command.wait_complete()
@@ -194,42 +194,53 @@ class ProbeScreenBase(object):
         self,
         tool_tip_text,
         s="",
-        xm=0.0,
-        xc=0.0,
-        xp=0.0,
-        lx=0.0,
-        ym=0.0,
-        yc=0.0,
-        yp=0.0,
-        ly=0.0,
-        z=0.0,
-        d=0.0,
-        a=0.0,
+        xm=None,
+        xc=None,
+        xp=None,
+        lx=None,
+        ym=None,
+        yc=None,
+        yp=None,
+        ly=None,
+        z=None,
+        d=None,
+        a=None,
     ):
-        #        c = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         c = datetime.now().strftime("%H:%M:%S  ") + "{0: <10}".format(tool_tip_text)
         if "Xm" in s:
             c += "X-=%.4f " % xm
+            self._lb_probe_xm.set_text("%.4f" % xm)
         if "Xc" in s:
             c += "Xc=%.4f " % xc
+            self._lb_probe_xc.set_text("%.4f" % xc)
         if "Xp" in s:
             c += "X+=%.4f " % xp
+            self._lb_probe_xp.set_text("%.4f" % xp)
         if "Lx" in s:
             c += "Lx=%.4f " % lx
+            self._lb_probe_lx.set_text("%.4f" % lx)
         if "Ym" in s:
             c += "Y-=%.4f " % ym
+            self._lb_probe_ym.set_text("%.4f" % ym)
         if "Yc" in s:
             c += "Yc=%.4f " % yc
+            self._lb_probe_yc.set_text("%.4f" % yc)
         if "Yp" in s:
             c += "Y+=%.4f " % yp
+            self._lb_probe_yp.set_text("%.4f" % yp)
         if "Ly" in s:
             c += "Ly=%.4f " % ly
+            self._lb_probe_ly.set_text("%.4f" % ly)
         if "Z" in s:
             c += "Z=%.4f " % z
+            self._lb_probe_z.set_text("%.4f" % z)
         if "D" in s:
             c += "D=%.4f" % d
+            self._lb_probe_d.set_text("%.4f" % d)
         if "A" in s:
             c += "Angle=%.3f" % a
+            self._lb_probe_a.set_text("%.3f" % a)
+
         i = self.buffer.get_end_iter()
         if i.get_line() > 1000:
             i.backward_line()
@@ -255,37 +266,8 @@ class ProbeScreenBase(object):
         dialog.destroy()
         return responce == gtk.RESPONSE_OK
 
-    def display_result_xp(self, value):
-        self._lb_probe_xp.set_text("%.4f" % value)
-
-    def display_result_yp(self, value):
-        self._lb_probe_yp.set_text("%.4f" % value)
-
-    def display_result_xm(self, value):
-        self._lb_probe_xm.set_text("%.4f" % value)
-
-    def display_result_ym(self, value):
-        self._lb_probe_ym.set_text("%.4f" % value)
-
-    def display_result_lx(self, value):
-        self._lb_probe_lx.set_text("%.4f" % value)
-
-    def display_result_ly(self, value):
-        self._lb_probe_ly.set_text("%.4f" % value)
-
-    def display_result_z(self, value):
-        self._lb_probe_z.set_text("%.4f" % value)
-
-    def display_result_d(self, value):
-        self._lb_probe_d.set_text("%.4f" % value)
-
-    def display_result_xc(self, value):
-        self._lb_probe_xc.set_text("%.4f" % value)
-
-    def display_result_yc(self, value):
-        self._lb_probe_yc.set_text("%.4f" % value)
-
     def display_result_a(self, value):
+        # TODO: Convert the remaining uses of this to add_history and remove.
         self._lb_probe_a.set_text("%.3f" % value)
 
     # --------------------------
@@ -371,30 +353,68 @@ class ProbeScreenBase(object):
             coord[1] = x1 * math.sin(t) + y1 * math.cos(t)
         return coord
 
-    def length_x(self):
+    def length_x(self, xm=None, xp=None):
+        """ Calculates a length in the X direction """
+        # Use previous value for xm if not supplied
+        if xm is None:
+            xm = self._lb_probe_xm.get_text()
+            # Use None if no previous value exists
+            if xm == "":
+                xm = None
+            else:
+                xm = float(xm)
+
+        # Use previous value for xp if not supplied
+        if xp is None:
+            xp = self._lb_probe_xp.get_text()
+            # Use None if no previous value exists
+            if xp == "":
+                xp = None
+            else:
+                xp = float(xp)
+
         res = 0
-        if self._lb_probe_xm.get_text() == "" or self._lb_probe_xp.get_text() == "":
+
+        if xm is None or xp is None:
             return res
-        xm = float(self._lb_probe_xm.get_text())
-        xp = float(self._lb_probe_xp.get_text())
+
         if xm < xp:
             res = xp - xm
         else:
             res = xm - xp
-        self.display_result_lx(res)
+
         return res
 
-    def length_y(self):
+    def length_y(self, ym=None, yp=None):
+        """ Calculates a length in the Y direction """
+        # Use previous value for ym if not supplied
+        if ym is None:
+            ym = self._lb_probe_ym.get_text()
+            # Use None if no previous value exists
+            if ym == "":
+                ym = None
+            else:
+                ym = float(ym)
+
+        # Use previous value for yp if not supplied
+        if yp is None:
+            yp = self._lb_probe_yp.get_text()
+            # Use None if no previous value exists
+            if yp == "":
+                yp = None
+            else:
+                yp = float(yp)
+
         res = 0
-        if self._lb_probe_ym.get_text() == "" or self._lb_probe_yp.get_text() == "":
+
+        if ym is None or yp is None:
             return res
-        ym = float(self._lb_probe_ym.get_text())
-        yp = float(self._lb_probe_yp.get_text())
+
         if ym < yp:
             res = yp - ym
         else:
             res = ym - yp
-        self.display_result_ly(res)
+
         return res
 
     # --------------------------
