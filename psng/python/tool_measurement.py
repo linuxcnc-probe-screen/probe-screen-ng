@@ -85,9 +85,11 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         ):
             self.chk_use_tool_measurement.set_active(False)
             self.tool_dia.set_sensitive(False)
-            print(_("**** PROBE SCREEN INFO ****"))
-            print(_("**** no valid probe config in INI File ****"))
-            print(_("**** disabled auto tool measurement ****"))
+
+            self.error_dialog(
+                "Invalid INI Configuration",
+                secondary="Please check the TOOLSENSOR INI configurations",
+            )
         else:
             self.spbtn_setter_height.set_value(
                 self.prefs.getpref("setterheight", 0.0, float)
@@ -322,13 +324,10 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
             else:
                 tooltable = self.inifile.find("EMCIO", "TOOL_TABLE")
                 if not tooltable:
-                    print(_("**** auto_tool_measurement ERROR ****"))
-                    print(
-                        _(
-                            "**** Did not find a toolfile file in [EMCIO] TOOL_TABLE ****"
-                        )
+                    self.error_dialog(
+                        "Tool Measurement Error",
+                        secondary="Did not find a toolfile file in [EMCIO] TOOL_TABLE",
                     )
-                    sys.exit()
                 CONFIGPATH = os.environ["CONFIG_DIR"]
                 toolfile = os.path.join(CONFIGPATH, tooltable)
                 self.tooledit1.set_filename(toolfile)

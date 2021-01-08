@@ -46,8 +46,7 @@ class ProbeScreenBase(object):
         # Load the machines INI file
         self.inifile = linuxcnc.ini(os.environ["INI_FILE_NAME"])
         if not self.inifile:
-            print("**** PROBE SCREEN GET INI INFO **** \n Error, no INI File given !!")
-            sys.exit()
+            self.error_dialog("Error, no INI File given")
 
         # Load Probe Screen Preferences
         self.prefs = ProbeScreenConfigParser(self.get_preference_file_path())
@@ -248,13 +247,15 @@ class ProbeScreenBase(object):
         i.set_line(0)
         self.buffer.insert(i, "%s \n" % c)
 
-    def warning_dialog(self, message, secondary=None, title=_("Operator Message")):
-        """ displays a warning dialog """
+    def _dialog(
+        self, gtk_type, gtk_buttons, message, secondary=None, title=_("Probe Screen NG")
+    ):
+        """ displays a dialog """
         dialog = gtk.MessageDialog(
             self.window,
             gtk.DIALOG_DESTROY_WITH_PARENT,
-            gtk.MESSAGE_INFO,
-            gtk.BUTTONS_OK,
+            gtk_type,
+            gtk_buttons,
             message,
         )
         # if there is a secondary message then the first message text is bold
@@ -265,6 +266,17 @@ class ProbeScreenBase(object):
         responce = dialog.run()
         dialog.destroy()
         return responce == gtk.RESPONSE_OK
+
+    def warning_dialog(self, message, secondary=None, title=_("Probe Screen NG")):
+        """ displays a warning dialog """
+        return self._dialog(
+            gtk.MESSAGE_WARNING, gtk.BUTTONS_OK, message, secondary, title
+        )
+
+    def error_dialog(self, message, secondary=None, title=_("Probe Screen NG")):
+        """ displays a warning dialog and exits the probe screen"""
+        self._dialog(gtk.MESSAGE_ERROR, gtk.BUTTONS_CLOSE, message, secondary, title)
+        sys.exit(1)
 
     def display_result_a(self, value):
         # TODO: Convert the remaining uses of this to add_history and remove.
