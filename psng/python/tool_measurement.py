@@ -70,18 +70,18 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
 
     # Read the ini file config [TOOLSENSOR] section
     def _init_tool_sensor_data(self):
-        self.xpos = float(self.inifile.find("TOOLSENSOR", "X"))
-        self.ypos = float(self.inifile.find("TOOLSENSOR", "Y"))
-        self.zpos = float(self.inifile.find("TOOLSENSOR", "Z"))
-        self.maxprobe = float(self.inifile.find("TOOLSENSOR", "MAXPROBE"))
-        self.tsdiam = float(self.inifile.find("TOOLSENSOR", "TS_DIAMETER"))
+        xpos = self.inifile.find("TOOLSENSOR", "X")
+        ypos = self.inifile.find("TOOLSENSOR", "Y")
+        zpos = self.inifile.find("TOOLSENSOR", "Z")
+        maxprobe = self.inifile.find("TOOLSENSOR", "MAXPROBE")
+        tsdiam = self.inifile.find("TOOLSENSOR", "TS_DIAMETER")
 
         if (
-            not self.xpos
-            or not self.ypos
-            or not self.zpos
-            or not self.maxprobe
-            or not self.tsdiam
+            xpos is None
+            or ypos is None
+            or zpos is None
+            or maxprobe is None
+            or tsdiam is None
         ):
             self.chk_use_tool_measurement.set_active(False)
             self.tool_dia.set_sensitive(False)
@@ -91,6 +91,12 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
                 secondary="Please check the TOOLSENSOR INI configurations",
             )
         else:
+            self.xpos = float(xpos)
+            self.ypos = float(ypos)
+            self.zpos = float(zpos)
+            self.maxprobe = float(maxprobe)
+            self.tsdiam = float(tsdiam)
+
             self.spbtn_setter_height.set_value(
                 self.prefs.getpref("setterheight", 0.0, float)
             )
