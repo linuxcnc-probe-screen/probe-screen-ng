@@ -40,12 +40,10 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         self.spbtn_block_height = self.builder.get_object("spbtn_block_height")
         self.btn_probe_setter = self.builder.get_object("btn_probe_setter")
         self.btn_probe_workpiece = self.builder.get_object("btn_probe_workpiece")
-        self.tooledit1 = self.builder.get_object("tooledit1")
-        self.chk_use_tool_measurement = self.builder.get_object(
-            "chk_use_tool_measurement"
-        )
         self.btn_tool_dia = self.builder.get_object("btn_tool_dia")
         self.btn_probe_setter = self.builder.get_object("btn_probe_setter")
+        self.tooledit1 = self.builder.get_object("tooledit1")
+        self.chk_use_tool_measurement = self.builder.get_object("chk_use_tool_measurement")
 
         self.chk_use_tool_measurement.set_active(
             self.prefs.getpref("use_tool_measurement", False, bool)

@@ -2227,7 +2227,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkButton" idid="btn_probe_table">
+                          <object class="GtkButton" id="btn_probe_table">
                             <property name="width_request">72</property>
                             <property name="height_request">58</property>
                             <property name="visible">True</property>
