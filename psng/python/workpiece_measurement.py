@@ -46,6 +46,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
     #               Measurement outside
     # -------------------------------------------------
     # X+
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_xp_released(self, gtkbutton, data=None):
         # move X - xy_clearance
         s = """G91
@@ -78,6 +79,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.set_zerro("X")
 
     # Y+
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_yp_released(self, gtkbutton, data=None):
         # move Y - xy_clearance
         s = """G91
@@ -110,6 +112,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.set_zerro("Y")
 
     # X-
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_xm_released(self, gtkbutton, data=None):
         # move X + xy_clearance
         s = """G91
@@ -142,6 +145,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.set_zerro("X")
 
     # Y-
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_ym_released(self, gtkbutton, data=None):
         # move Y + xy_clearance
         s = """G91
@@ -176,6 +180,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
     # Corners
     # Move Probe manual under corner 2-3 mm
     # X+Y+
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_xpyp_released(self, gtkbutton, data=None):
         # move X - xy_clearance Y + edge_length
         s = """G91
@@ -236,6 +241,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.set_zerro("XY")
 
     # X+Y-
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_xpym_released(self, gtkbutton, data=None):
         # move X - xy_clearance Y + edge_length
         s = """G91
@@ -297,6 +303,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.set_zerro("XY")
 
     # X-Y+
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_xmyp_released(self, gtkbutton, data=None):
         # move X + xy_clearance Y + edge_length
         s = """G91
@@ -356,6 +363,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.set_zerro("XY")
 
     # X-Y-
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_xmym_released(self, gtkbutton, data=None):
         # move X + xy_clearance Y - edge_length
         s = """G91
@@ -416,6 +424,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.set_zerro("XY")
 
     # Center X+ X- Y+ Y-
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_xy_center_released(self, gtkbutton, data=None):
         # move X - edge_length- xy_clearance
         tmpx = self.halcomp["ps_edge_length"] + self.halcomp["ps_xy_clearance"]
@@ -545,6 +554,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
     # Corners
     # Move Probe manual under corner 2-3 mm
     # X+Y+
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_xpyp1_released(self, gtkbutton, data=None):
         # move Y - edge_length X - xy_clearance
         s = """G91
@@ -600,6 +610,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.set_zerro("XY")
 
     # X+Y-
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_xpym1_released(self, gtkbutton, data=None):
         # move Y + edge_length X - xy_clearance
         s = """G91
@@ -657,6 +668,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.set_zerro("XY")
 
     # X-Y+
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_xmyp1_released(self, gtkbutton, data=None):
         # move Y - edge_length X + xy_clearance
         s = """G91
@@ -715,6 +727,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.set_zerro("XY")
 
     # X-Y-
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_xmym1_released(self, gtkbutton, data=None):
         # move Y + edge_length X + xy_clearance
         s = """G91
@@ -773,6 +786,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
         self.set_zerro("XY")
 
     # Hole Xin- Xin+ Yin- Yin+
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_xy_hole_released(self, gtkbutton, data=None):
         if self.z_clearance_down() == -1:
             return

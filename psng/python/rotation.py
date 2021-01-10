@@ -84,6 +84,7 @@ class ProbeScreenRotation(ProbeScreenBase):
         self.on_common_spbtn_value_changed("ps_offs_angle", gtkspinbutton, data)
 
     # Y+Y+
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_angle_yp_released(self, gtkbutton, data=None):
         self.stat.poll()
         xstart = (
@@ -148,6 +149,7 @@ class ProbeScreenRotation(ProbeScreenBase):
         self.rotate_coord_system(alfa)
 
     # Y-Y-
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_angle_ym_released(self, gtkbutton, data=None):
         self.stat.poll()
         xstart = (
@@ -211,6 +213,7 @@ class ProbeScreenRotation(ProbeScreenBase):
         self.rotate_coord_system(alfa)
 
     # X+X+
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_angle_xp_released(self, gtkbutton, data=None):
         self.stat.poll()
         ystart = (
@@ -274,6 +277,7 @@ class ProbeScreenRotation(ProbeScreenBase):
         self.rotate_coord_system(alfa)
 
     # X-X-
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_angle_xm_released(self, gtkbutton, data=None):
         self.stat.poll()
         ystart = (
