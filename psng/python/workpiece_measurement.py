@@ -47,6 +47,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
     # -------------------------------------------------
     # X+
     def on_xp_released(self, gtkbutton, data=None):
+    	if "FALSE" in error_pin:
         # move X - xy_clearance
         s = """G91
         G1 X-%f
@@ -79,6 +80,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # Y+
     def on_yp_released(self, gtkbutton, data=None):
+    	if "FALSE" in error_pin:
         # move Y - xy_clearance
         s = """G91
         G1 Y-%f
@@ -111,6 +113,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # X-
     def on_xm_released(self, gtkbutton, data=None):
+    	if "FALSE" in error_pin:
         # move X + xy_clearance
         s = """G91
         G1 X%f
@@ -143,6 +146,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # Y-
     def on_ym_released(self, gtkbutton, data=None):
+    	if "FALSE" in error_pin:
         # move Y + xy_clearance
         s = """G91
         G1 Y%f
@@ -177,6 +181,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
     # Move Probe manual under corner 2-3 mm
     # X+Y+
     def on_xpyp_released(self, gtkbutton, data=None):
+    	if "FALSE" in error_pin:
         # move X - xy_clearance Y + edge_length
         s = """G91
         G1 X-%f Y%f
@@ -237,6 +242,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # X+Y-
     def on_xpym_released(self, gtkbutton, data=None):
+    	if "FALSE" in error_pin:
         # move X - xy_clearance Y + edge_length
         s = """G91
         G1 X-%f Y-%f
@@ -298,6 +304,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # X-Y+
     def on_xmyp_released(self, gtkbutton, data=None):
+    	if "FALSE" in error_pin:
         # move X + xy_clearance Y + edge_length
         s = """G91
         G1 X%f Y%f
@@ -357,6 +364,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # X-Y-
     def on_xmym_released(self, gtkbutton, data=None):
+    	if "FALSE" in error_pin:
         # move X + xy_clearance Y - edge_length
         s = """G91
         G1 X%f Y-%f
@@ -417,6 +425,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # Center X+ X- Y+ Y-
     def on_xy_center_released(self, gtkbutton, data=None):
+    	if "FALSE" in error_pin:
         # move X - edge_length- xy_clearance
         tmpx = self.halcomp["ps_edge_length"] + self.halcomp["ps_xy_clearance"]
         s = """G91
@@ -546,6 +555,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
     # Move Probe manual under corner 2-3 mm
     # X+Y+
     def on_xpyp1_released(self, gtkbutton, data=None):
+    	if "FALSE" in error_pin:
         # move Y - edge_length X - xy_clearance
         s = """G91
         G1 X-%f Y-%f
@@ -601,6 +611,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # X+Y-
     def on_xpym1_released(self, gtkbutton, data=None):
+    	if "FALSE" in error_pin:
         # move Y + edge_length X - xy_clearance
         s = """G91
         G1 X-%f Y%f
@@ -658,6 +669,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # X-Y+
     def on_xmyp1_released(self, gtkbutton, data=None):
+    	if "FALSE" in error_pin:
         # move Y - edge_length X + xy_clearance
         s = """G91
         G1 X%f Y-%f
@@ -716,6 +728,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # X-Y-
     def on_xmym1_released(self, gtkbutton, data=None):
+    	if "FALSE" in error_pin:
         # move Y + edge_length X + xy_clearance
         s = """G91
         G1 X%f Y%f
@@ -774,6 +787,7 @@ class ProbeScreenWorkpieceMeasurement(ProbeScreenBase):
 
     # Hole Xin- Xin+ Yin- Yin+
     def on_xy_hole_released(self, gtkbutton, data=None):
+    	if "FALSE" in error_pin:
         if self.z_clearance_down() == -1:
             return
         # move X - edge_length Y + xy_clearance
