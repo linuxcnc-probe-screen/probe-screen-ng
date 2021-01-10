@@ -165,7 +165,6 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
 
     # Down probe to table for measuring it and use for calculate tool setter height and can set G10 L20 Z0 if you tick auto zero
     def on_btn_probe_table_released(self, gtkbutton, data=None):
-    	if "FALSE" in error_pin:
         # Start psng_probe_table.ngc
         if self.ocode("o<psng_probe_table> call") == -1:
             return
@@ -175,7 +174,6 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         
     # Down probe to tool setter for measuring it vs table probing result
     def on_btn_probe_tool_setter_released(self, gtkbutton, data=None):
-    	if "FALSE" in error_pin:
         # Start psng_probe_tool_setter.ngc
         if self.ocode("o<psng_probe_tool_setter> call") == -1:
             return
@@ -186,7 +184,6 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
 
     # Down probe to workpiece for measuring it vs Know tool setter height
     def on_btn_probe_workpiece_released(self, gtkbutton, data=None):
-    	if "FALSE" in error_pin:
         # Start psng_probe_workpiece.ngc
         if self.ocode("o<psng_probe_workpiece> call") == -1:
             return
@@ -197,7 +194,6 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
 
     # Probe tool Diameter
     def on_btn_tool_dia_released(self, gtkbutton, data=None):
-    	if "FALSE" in error_pin:
         # move XY to Tool Setter point
         # Start psng_tool_diameter.ngc
         if self.ocode("o<psng_tool_diameter> call") == -1:
