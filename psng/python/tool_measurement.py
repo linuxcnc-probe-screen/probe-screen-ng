@@ -173,7 +173,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         self.set_zerro("Z", 0, 0, a[2])
         
     # Down probe to tool setter for measuring it vs table probing result
-    def on_btn_probe_tool_setter_released(self, gtkbutton, data=None):
+    def on_btn_probe_setter_released(self, gtkbutton, data=None):
         # Start psng_probe_tool_setter.ngc
         if self.ocode("o<psng_probe_tool_setter> call") == -1:
             return

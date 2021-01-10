@@ -2428,7 +2428,7 @@
                                         <property name="tooltip_text" translatable="yes">TS Height</property>
                                         <property name="related_action">vcp_action_reload</property>
                                         <property name="use_action_appearance">False</property>
-                                        <signal name="released" handler="on_btn_probe_tool_setter_released" swapped="no"/>
+                                        <signal name="released" handler="on_btn_probe_setter_released" swapped="no"/>
                                         <child>
                                           <object class="GtkImage" id="image45">
                                             <property name="visible">True</property>
