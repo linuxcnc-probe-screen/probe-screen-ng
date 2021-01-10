@@ -169,6 +169,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         # Start psng_probe_tool_setter.ngc
         if self.ocode("o<psng_probe_tool_setter> call") == -1:
             return
+        self.vcp_reload()
         a = self.stat.probed_position
         self.spbtn_setter_height.set_value(float(a[2]))
         self.add_history(gtkbutton.get_tooltip_text(), "Z", z=a[2])
@@ -178,6 +179,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         # Start psng_probe_workpiece.ngc
         if self.ocode("o<psng_probe_workpiece> call") == -1:
             return
+        self.vcp_reload()
         a = self.stat.probed_position
         self.spbtn_block_height.set_value(float(a[2]))
         self.add_history(gtkbutton.get_tooltip_text(), "Z", z=a[2])
@@ -343,6 +345,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
                 ).format(toolprepnumber, tooldescr)
             result = self.warning_dialog(message, title=_("Manual Toolchange"))
             if result:
+                self.vcp_reload()
                 self.halcomp["toolchange-changed"] = True
             else:
                 print(
