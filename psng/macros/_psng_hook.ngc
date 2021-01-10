@@ -10,7 +10,7 @@
 ;
 ; 1 = psng_manual_change
 ; 2 = psng_tool_diameter
-; 3 = psng_down
+; 3 = psng_probe_table
 ; 4 = psng_probe_tool_setter
 ; 5 = psng_probe_workpiece
 ; 6 = psng_xminus
