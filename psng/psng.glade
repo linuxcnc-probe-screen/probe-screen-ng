@@ -21,7 +21,7 @@
   </object>
   <object class="GtkAdjustment" id="adj_offs_angle">
     <property name="lower">-359.9999</property>
-    <property name="upper">359.99990000000003</property>
+    <property name="upper">359.9999</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
@@ -2208,7 +2208,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkButton" id="down">
+                          <object class="GtkButton" id="btn_probe_table">
                             <property name="width_request">72</property>
                             <property name="height_request">58</property>
                             <property name="visible">True</property>
@@ -2258,7 +2258,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkButton" id="tool_dia">
+                          <object class="GtkButton" id="btn_tool_dia">
                             <property name="width_request">72</property>
                             <property name="height_request">58</property>
                             <property name="visible">True</property>
@@ -2266,7 +2266,7 @@
                             <property name="receives_default">True</property>
                             <property name="tooltip_text" translatable="yes">Tool diam</property>
                             <property name="use_action_appearance">False</property>
-                            <signal name="released" handler="on_tool_dia_released" swapped="no"/>
+                            <signal name="released" handler="on_btn_tool_dia_released" swapped="no"/>
                             <child>
                               <object class="GtkImage" id="image47">
                                 <property name="visible">True</property>
@@ -2409,7 +2409,7 @@
                                         <property name="tooltip_text" translatable="yes">TS Height</property>
                                         <property name="related_action">vcp_action_reload</property>
                                         <property name="use_action_appearance">False</property>
-                                        <signal name="clicked" handler="on_btn_probe_tool_setter_released" swapped="no"/>
+                                        <signal name="released" handler="on_btn_probe_tool_setter_released" swapped="no"/>
                                         <child>
                                           <object class="GtkImage" id="image45">
                                             <property name="visible">True</property>
@@ -2433,7 +2433,7 @@
                                         <property name="tooltip_text" translatable="yes">Workpiece Height</property>
                                         <property name="related_action">vcp_action_reload</property>
                                         <property name="use_action_appearance">False</property>
-                                        <signal name="clicked" handler="on_btn_probe_workpiece_released" swapped="no"/>
+                                        <signal name="released" handler="on_btn_probe_workpiece_released" swapped="no"/>
                                         <child>
                                           <object class="GtkImage" id="image46">
                                             <property name="visible">True</property>
