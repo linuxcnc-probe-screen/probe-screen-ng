@@ -335,7 +335,7 @@ class ProbeScreenBase(object):
             if "Z" in s:
                 tmpz = tmpz - z + self.halcomp["ps_offs_z"]
                 c += " Z%s" % tmpz
-            self.gcode(c)
+            self.gcode(c)                                 # Is there a real reason for not use the same system if self.gcode(c) == -1: for coding style ?
             time.sleep(1)
 
     def probed_position_with_offsets(self):

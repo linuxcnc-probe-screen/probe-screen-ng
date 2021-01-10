@@ -2229,7 +2229,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkButton" id="down">
+                          <object class="GtkButton" ="btn_probe_table">
                             <property name="width_request">60</property>
                             <property name="height_request">50</property>
                             <property name="visible">True</property>
@@ -2279,7 +2279,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkButton" id="tool_dia">
+                          <object class="GtkButton" id="btn_tool_dia">
                             <property name="width_request">60</property>
                             <property name="height_request">50</property>
                             <property name="visible">True</property>
@@ -2287,7 +2287,7 @@
                             <property name="receives_default">True</property>
                             <property name="tooltip_text" translatable="yes">Tool diam</property>
                             <property name="use_action_appearance">False</property>
-                            <signal name="released" handler="on_tool_dia_released" swapped="no"/>
+                            <signal name="released" handler="on_btn_tool_dia_released" swapped="no"/>
                             <child>
                               <object class="GtkImage" id="image47">
                                 <property name="visible">True</property>
