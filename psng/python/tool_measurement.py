@@ -38,10 +38,10 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         self.frm_probe_pos = self.builder.get_object("frm_probe_pos")
         self.spbtn_setter_height = self.builder.get_object("spbtn_setter_height")
         self.spbtn_block_height = self.builder.get_object("spbtn_block_height")
-        self.btn_probe_setter = self.builder.get_object("btn_probe_setter")
+        self.btn_probe_tool_setter = self.builder.get_object("btn_probe_tool_setter")
         self.btn_probe_workpiece = self.builder.get_object("btn_probe_workpiece")
         self.btn_tool_dia = self.builder.get_object("btn_tool_dia")
-        self.btn_probe_setter = self.builder.get_object("btn_probe_setter")
+        self.btn_probe_tool_setter = self.builder.get_object("btn_probe_tool_setter")
         self.tooledit1 = self.builder.get_object("tooledit1")
         self.chk_use_tool_measurement = self.builder.get_object("chk_use_tool_measurement")
 
@@ -83,7 +83,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         ):
             self.chk_use_tool_measurement.set_active(False)
             self.btn_tool_dia.set_sensitive(False)
-            self.btn_probe_setter.set_sensitive(False)
+            self.btn_probe_tool_setter.set_sensitive(False)
 
             self.error_dialog(
                 "Invalid INI Configuration",
@@ -173,7 +173,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         self.set_zerro("Z", 0, 0, a[2])
         
     # Down probe to tool setter for measuring it vs table probing result
-    def on_btn_probe_setter_released(self, gtkbutton, data=None):
+    def on_btn_probe_tool_setter_released(self, gtkbutton, data=None):
         # Start psng_probe_tool_setter.ngc
         if self.ocode("o<psng_probe_tool_setter> call") == -1:
             return
@@ -192,12 +192,6 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
 
     # Probe tool Diameter
     def on_btn_tool_dia_released(self, gtkbutton, data=None):
-        tooltable = self.inifile.find("EMCIO", "TOOL_TABLE")
-        if not tooltable:
-            self.error_dialog(
-                "Tool Diameter Measurement Error",
-                secondary="Did not find a toolfile file in [EMCIO] TOOL_TABLE",
-            )
         # move XY to Tool Setter point
         # Start psng_tool_diameter.ngc
         if self.ocode("o<psng_tool_diameter> call") == -1:
