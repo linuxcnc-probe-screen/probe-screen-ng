@@ -205,7 +205,7 @@ class ProbeScreenBase(object):
         d=None,
         a=None,
     ):
-        c = datetime.now().strftime("%H:%M:%S  ") + "{0: <10}".format(tool_tip_text)
+        c = "{0: <10}".format(tool_tip_text)
         if "Xm" in s:
             c += "X-=%.4f " % xm
             self._lb_probe_xm.set_text("%.4f" % xm)
@@ -240,12 +240,22 @@ class ProbeScreenBase(object):
             c += "Angle=%.3f" % a
             self._lb_probe_a.set_text("%.3f" % a)
 
+        self.add_history_text(c)
+
+    def add_history_text(self, text):
+        # Prepend a timestamp to all History lines
+        text = datetime.now().strftime("%H:%M:%S  ") + text
+
+        # Remove the oldest history entries when we have a large
+        # number of entries.
         i = self.buffer.get_end_iter()
         if i.get_line() > 1000:
             i.backward_line()
             self.buffer.delete(i, self.buffer.get_end_iter())
+
+        # Add the line of text to the top of the history
         i.set_line(0)
-        self.buffer.insert(i, "%s \n" % c)
+        self.buffer.insert(i, "%s \n" % text)
 
     def _dialog(
         self, gtk_type, gtk_buttons, message, secondary=None, title=_("Probe Screen NG")

@@ -138,13 +138,9 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
     def on_spbtn_setter_height_value_changed(self, gtkspinbutton, data=None):
         self.on_common_spbtn_value_changed("setterheight", gtkspinbutton, data)
 
+        # Record results to history panel
         c = "TS Height = " + "%.4f" % gtkspinbutton.get_value()
-        i = self.buffer.get_end_iter()
-        if i.get_line() > 1000:
-            i.backward_line()
-            self.buffer.delete(i, self.buffer.get_end_iter())
-        i.set_line(0)
-        self.buffer.insert(i, "%s \n" % c)
+        self.add_history_text(c)
 
     # Spinbox for block height with autosave value inside machine pref file
     def on_spbtn_block_height_key_press_event(self, gtkspinbutton, data=None):
@@ -153,16 +149,13 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
     def on_spbtn_block_height_value_changed(self, gtkspinbutton, data=None):
         self.on_common_spbtn_value_changed("blockheight", gtkspinbutton, data)
 
-        # set koordinate system to new origin
+        # set coordinate system to new origin
         self.gcode("G10 L2 P0 Z%s" % gtkspinbutton.get_value())
         self.vcp_reload()
+
+        # Record results to history panel
         c = "Workpiece Height = " + "%.4f" % gtkspinbutton.get_value()
-        i = self.buffer.get_end_iter()
-        if i.get_line() > 1000:
-            i.backward_line()
-            self.buffer.delete(i, self.buffer.get_end_iter())
-        i.set_line(0)
-        self.buffer.insert(i, "%s \n" % c)
+        self.add_history_text(c)
 
     # Down probe to table for measuring it and use for calculate tool setter height and can set G10 L20 Z0 if you tick auto zero
     def on_btn_probe_table_released(self, gtkbutton, data=None):
