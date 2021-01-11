@@ -40,19 +40,16 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         self.spbtn_block_height = self.builder.get_object("spbtn_block_height")
         self.btn_probe_tool_setter = self.builder.get_object("btn_probe_tool_setter")
         self.btn_probe_workpiece = self.builder.get_object("btn_probe_workpiece")
+        self.btn_tool_dia = self.builder.get_object("btn_tool_dia")
         self.tooledit1 = self.builder.get_object("tooledit1")
-        self.chk_use_tool_measurement = self.builder.get_object(
-            "chk_use_tool_measurement"
-        )
-        self.tool_dia = self.builder.get_object("tool_dia")
-        self.down = self.builder.get_object("down")
+        self.chk_use_tool_measurement = self.builder.get_object("chk_use_tool_measurement")
 
         self.chk_use_tool_measurement.set_active(
-            self.prefs.getpref("use_toolmeasurement", False, bool)
+            self.prefs.getpref("use_tool_measurement", False, bool)
         )
 
         # make the pins for tool measurement
-        self.halcomp.newpin("use_toolmeasurement", hal.HAL_BIT, hal.HAL_OUT)
+        self.halcomp.newpin("use_tool_measurement", hal.HAL_BIT, hal.HAL_OUT)
         self.halcomp.newpin("setterheight", hal.HAL_FLOAT, hal.HAL_OUT)
         self.halcomp.newpin("blockheight", hal.HAL_FLOAT, hal.HAL_OUT)
         # for manual tool change dialog
@@ -63,7 +60,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         hal_glib.GPin(pin).connect("value_changed", self.on_tool_change)
 
         if self.chk_use_tool_measurement.get_active():
-            self.halcomp["use_toolmeasurement"] = True
+            self.halcomp["use_tool_measurement"] = True
             self.hal_led_set_m6.hal_pin.set(1)
 
         self._init_tool_sensor_data()
@@ -84,7 +81,8 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
             or tsdiam is None
         ):
             self.chk_use_tool_measurement.set_active(False)
-            self.tool_dia.set_sensitive(False)
+            self.btn_tool_dia.set_sensitive(False)
+            self.btn_probe_tool_setter.set_sensitive(False)
 
             self.error_dialog(
                 "Invalid INI Configuration",
@@ -106,7 +104,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
             # to set the hal pin with correct values we emit a toogled
             if self.chk_use_tool_measurement.get_active():
                 self.frm_probe_pos.set_sensitive(True)
-                self.halcomp["use_toolmeasurement"] = True
+                self.halcomp["use_tool_measurement"] = True
                 self.halcomp["setterheight"] = self.spbtn_setter_height.get_value()
                 self.halcomp["blockheight"] = self.spbtn_block_height.get_value()
             else:
@@ -120,15 +118,15 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
     def on_chk_use_tool_measurement_toggled(self, gtkcheckbutton, data=None):
         if gtkcheckbutton.get_active():
             self.frm_probe_pos.set_sensitive(True)
-            self.halcomp["use_toolmeasurement"] = True
+            self.halcomp["use_tool_measurement"] = True
             self.halcomp["setterheight"] = self.spbtn_setter_height.get_value()
             self.halcomp["blockheight"] = self.spbtn_block_height.get_value()
         else:
             self.frm_probe_pos.set_sensitive(False)
-            self.halcomp["use_toolmeasurement"] = False
+            self.halcomp["use_tool_measurement"] = False
             self.halcomp["setterheight"] = 0.0
             self.halcomp["blockheight"] = 0.0
-        self.prefs.putpref("use_toolmeasurement", gtkcheckbutton.get_active(), bool)
+        self.prefs.putpref("use_tool_measurement", gtkcheckbutton.get_active(), bool)
         self.hal_led_set_m6.hal_pin.set(gtkcheckbutton.get_active())
 
     # Spinbox for setter height with autosave value inside machine pref file
@@ -164,6 +162,15 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         i.set_line(0)
         self.buffer.insert(i, "%s \n" % c)
 
+    # Down probe to table for measuring it and use for calculate tool setter height and can set G10 L20 Z0 if you tick auto zero
+    def on_btn_probe_table_released(self, gtkbutton, data=None):
+        # Start psng_probe_table.ngc
+        if self.ocode("o<psng_probe_table> call") == -1:
+            return
+        a = self.probed_position_with_offsets()
+        self.add_history(gtkbutton.get_tooltip_text(), "Z", z=a[2])
+        self.set_zerro("Z", 0, 0, a[2])
+        
     # Down probe to tool setter for measuring it vs table probing result
     def on_btn_probe_tool_setter_released(self, gtkbutton, data=None):
         # Start psng_probe_tool_setter.ngc
@@ -184,17 +191,8 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         self.spbtn_block_height.set_value(float(a[2]))
         self.add_history(gtkbutton.get_tooltip_text(), "Z", z=a[2])
 
-    # Down probe to table for measuring it and use for calculate tool setter height and can set G10 L20 Z0 if you tick auto zero
-    def on_btn_probe_table_released(self, gtkbutton, data=None):
-        # Start psng_probe_table.ngc
-        if self.ocode("o<psng_probe_table> call") == -1:
-            return
-        a = self.probed_position_with_offsets()
-        self.add_history(gtkbutton.get_tooltip_text(), "Z", z=a[2])
-        self.set_zerro("Z", 0, 0, a[2])
-
     # Probe tool Diameter
-    def on_tool_dia_released(self, gtkbutton, data=None):
+    def on_btn_tool_dia_released(self, gtkbutton, data=None):
         # move XY to Tool Setter point
         # Start psng_tool_diameter.ngc
         if self.ocode("o<psng_tool_diameter> call") == -1:

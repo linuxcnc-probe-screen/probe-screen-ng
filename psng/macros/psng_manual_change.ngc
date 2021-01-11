@@ -38,7 +38,7 @@ G49
 ; using the code being remapped here means 'use builtin behaviour'
 M6
 
-O200 if [#<_hal[probe.use_toolmeasurement]> EQ 0]
+O200 if [#<_hal[probe.use_tool_measurement]> EQ 0]
     M71 ; Invalidate Modal Autorestore
     o<_psng_modal_restore> call
     O200 return [3] ; indicate no tool measurement
