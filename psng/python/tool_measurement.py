@@ -42,7 +42,9 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         self.btn_probe_workpiece = self.builder.get_object("btn_probe_workpiece")
         self.btn_tool_dia = self.builder.get_object("btn_tool_dia")
         self.tooledit1 = self.builder.get_object("tooledit1")
-        self.chk_use_tool_measurement = self.builder.get_object("chk_use_tool_measurement")
+        self.chk_use_tool_measurement = self.builder.get_object(
+            "chk_use_tool_measurement"
+        )
 
         self.chk_use_tool_measurement.set_active(
             self.prefs.getpref("use_tool_measurement", False, bool)
@@ -170,7 +172,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         a = self.probed_position_with_offsets()
         self.add_history(gtkbutton.get_tooltip_text(), "Z", z=a[2])
         self.set_zerro("Z", 0, 0, a[2])
-        
+
     # Down probe to tool setter for measuring it vs table probing result
     def on_btn_probe_tool_setter_released(self, gtkbutton, data=None):
         # Start psng_probe_tool_setter.ngc
