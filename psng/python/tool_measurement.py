@@ -41,7 +41,6 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         self.btn_probe_tool_setter = self.builder.get_object("btn_probe_tool_setter")
         self.btn_probe_workpiece = self.builder.get_object("btn_probe_workpiece")
         self.btn_tool_dia = self.builder.get_object("btn_tool_dia")
-        self.btn_probe_tool_setter = self.builder.get_object("btn_probe_tool_setter")
         self.tooledit1 = self.builder.get_object("tooledit1")
         self.chk_use_tool_measurement = self.builder.get_object("chk_use_tool_measurement")
 
