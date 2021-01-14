@@ -30,6 +30,7 @@ class ProbeScreenZero(ProbeScreenBase):
     def __init__(self, halcomp, builder, useropts):
         super(ProbeScreenZero, self).__init__(halcomp, builder, useropts)
 
+        self.frm_set_zero = self.builder.get_object("frm_set_zero")
         self.chk_set_zero = self.builder.get_object("chk_set_zero")
         self.hal_led_set_zero = self.builder.get_object("hal_led_set_zero")
         self.spbtn_offs_x = self.builder.get_object("spbtn_offs_x")
@@ -46,20 +47,39 @@ class ProbeScreenZero(ProbeScreenBase):
         self.halcomp.newpin("ps_offs_y", hal.HAL_FLOAT, hal.HAL_OUT)
         self.halcomp.newpin("ps_offs_z", hal.HAL_FLOAT, hal.HAL_OUT)
 
-        if self.chk_set_zero.get_active():
-            self.halcomp["set_zero"] = True
-            self.hal_led_set_zero.hal_pin.set(1)
-        self.halcomp["ps_offs_x"] = self.spbtn_offs_x.get_value()
-        self.halcomp["ps_offs_y"] = self.spbtn_offs_y.get_value()
-        self.halcomp["ps_offs_z"] = self.spbtn_offs_z.get_value()
+        self._set_set_zero()
+
+    # --------------
+    # Helper Methods
+    # --------------
+    def _set_set_zero(self, enabled=None):
+        if enabled is None:
+            # If an enabled value is not supplied, read the current value
+            enabled = self.chk_set_zero.get_active()
+        else:
+            # If an enabled value is supplied, save the supplied value
+            self.prefs.putpref("set_zero", enabled, bool)
+            self.chk_set_zero.set_active(enabled)
+
+        self.frm_set_zero.set_sensitive(enabled)
+        self.hal_led_set_zero.hal_pin.set(enabled)
+
+        self.halcomp["set_zero"] = enabled
+
+        if enabled:
+            self.halcomp["ps_offs_x"] = self.spbtn_offs_x.get_value()
+            self.halcomp["ps_offs_y"] = self.spbtn_offs_y.get_value()
+            self.halcomp["ps_offs_z"] = self.spbtn_offs_z.get_value()
+        else:
+            self.halcomp["ps_offs_x"] = 0.0
+            self.halcomp["ps_offs_y"] = 0.0
+            self.halcomp["ps_offs_z"] = 0.0
 
     # -----------------
     # Touch Off Buttons
     # -----------------
     def on_chk_set_zero_toggled(self, gtkcheckbutton, data=None):
-        self.halcomp["set_zero"] = gtkcheckbutton.get_active()
-        self.hal_led_set_zero.hal_pin.set(gtkcheckbutton.get_active())
-        self.prefs.putpref("chk_set_zero", gtkcheckbutton.get_active(), bool)
+        self._set_set_zero(gtkcheckbutton.get_active())
 
     def on_spbtn_offs_x_key_press_event(self, gtkspinbutton, data=None):
         self.on_common_spbtn_key_press_event("ps_offs_x", gtkspinbutton, data)
