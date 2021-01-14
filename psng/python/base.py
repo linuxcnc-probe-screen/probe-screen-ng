@@ -21,8 +21,8 @@ import os
 import sys
 import time
 from datetime import datetime
-from subprocess import PIPE, Popen
 from functools import wraps
+from subprocess import PIPE, Popen
 
 import gtk
 import linuxcnc
