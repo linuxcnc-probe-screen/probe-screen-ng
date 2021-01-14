@@ -22,6 +22,7 @@ import sys
 import time
 from datetime import datetime
 from subprocess import PIPE, Popen
+from functools import wraps
 
 import gtk
 import linuxcnc
@@ -471,3 +472,25 @@ class ProbeScreenBase(object):
 
         # Update the preferences
         self.prefs.putpref(pin_name, gtkspinbutton.get_value(), _type)
+
+    # --------------------------
+    #
+    #  Generic Method Wrappers
+    #
+    # --------------------------
+    @classmethod
+    def ensure_errors_dismissed(cls, f):
+        """ Ensures all errors have been dismissed, otherwise, shows a warning dialog """
+
+        @wraps(f)
+        def wrapper(self, *args, **kwargs):
+            if self.error_poll() == -1:
+                message = _("Please dismiss & act upon all errors")
+                secondary = _("You can retry once done")
+                self.warning_dialog(message, secondary=secondary)
+                return -1
+
+            # Execute wrapped function
+            return f(self, *args, **kwargs)
+
+        return wrapper

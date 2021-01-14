@@ -38,6 +38,7 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
     # --------------
 
     # Lx OUT
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_lx_out_released(self, gtkbutton, data=None):
         # move X - edge_length- xy_clearance
         tmpx = self.halcomp["ps_edge_length"] + self.halcomp["ps_xy_clearance"]
@@ -102,6 +103,7 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
         self.set_zerro("XY")
 
     # Ly OUT
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_ly_out_released(self, gtkbutton, data=None):
         # move Y - edge_length- xy_clearance
         tmpy = self.halcomp["ps_edge_length"] + self.halcomp["ps_xy_clearance"]
@@ -168,6 +170,7 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
         self.set_zerro("XY")
 
     # Lx IN
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_lx_in_released(self, gtkbutton, data=None):
         if self.z_clearance_down() == -1:
             return
@@ -222,6 +225,7 @@ class ProbeScreenLengthMeasurement(ProbeScreenBase):
         self.set_zerro("XY")
 
     # Ly IN
+    @ProbeScreenBase.ensure_errors_dismissed
     def on_ly_in_released(self, gtkbutton, data=None):
         if self.z_clearance_down() == -1:
             return
