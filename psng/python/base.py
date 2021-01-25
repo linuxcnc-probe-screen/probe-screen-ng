@@ -272,6 +272,7 @@ class ProbeScreenBase(object):
         # if there is a secondary message then the first message text is bold
         if secondary:
             dialog.format_secondary_text(secondary)
+        dialog.set_keep_above(True)
         dialog.show_all()
         dialog.set_title(title)
         responce = dialog.run()
