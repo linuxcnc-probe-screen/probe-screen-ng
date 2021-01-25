@@ -49,6 +49,12 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         self.chk_use_tool_measurement.set_active(
             self.prefs.getpref("use_tool_measurement", False, bool)
         )
+        self.spbtn_setter_height.set_value(
+            self.prefs.getpref("setterheight", 0.0, float)
+        )
+        self.spbtn_block_height.set_value(
+            self.prefs.getpref("blockheight", 0.0, float)
+        )
 
         # make the pins for tool measurement
         self.halcomp.newpin("use_tool_measurement", hal.HAL_BIT, hal.HAL_OUT)
@@ -61,11 +67,8 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         pin = self.halcomp.newpin("toolchange-change", hal.HAL_BIT, hal.HAL_IN)
         hal_glib.GPin(pin).connect("value_changed", self.on_tool_change)
 
-        if self.chk_use_tool_measurement.get_active():
-            self.halcomp["use_tool_measurement"] = True
-            self.hal_led_set_m6.hal_pin.set(1)
-
         self._init_tool_sensor_data()
+        self._set_use_tool_measurement()
 
     # Read the ini file config [TOOLSENSOR] section
     def _init_tool_sensor_data(self):
@@ -82,10 +85,6 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
             or maxprobe is None
             or tsdiam is None
         ):
-            self.chk_use_tool_measurement.set_active(False)
-            self.btn_tool_dia.set_sensitive(False)
-            self.btn_probe_tool_setter.set_sensitive(False)
-
             self.error_dialog(
                 "Invalid INI Configuration",
                 secondary="Please check the TOOLSENSOR INI configurations",
@@ -97,39 +96,36 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
             self.maxprobe = float(maxprobe)
             self.tsdiam = float(tsdiam)
 
-            self.spbtn_setter_height.set_value(
-                self.prefs.getpref("setterheight", 0.0, float)
-            )
-            self.spbtn_block_height.set_value(
-                self.prefs.getpref("blockheight", 0.0, float)
-            )
-            # to set the hal pin with correct values we emit a toogled
-            if self.chk_use_tool_measurement.get_active():
-                self.frm_probe_pos.set_sensitive(True)
-                self.halcomp["use_tool_measurement"] = True
-                self.halcomp["setterheight"] = self.spbtn_setter_height.get_value()
-                self.halcomp["blockheight"] = self.spbtn_block_height.get_value()
-            else:
-                self.frm_probe_pos.set_sensitive(False)
-                self.chk_use_tool_measurement.set_sensitive(True)
+    # --------------
+    # Helper Methods
+    # --------------
+    def _set_use_tool_measurement(self, enabled=None):
+        if enabled is None:
+            # If an enabled value is not supplied, read the current value
+            enabled = self.chk_use_tool_measurement.get_active()
+        else:
+            # If an enabled value is supplied, save the supplied value
+            self.prefs.putpref("use_tool_measurement", enabled, bool)
+            self.chk_use_tool_measurement.set_active(enabled)
+
+        self.frm_probe_pos.set_sensitive(enabled)
+        self.hal_led_set_m6.hal_pin.set(enabled)
+
+        self.halcomp["use_tool_measurement"] = enabled
+
+        if enabled:
+            self.halcomp["setterheight"] = self.spbtn_setter_height.get_value()
+            self.halcomp["blockheight"] = self.spbtn_block_height.get_value()
+        else:
+            self.halcomp["setterheight"] = 0.0
+            self.halcomp["blockheight"] = 0.0
 
     # ----------------
     # Remap M6 Buttons
     # ----------------
     # Tickbox from gui for enable disable remap (with saving pref)
     def on_chk_use_tool_measurement_toggled(self, gtkcheckbutton, data=None):
-        if gtkcheckbutton.get_active():
-            self.frm_probe_pos.set_sensitive(True)
-            self.halcomp["use_tool_measurement"] = True
-            self.halcomp["setterheight"] = self.spbtn_setter_height.get_value()
-            self.halcomp["blockheight"] = self.spbtn_block_height.get_value()
-        else:
-            self.frm_probe_pos.set_sensitive(False)
-            self.halcomp["use_tool_measurement"] = False
-            self.halcomp["setterheight"] = 0.0
-            self.halcomp["blockheight"] = 0.0
-        self.prefs.putpref("use_tool_measurement", gtkcheckbutton.get_active(), bool)
-        self.hal_led_set_m6.hal_pin.set(gtkcheckbutton.get_active())
+        self._set_use_tool_measurement(gtkcheckbutton.get_active())
 
     # Spinbox for setter height with autosave value inside machine pref file
     def on_spbtn_setter_height_key_press_event(self, gtkspinbutton, data=None):

@@ -1516,7 +1516,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkFrame" id="frame4">
+                          <object class="GtkFrame" id="frm_set_zero">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label_xalign">0</property>
@@ -1688,19 +1688,6 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkCheckButton" id="chk_set_zero">
-                                        <property name="label" translatable="yes">Auto Zero</property>
-                                        <property name="height_request">16</property>
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">True</property>
-                                        <property name="receives_default">False</property>
-                                        <property name="use_action_appearance">False</property>
-                                        <property name="image_position">bottom</property>
-                                        <property name="draw_indicator">True</property>
-                                        <signal name="toggled" handler="on_chk_set_zero_toggled" swapped="no"/>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="HAL_LED" id="hal_led_set_zero">
                                         <property name="width_request">28</property>
                                         <property name="height_request">16</property>
@@ -1738,6 +1725,23 @@
                           <packing>
                             <property name="x">587</property>
                             <property name="y">39</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="chk_set_zero">
+                            <property name="label" translatable="yes">Auto Zero</property>
+                            <property name="height_request">16</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_action_appearance">False</property>
+                            <property name="image_position">bottom</property>
+                            <property name="draw_indicator">True</property>
+                            <signal name="toggled" handler="on_chk_set_zero_toggled" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="x">591</property>
+                            <property name="y">55</property>
                           </packing>
                         </child>
                         <child>
