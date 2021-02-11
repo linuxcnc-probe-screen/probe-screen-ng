@@ -83,8 +83,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
             or tsdiam is None
         ):
             self.chk_use_tool_measurement.set_active(False)
-            self.btn_tool_dia.set_sensitive(False)
-            self.btn_probe_tool_setter.set_sensitive(False)
+            self.frm_probe_pos.set_sensitive(False)
 
             self.error_dialog(
                 "Invalid INI Configuration",
