@@ -132,7 +132,7 @@ class ProbeScreenBase(object):
             # gmoccapy polls for errors every 0.25 seconds, OR whatever value is in the [DISPLAY]CYCLE_TIME ini
             # setting, so we wait slightly longer to make sure it's happened.
             ms = int(self.inifile.find("DISPLAY", "CYCLE_TIME") or 250) + 50
-            time.sleep(ms / 100)
+            time.sleep(ms / 1000)
 
             error_pin = Popen(
                 "halcmd getp gmoccapy.error ", shell=True, stdout=PIPE
