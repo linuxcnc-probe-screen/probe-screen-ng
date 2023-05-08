@@ -94,10 +94,11 @@ class ProbeScreenRotation(ProbeScreenBase):
             - self.stat.tool_offset[0]
         )
         # move Y - xy_clearance
-        s = """G91
+        s = """%s
+        G91
         G1 Y-%f
         G90""" % (
-            self.halcomp["ps_xy_clearance"]
+            self.setunits, self.halcomp["ps_xy_clearance"]
         )
         if self.gcode(s) == -1:
             return
@@ -114,10 +115,11 @@ class ProbeScreenRotation(ProbeScreenBase):
         if self.z_clearance_up() == -1:
             return
         # move X + edge_length
-        s = """G91
+        s = """%s
+        G91
         G1 X%f
         G90""" % (
-            self.halcomp["ps_edge_length"]
+            self.setunits, self.halcomp["ps_edge_length"]
         )
         if self.gcode(s) == -1:
             return
@@ -159,10 +161,11 @@ class ProbeScreenRotation(ProbeScreenBase):
             - self.stat.tool_offset[0]
         )
         # move Y + xy_clearance
-        s = """G91
+        s = """%s
+        G91
         G1 Y%f
         G90""" % (
-            self.halcomp["ps_xy_clearance"]
+            self.setunits, self.halcomp["ps_xy_clearance"]
         )
         if self.gcode(s) == -1:
             return
@@ -179,10 +182,11 @@ class ProbeScreenRotation(ProbeScreenBase):
         if self.z_clearance_up() == -1:
             return
         # move X - edge_length
-        s = """G91
+        s = """%s
+        G91
         G1 X-%f
         G90""" % (
-            self.halcomp["ps_edge_length"]
+            self.setunits, self.halcomp["ps_edge_length"]
         )
         if self.gcode(s) == -1:
             return
@@ -223,10 +227,11 @@ class ProbeScreenRotation(ProbeScreenBase):
             - self.stat.tool_offset[1]
         )
         # move X - xy_clearance
-        s = """G91
+        s = """%s
+        G91
         G1 X-%f
         G90""" % (
-            self.halcomp["ps_xy_clearance"]
+            self.setunits, self.halcomp["ps_xy_clearance"]
         )
         if self.gcode(s) == -1:
             return
@@ -243,10 +248,11 @@ class ProbeScreenRotation(ProbeScreenBase):
         if self.z_clearance_up() == -1:
             return
         # move Y - edge_length
-        s = """G91
+        s = """%s
+        G91
         G1 Y-%f
         G90""" % (
-            self.halcomp["ps_edge_length"]
+            self.setunits, self.halcomp["ps_edge_length"]
         )
         if self.gcode(s) == -1:
             return
@@ -287,10 +293,11 @@ class ProbeScreenRotation(ProbeScreenBase):
             - self.stat.tool_offset[1]
         )
         # move X + xy_clearance
-        s = """G91
+        s = """%s
+        G91
         G1 X%f
         G90""" % (
-            self.halcomp["ps_xy_clearance"]
+            self.setunits, self.halcomp["ps_xy_clearance"]
         )
         if self.gcode(s) == -1:
             return
@@ -307,10 +314,11 @@ class ProbeScreenRotation(ProbeScreenBase):
         if self.z_clearance_up() == -1:
             return
         # move Y + edge_length
-        s = """G91
+        s = """%s
+        G91
         G1 Y%f
         G90""" % (
-            self.halcomp["ps_edge_length"]
+            self.setunits, self.halcomp["ps_edge_length"]
         )
         if self.gcode(s) == -1:
             return

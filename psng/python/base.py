@@ -59,6 +59,10 @@ class ProbeScreenBase(object):
         self.command = linuxcnc.command()
         self.stat = linuxcnc.stat()
         self.stat.poll()
+        if self.stat.linear_units == 1.0:
+            self.setunits = "G21"
+        else:
+            self.setunits = "G20"
 
         # History Area
         textarea = builder.get_object("textview1")
@@ -301,9 +305,11 @@ class ProbeScreenBase(object):
     # --------------------------
     def z_clearance_down(self, data=None):
         # move Z - z_clearance
-        s = """G91
+        s = """%s
+        G91
         G1 Z-%f
         G90""" % (
+            self.setunits, 
             self.halcomp["ps_z_clearance"]
         )
         if self.gcode(s) == -1:
@@ -312,9 +318,11 @@ class ProbeScreenBase(object):
 
     def z_clearance_up(self, data=None):
         # move Z + z_clearance
-        s = """G91
+        s = """%s
+        G91
         G1 Z%f
         G90""" % (
+            self.setunits, 
             self.halcomp["ps_z_clearance"]
         )
         if self.gcode(s) == -1:
