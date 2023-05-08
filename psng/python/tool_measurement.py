@@ -197,9 +197,11 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         if self.ocode("o<psng_tool_diameter> call") == -1:
             return
         # move X - edge_length- xy_clearance
-        s = """G91
+        s = """%s
+        G91
         G1 X-%f
         G90""" % (
+            self.setunits, 
             0.5 * self.tsdiam + self.halcomp["ps_xy_clearance"]
         )
         if self.gcode(s) == -1:
@@ -223,9 +225,11 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
 
         # move X + tsdiam +  xy_clearance
         aa = self.tsdiam + self.halcomp["ps_xy_clearance"]
-        s = """G91
+        s = """%s
+        G91
         G1 X%f
         G90""" % (
+            self.setunits, 
             aa
         )
         if self.gcode(s) == -1:
@@ -250,11 +254,12 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
 
         # move Y - tsdiam/2 - xy_clearance
         a = 0.5 * self.tsdiam + self.halcomp["ps_xy_clearance"]
-        s = (
-            """G91
+        s = """%s
+            G91
         G1 Y-%f
-        G90"""
-            % a
+        G90""" % (
+            self.setunits,
+            a
         )
         if self.gcode(s) == -1:
             return
@@ -276,9 +281,11 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
 
         # move Y + tsdiam +  xy_clearance
         aa = self.tsdiam + self.halcomp["ps_xy_clearance"]
-        s = """G91
+        s = """%s
+        G91
         G1 Y%f
         G90""" % (
+            self.setunits, 
             aa
         )
         if self.gcode(s) == -1:
