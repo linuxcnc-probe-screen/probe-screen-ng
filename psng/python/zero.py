@@ -65,7 +65,7 @@ class ProbeScreenZero(ProbeScreenBase):
         self.on_common_spbtn_key_press_event("ps_offs_x", gtkspinbutton, data)
 
     def on_spbtn_offs_x_value_changed(self, gtkspinbutton, data=None):
-        self.on_common_spbtn_key_press_event("ps_offs_x", gtkspinbutton, data)
+        self.on_common_spbtn_value_changed("ps_offs_x", gtkspinbutton, data)
 
     def on_btn_set_x_released(self, gtkbutton, data=None):
         self.prefs.putpref("ps_offs_x", self.spbtn_offs_x.get_value(), float)
@@ -76,7 +76,7 @@ class ProbeScreenZero(ProbeScreenBase):
         self.on_common_spbtn_key_press_event("ps_offs_y", gtkspinbutton, data)
 
     def on_spbtn_offs_y_value_changed(self, gtkspinbutton, data=None):
-        self.on_common_spbtn_key_press_event("ps_offs_y", gtkspinbutton, data)
+        self.on_common_spbtn_value_changed("ps_offs_y", gtkspinbutton, data)
 
     def on_btn_set_y_released(self, gtkbutton, data=None):
         self.prefs.putpref("ps_offs_y", self.spbtn_offs_y.get_value(), float)
@@ -87,7 +87,7 @@ class ProbeScreenZero(ProbeScreenBase):
         self.on_common_spbtn_key_press_event("ps_offs_z", gtkspinbutton, data)
 
     def on_spbtn_offs_z_value_changed(self, gtkspinbutton, data=None):
-        self.on_common_spbtn_key_press_event("ps_offs_z", gtkspinbutton, data)
+        self.on_common_spbtn_value_changed("ps_offs_z", gtkspinbutton, data)
 
     def on_btn_set_z_released(self, gtkbutton, data=None):
         self.prefs.putpref("ps_offs_z", self.spbtn_offs_z.get_value(), float)
